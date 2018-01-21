@@ -1,0 +1,133 @@
+
+
+@import "../../assets/scss/variables";
+.login-page__content {
+}
+.login-form {
+  padding: 5rem 0;
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.8),
+    rgba($dark-primary-color, 0.8));
+  //height: 95vh;
+  .login {
+    margin: 0 auto;
+    width: 90%;
+    background-image: linear-gradient(105deg,
+      transparent 0%,
+      transparent 45%,
+      rgba($color-white, .8) 45%),
+    url("../../assets/images/hugues-de-buyer-mimeure-335733.jpg");
+    background-size: 100%;
+    height: 80vh;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    position: relative;
+    .form {
+      width: 100%;
+      padding: 3rem;
+      p {
+        font-size: $font-size-default;
+        margin-top: 2rem;
+        a {
+          color: $dark-primary-color;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .form-group {
+        button {
+          margin-top: 1rem;
+        }
+        #remember {
+          display: none;
+        }
+        .form-checkbox {
+          height: 3rem;
+          width: 3rem;
+          border: 5px solid $dark-primary-color;
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          top: -.4rem;
+          &::after {
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            //border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-color: $dark-primary-color;
+            opacity: 0;
+            -webkit-transition: opacity .2s;
+            transition: opacity .2s;
+          }
+        }
+        .checkbox-label {
+          font-size: 1.6rem;
+          cursor: pointer;
+          position: relative;
+          padding-left: 4.5rem;
+        }
+
+      }
+      .form-input {
+        font-size: 1.5rem;
+        padding: 1.5rem 2rem;
+        color: inherit;
+        border-radius: 2px;
+        background-color: rgba($color-white, .7);
+        border: none;
+        font-family: Lato, sans-serif;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .3s;
+        &:focus {
+          outline: none;
+          box-shadow: 0 1rem 2rem rgba($color-black, .1);
+          border-bottom: 3px solid $dark-primary-color;
+        }
+        &:focus:invalid {
+          border-bottom: 3px solid orangered !important;
+        }
+        &::-webkit-input-placeholder {
+          color: $secondary-text;
+        }
+      }
+
+      .form-label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+      }
+      .form-input:placeholder-shown + .form-label {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+      }
+    }
+  }
+  .logo {
+    position: absolute;
+    top: 4.5rem;
+    left: 4.5rem;
+    width: 9rem;
+    z-index: 2;
+  }
+  .form-group__checkbox {
+    margin-top: 5rem;
+  }
+}
+#remember:checked ~ .checkbox-label .form-checkbox::after {
+  opacity: 1; }
+
+
+

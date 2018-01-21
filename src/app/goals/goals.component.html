@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="goals-page__component">
+  <div class="goals-page__component--content">
+    <header>
+      <img src="../../assets/images/logoShot.png" alt="">
+    </header>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="goals-page__sidebar">
+            <nav class="sidebar">
+              <ul class="side-nav">
+                <li class="side-nav__item"><a routerLinkActive="active" [routerLink]="'./goal-of-life'" class="side-nav__link">Goal Of Life </a></li>
+                <li class="side-nav__item"><a routerLinkActive="active" [routerLink]="'./goals-of-year'" class="side-nav__link">Goal of year</a></li>
+                <li class="side-nav__item"><a routerLinkActive="active" [routerLink]="'./goals-of-month'" class="side-nav__link">Goals of month</a></li>
+                <li class="side-nav__item"><a routerLinkActive="active" [routerLink]="'./goals-of-week'" class="side-nav__link">Goals of week</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="col-md-9">
+
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

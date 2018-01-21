@@ -1,0 +1,128 @@
+<div class="welcome-page__content">
+  <header class="header">
+    <div class="header__logo-box">
+      <img src="../../assets/images/logoShot.png" alt="">
+    </div>
+
+    <div class="header__text-box">
+      <h1 class="heading-primary">
+        <span class="heading-primary--main">Go2Goal</span>
+        <span class="heading-primary--sub">is where wishes come true</span>
+      </h1>
+      <div class="header__btns">
+        <a [routerLink]="['/login']" class="btn btn--white btn--animated">Log in</a>
+        <a [routerLink]="['/register']" class="btn btn--transparent btn--appeared">Register</a>
+      </div>
+    </div>
+  </header>
+  <div class="about-section">
+    <div class="text-center u-margin-bottom-big">
+      <h2 class="heading-secondary">Why is this service the best one ever?</h2>
+    </div>
+    <div class="container row">
+      <div class="col-md-6">
+        <h3 class="heading-tertiary u-margin-bottom-small">Lorem ipsum dolor sit amet.</h3>
+        <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti esse itaque libero molestias, pariatur quo
+          rerum voluptates! Odio, officiis?</p>
+
+        <h3 class="heading-tertiary u-margin-bottom-small">Lorem ipsum dolor sit amet.</h3>
+        <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti esse itaque libero molestias, pariatur quo
+          rerum voluptates! Odio, officiis?</p>
+        <a [routerLink]="['/register']" class="btn-text">Get started &rarr;</a>
+      </div>
+      <div class="col-md-6">
+        <div class="composition">
+          <img src="../../assets/images/hero.jpg" alt="" class="composition__photo composition__photo--p1">
+          <img src="../../assets/images/nat-2-large.jpg" alt="" class="composition__photo composition__photo--p2">
+          <img src="../../assets/images/nat-3-large.jpg" alt="" class="composition__photo composition__photo--p3">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="feature-box">
+            <i class="feature-box__icon ion-trophy"></i>
+            <h3 class="heading-tertiary u-margin-bottom-small">Goals</h3>
+            <p class="feature-box__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, vitae.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-box">
+            <i class="feature-box__icon ion-android-checkbox-outline"></i>
+            <h3 class="heading-tertiary u-margin-bottom-small">Todos</h3>
+            <p class="feature-box__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, omnis.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-box">
+            <i class="feature-box__icon ion-compose"></i>
+            <h3 class="heading-tertiary u-margin-bottom-small">Notes</h3>
+            <p class="feature-box__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, facilis?</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="feature-box">
+            <i class="feature-box__icon ion-clipboard"></i>
+            <h3 class="heading-tertiary u-margin-bottom-small">Posts</h3>
+            <p class="feature-box__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium,
+              obcaecati.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-section">
+    <div class="bg-video">
+      <video class="bg-video__content" autoplay loop muted>
+        <source src="../../assets/images/Sunset-Lapse.mp4">
+        <source src="../../assets/images/Sunset-Lapse.ogv">
+        <source src="../../assets/images/Sunset-Lapse.webm">
+      </video>
+    </div>
+    <div class="text-center u-margin-bottom-big">
+      <h2 class="heading-secondary">People say about us...</h2>
+    </div>
+    <div class="row u-margin-bottom-big">
+      <div class="col-md-12">
+        <div class="story">
+          <figure class="story__shape">
+            <img src="../../assets/images/user1.jpeg" alt="">
+            <figcaption class="story__caption">Mary Smith</figcaption>
+          </figure>
+          <div class="story__text">
+            <h3 class="heading-tertiary">Lorem ipsum dolor sit amet.</h3>
+            <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa doloribus fugiat
+              illo nam! Accusamus distinctio laboriosam sequi vitae voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam, aut expedita illum iste libero necessitatibus nesciunt soluta tenetur velit?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row  u-margin-bottom-big">
+      <div class="col-md-12">
+        <div class="story">
+          <figure class="story__shape">
+            <img src="../../assets/images/user2.jpeg" alt="">
+            <figcaption class="story__caption">John Snow</figcaption>
+          </figure>
+          <div class="story__text">
+            <h3 class="heading-tertiary">Lorem ipsum dolor sit amet.</h3>
+            <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa doloribus fugiat
+              illo nam! Accusamus distinctio laboriosam sequi vitae voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam, aut expedita illum iste libero necessitatibus nesciunt soluta tenetur velit?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <a [routerLink]="['/register']" class="btn-text">See all reviews &rarr;</a>
+      </div>
+    </div>
+  </div>
+ <app-footer></app-footer>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="gol-of-life__content">
+  <div class="goal-of-life__header">
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <div class="form-group">
+            <input type="text"
+                   #mainGoal
+                   class="form-input"
+                   id="mainGoal"
+                   aria-describedby="emailHelp"
+                   placeholder="Enter your main goal">
+            <button type="button" class="btn btn--indigo" (click)="getMainGoal(mainGoal.value)">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="heading-secondary" *ngIf="user.goL">{{user.goL}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="goal-of-life__container">
+
+  </div>
+</div>

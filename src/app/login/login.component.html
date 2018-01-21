@@ -1,0 +1,65 @@
+<!--<app-header></app-header>-->
+<!--<div class="container">-->
+<!--<h1>Login page</h1>-->
+<!--<form #form="ngForm" (ngSubmit)="login()" class="form-group">-->
+<!--<input class="form-control" placeholder="Username" type="text" name="username" required [(ngModel)]="username">-->
+<!--<input class="form-control" placeholder="Password" type="password" name="password" required [(ngModel)]="password">-->
+<!--<label for="remember">Remember me</label>-->
+<!--<input type="checkbox" [(ngModel)]="remember" name="remember" id="remember">-->
+<!--<br>-->
+<!--<button class="btn btn-primary" [disabled]="!form.valid">Log In</button>-->
+<!--<br>-->
+<!--<hr>-->
+<!--<p>New to site? <a [routerLink]="['/register']">Create an account</a></p>-->
+<!--</form>-->
+<!--</div>-->
+<div class="login-page__content">
+  <div class="login-form">
+    <img src="../../assets/images/logo4.png" alt="" class="logo">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="login">
+          <div class="row">
+            <div class="offset-6 col-md-6">
+              <div class="form">
+                <form #form="ngForm" (ngSubmit)="login()">
+                  <div class="u-margin-bottom-small">
+                    <h2 class="heading-secondary">Welcome to site</h2>
+                  </div>
+                  <div class="form-group">
+                    <input type="text"
+                           class="form-input"
+                           placeholder="Username"
+                           id="username"
+                           name="username" required [(ngModel)]="username">
+                    <label class="form-label" for="username">Username</label>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text"
+                           class="form-input"
+                           placeholder="Password"
+                           id="password"
+                           name="password" required [(ngModel)]="password">
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+
+                  <div class="form-group form-group__checkbox">
+                    <input type="checkbox" [(ngModel)]="remember" name="remember" id="remember">
+                    <label for="remember" class="checkbox-label">
+                      <span class="form-checkbox"></span>Remember me</label>
+                  </div>
+
+                  <div class="form-group">
+                    <button class="btn btn--indigo" [disabled]="!form.valid">Login</button>
+                  </div>
+                </form>
+                <p>New to site? <a [routerLink]="['/register']">Create an account</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

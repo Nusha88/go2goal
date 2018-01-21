@@ -1,0 +1,100 @@
+@import "../../assets/scss/variables";
+.goals-page__component {
+  background-image: linear-gradient(to right bottom, rgba(48, 63, 159, .8), rgba(63, 81, 181, .8)), url("../../assets/images/luca-bravo-121932.jpg");
+  background-size: 100%;
+
+  header {
+    font-size: 1.4rem;
+    height: 7rem;
+    //background-color: #fff;
+    display: flex;
+    position: relative;
+    img {
+      height: 4.5rem;
+      position: absolute;
+      top: 4rem;
+      left: 4rem;
+    }
+  }
+  &--content {
+.content {
+  margin: 3rem auto;
+  width: 90%;
+  //height: 90vh;
+  background: $color-white;
+  //padding: 2rem;
+  .col-md-3, .col-md-9 {
+    padding: 0;}
+}
+    .sidebar {
+      background-color: #333333;
+      height: 100vh;
+      //width: 20%;
+    }
+    .navigation {
+      position: absolute;
+      right: 0rem;
+      .main-navigation {
+        font-size: 1.4rem;
+        list-style: none;
+        padding: 1.5rem;
+        padding-left: 20rem;
+        li {
+          display: inline-block;
+          padding: 1rem;
+          margin-right: 7rem;
+          cursor: pointer;
+          &:hover {
+            text-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+          }
+          a {
+            text-transform: uppercase;
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+    .side-nav {
+      font-size: 1.4rem;
+      list-style: none;
+      padding-top: 3.5rem;
+      &__item {
+        position: relative;
+        cursor: pointer;
+        &:hover::before, &--active::before {
+          transform: scaleY(1);
+          width: 100%; }
+        &:active::before {
+          background-color: $light-primary-color; }
+        .side-nav__link, .side-nav__link:visited {
+          color: $light-grey-color;
+          text-decoration: none;
+          text-transform: uppercase;
+          display: block;
+          padding: 1.5rem 3rem;
+          position: relative;
+          z-index: 10;
+          display: flex;
+          align-items: center; }
+        &:not(:last-child) {
+          margin-bottom: .5rem;
+        }
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 3px;
+          background-color: $dark-primary-color;
+          transform: scaleY(0);
+          transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s; }
+        .active {
+          background-color: $light-primary-color;
+        }
+      }
+    }
+  }
+}
