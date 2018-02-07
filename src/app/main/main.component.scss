@@ -1,21 +1,8 @@
 @import "../../assets/scss/variables";
-.main-page__component {
-  background-image: linear-gradient(to right bottom, rgba(48, 63, 159, .8), rgba(63, 81, 181, .8)), url("../../assets/images/luca-bravo-121932.jpg");
-  background-size: 100%;
 
-  header {
-    font-size: 1.4rem;
-    height: 7rem;
-    //background-color: #fff;
-    display: flex;
-    position: relative;
-    img {
-      height: 4.5rem;
-      position: absolute;
-      top: 4rem;
-      left: 4rem;
-    }
-  }
+.main-page__component {
+  background-color: $light-grey-color;
+
   .content {
     margin: 3rem auto;
     width: 90%;
@@ -23,10 +10,10 @@
     background: $color-white;
     padding: 2rem;
     h1 {
-      color: $primary-color;
+      color: $primary-text;
       margin-top: 3rem;
       span {
-        color: $light-primary-color;
+        color: $dark-primary-color;
       }
     }
     .card {
@@ -55,16 +42,16 @@
       transform: rotateY(180deg);
     }
     .card__side--back-1 {
-      background-image: linear-gradient(to right bottom, $dark-primary-color, $light-primary-color);
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9);
     }
     .card__side--back-2 {
-      background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
+      background-image: linear-gradient(to right bottom, $light-green-color, $green-color);
     }
     .card__side--back-3 {
-      background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
+      background-image: linear-gradient(to right bottom, $light-orange-color, $orange-color);
     }
-    .card__side--back-4{
-      background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
+    .card__side--back-4 {
+      background-image: linear-gradient(to right bottom, $light-blue-color, $blue-color);
     }
     .card:hover .card__side--front {
       transform: rotateY(-180deg);
@@ -82,14 +69,17 @@
       border-top-right-radius: 3px;
     }
     .card__picture--1 {
-      background-image: linear-gradient(to right bottom, $dark-primary-color, $light-primary-color), url(../../assets/images/goals.jpg);
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9), url(../../assets/images/goals.jpg);
     }
     .card__picture--2 {
-      background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../assets/images/todos.jpg); }
+      background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../assets/images/todos.jpg);
+    }
     .card__picture--3 {
-      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../../assets/images/notes.jpg); }
+      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../../assets/images/notes.jpg);
+    }
     .card__picture--4 {
-      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../../assets/images/posts.jpg); }
+      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../../assets/images/posts.jpg);
+    }
     .card__heading {
       font-size: 2.8rem;
       font-weight: 300;
@@ -107,7 +97,7 @@
       box-decoration-break: clone;
     }
     .card__heading-span--1 {
-      background-image: linear-gradient(to right bottom, $dark-primary-color, $light-primary-color);
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9);
     }
     .card__heading-span--2 {
       background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.85), rgba(40, 180, 133, 0.85));
@@ -197,7 +187,6 @@
         }
       }
     }
-
 
     .card__cta {
       width: 100%;

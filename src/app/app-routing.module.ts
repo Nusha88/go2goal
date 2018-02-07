@@ -18,8 +18,7 @@ import {AppComponent} from './app.component';
 const routes: Routes = [
   {
     path: '',
-    children: [],
-    component: AppComponent
+    component: AppComponent,
   },
   {
     path: 'welcome',
@@ -70,46 +69,7 @@ const routes: Routes = [
   {
     path: ':id',
     component: MainComponent,
-    // children: [
-      // {
-        // path: 'goals',
-        // component: GoalsComponent,
-        // children: [
-        //   {
-        //     path: 'goal-of-life',
-        //     component: GoalOfLifeComponent
-        //   },
-        //   {
-        //     path: 'goals-of-year',
-        //     component: GoalOfYearComponent
-        //   },
-        //   {
-        //     path: 'goals-of-month',
-        //     component: GoalOfMonthComponent
-        //   },
-        //   {
-        //     path: 'goals-of-week',
-        //     component: GoalOfWeekComponent
-        //   },
-        // ]
-    //   },
-    //   {
-    //     path: 'goals',
-    //     component: GoalsComponent,
-    //   },
-    //   {
-    //     path: 'todos',
-    //     component: TodosComponent
-    //   },
-    //   {
-    //     path: 'notebook',
-    //     component: NotebookComponent
-    //   },
-    //   {
-    //     path: 'posts',
-    //     component: PostsComponent
-    //   },
-    // ]
+
   },
   {path: '**', redirectTo: '/login'}
 ];

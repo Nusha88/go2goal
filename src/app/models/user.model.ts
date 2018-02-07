@@ -1,4 +1,5 @@
 import {Todo} from './todo.model';
+import {Goals} from './goals';
 
 export class UserModel {
   constructor(
@@ -6,8 +7,11 @@ export class UserModel {
     public username: string,
     public password: string,
     public email: string,
-    public goL?: string,
-    public todos?: Array<Todo>,
+    public goals?: Goals,
+    public todos?: Todo,
+    public notes?: any,
+    public posts?: any,
   ) {}
 
 }
+

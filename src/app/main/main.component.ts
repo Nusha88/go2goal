@@ -9,28 +9,7 @@ import {UserService} from '../services/user.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
-  users: any;
-  @Input() username: string;
-  user: any;
-  subscription: Subscription;
+export class MainComponent {
 
-  constructor(private loginService: LoginService, private router: Router, private userService: UserService) { }
-  ngOnInit() {
-    this.subscription = this.loginService.getUser().subscribe(user => {
-      this.user = user;
-      // console.log(this.user);
-    });
-    // this.userService.getUsers().subscribe(users => {
-    //   this.users = users;
-    // });
-  }
-
-  logout() {
-    this.router.navigate(['/login']);
-  }
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
-  }
 
 }

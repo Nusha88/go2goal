@@ -5,8 +5,6 @@
  |--------------------------------------
  */
 
-// import {Todo} from "../src/app/models/todo.model";
-
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const User = require('./models/user');
@@ -18,14 +16,14 @@ const Todo = require('./models/todo');
  |--------------------------------------
  */
 
-module.exports = function(app, config) {
+module.exports = function (app, config) {
   // Authentication middleware
   const jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: 'https://' + config.AUTH0_DOMAIN +'/.well-known/jwks.json'
+      jwksUri: 'https://' + config.AUTH0_DOMAIN + '/.well-known/jwks.json'
     }),
     audience: config.AUTH0_API_AUDIENCE,
     issuer: 'https://' + config.AUTH0_DOMAIN + '/',
@@ -38,15 +36,10 @@ module.exports = function(app, config) {
    |--------------------------------------
    */
 
-  // GET API root
-//   app.get('/api/', (req, res) => {
-//     res.send('API works');
-// });
-
-  app.get('/api/',function(req,res){
+  app.get('/api/', function (req, res) {
     res.send("Api works!");
   });
-
+// GET USERS
   app.get('/api/users', function (req, res) {
 
     User.find({}, function (err, users) {
@@ -55,7 +48,7 @@ module.exports = function(app, config) {
         return res.status(500).send({message: err.message});
       }
       if (users) {
-        users.forEach( function(user) {
+        users.forEach(function (user) {
           usersArr.push(user);
         })
         ;
@@ -63,35 +56,24 @@ module.exports = function(app, config) {
       res.send(usersArr);
     });
   });
+  // POST USER
+  app.post('/api/users', (req, res) => {
+    var user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      goals: req.body.goals,
+      todos: '',
+    });
+    user.save(function (err, user) {
+      if (err) {
+        return next(err)
+      }
+      res.status(201).json(user)
+    })
+  });
 
-  // app.post('/api/go2users', function (req, res, next) {
-  //   var post = new User({
-  //     username: req.body.username,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //     // goL: req.body.goL,
-  //     // todos: req.body.todos
-  //   });
-  //   post.save(function (err, post) {
-  //     if (err) { return next(err) }
-  //     res.status(201).json(post)
-  //   })
-  // });
-  // app.post('/api/users', function (req, res, next) {
-  //   var post = new User({
-  //     username: req.body.username,
-  //     password: req.body.password,
-  //     user_id: req.body.user_id,
-  //     todos: '[]',
-  //     goL: ''
-  //   })
-  //   post.save(function (err, post) {
-  //     if (err) { console.log(next(err))}
-  //     res.status(201).json(post);
-  //     console.log(post);
-  //   })
-  // });
-
+// GET USER BY ID
   app.get('/api/users/:id', function (req, res) {
 
     User.findById(req.params.id, function (err, user) {
@@ -105,57 +87,67 @@ module.exports = function(app, config) {
     });
   });
 
-  app.get('/api/users/:userId/todos', (req, res) => {
-    Todo.find({userId: req.params.user_id}, (err, todos) => {
-      let todosArr = [];
-      if (err) {
-        return res.status(500).send({message: err.message});
-      }
-      if (todos) {
-        todos.forEach(todo => {
-          todosArr.push(todo);
-        });
-      }
-      res.send(todosArr);
-    });
-  });
+  app.get('/api/users/:id/todos', function (req, res) {
 
-  app.post('/api/users', (req, res) => {
-      var user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        goL: '',
-        todos: ''
-      });
-    user.save(function (err, user) {
-          if (err) { return next(err) }
-          res.status(201).json(user)
-        })
-  });
-
-  app.put('/api/users/:id', (req, res) => {
-    User.findById(req.params.id, (err, user) => {
+    User.findById(req.params.id, function (err, user) {
       if (err) {
         return res.status(500).send({message: err.message});
       }
       if (!user) {
         return res.status(400).send({message: 'User not found.'});
       }
-      user.name = req.body.username;
-      user.email = req.body.email;
-      user.password = req.body.password;
-      user.goL = req.body.goL;
-      user.todos = [];
-
-      user.save(err => {
-        if (err) {
-          return res.status(500).send({message: err.message});
-        }
-        res.send(user);
-      });
+      res.send(user.todos);
     });
   });
 
+  app.post('/api/users/:id/todos', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      var todo = new Todo({
+        id: req.body.id,
+        title: req.body.title,
+        complete: req.body.complete
+      });
+      user.todos.push(todo);
+      user.save(function (err) {
+        if (err) {
+          return next(err)
+        }
+        res.status(201).json(user);
+        console.log(user);
+      })
+    });
+  });
+
+  app.put('/api/users/:id/todos', function(req, res) {
+    const userId = req.params.id;
+    const todos = req.body;
+    console.log('update');
+    User.findById({_id: userId}, todos, (err, user) => {
+      user.todos.push(todos);
+      console.log(todos);
+
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        console.log(user);
+        res.send(todos);
+      });
+    });
+  });
+//
+//   app.put('/api/users/:id/todos', function (req, res) {
+//     const userId = req.params.id;
+//     const todos = req.body;
+//     console.log(todos);
+//     User.findById({_id: userId}, todos)
+//       .then(() => User.findById({_id: userId}))
+//       .then(user =>{
+//         console.log(user.todos);
+//         res.send(user.todos);
+//       })
+//       .catch(err);
+//   });
+// // PUT TODOS
 
 };

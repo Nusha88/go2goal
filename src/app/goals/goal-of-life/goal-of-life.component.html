@@ -1,27 +1,63 @@
 <div class="gol-of-life__content">
   <div class="goal-of-life__header">
     <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="heading-secondary text center">Goal of Life</h2>
+        <p class="goal-of-life__header--paragraph">Here you can define only one Goal Of Live and several steps which
+          will help you to achieve it.</p>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
-        <form>
-          <div class="form-group">
+        <form >
+          <div class="form-group" *ngIf="!user.goals.goal_of_live || edited">
             <input type="text"
                    #mainGoal
                    class="form-input"
                    id="mainGoal"
-                   aria-describedby="emailHelp"
                    placeholder="Enter your main goal">
-            <button type="button" class="btn btn--indigo" (click)="getMainGoal(mainGoal.value)">Add</button>
+            <button type="button" class="btn btn--white" (click)="getMainGoal(mainGoal.value)">{{showAddMain ? 'Add' : 'Edit'}}
+            </button>
+          </div>
+          <div class="form-group" *ngIf="editedFlsP">
+            <input type="text"
+                   #fls_name
+                   class="form-input"
+                   id="firstStep"
+                   placeholder="Enter first-level step">
+            <button type="button" class="btn btn--white" (click)="addFirstStep(fls_name.value)">{{showAdd ? 'Add' : 'Edit'}}</button>
           </div>
         </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h2 class="heading-secondary" *ngIf="user.goL">{{user.goL}}</h2>
-      </div>
-    </div>
   </div>
   <div class="goal-of-life__container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="goal-of-life--content">
+          <h2 class="heading-secondary" *ngIf="user.goals.goal_of_live">{{user.goals.goal_of_live}}</h2>
+          <span class="goal--add" (click)="editedFlsP = !editedFlsP"><i class="ion-android-add"></i></span>
+          <span class="goal--edit" (click)="edited = !edited"><i class="ion-edit"></i></span>
+          <span class="goal--remove"><i class="ion-close-round"></i></span>
+          <span class="goal--title">Goal of Life</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+          <!--&lt;!&ndash;<app-first-level-step (editChanged)="onEditGoalFirstStep($event)"&ndash;&gt;-->
+                                <!--&lt;!&ndash;*ngFor="let goal of user.goals let i = index"&ndash;&gt;-->
+                                <!--&lt;!&ndash;[goal]="goal"&ndash;&gt;-->
+                                <!--&lt;!&ndash;[index]="i"></app-first-level-step>&ndash;&gt;-->
+    <div class="goal-of-life--first-step" *ngIf="user.goals.first_level_steps">
+      <span class="goal-first-step--add"><i class="ion-android-add"></i></span>
+      <span class="goal-first-step--edit" (click)="editFirstStep()"><i class="ion-edit"></i></span>
+      <span class="goal-first-step--title">First Level</span>
+      <span class="goal-first-step--remove"><i class="ion-close-round"></i></span>
+      <p>{{user.goals.first_level_steps}}</p>
+    </div>
 
+    </div>
+    </div>
   </div>
 </div>

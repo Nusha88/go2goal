@@ -1,0 +1,84 @@
+@import "../../../../assets/scss/variables";
+.goal-of-life--first-step {
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  transform: skewX(-12deg);
+  transition: all .4s;
+  backface-visibility: hidden;
+  margin-bottom: 2rem;
+
+  .goal-first-step--add {
+    position: absolute;
+    top: 0;
+    right: 4rem;
+    padding: .5rem;
+    font-size: 1.2rem;
+    color: $orange-color;
+    cursor: pointer;
+    display: none;
+    &:hover {
+      display: block;
+      transform: scale(1.5);
+    }
+  }
+
+  .goal-first-step--edit {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    padding: .5rem;
+    font-size: 1.2rem;
+    color: $orange-color;
+    cursor: pointer;
+    display: none;
+    &:hover {
+      display: block;
+      transform: scale(1.5);
+    }
+  }
+  .goal-first-step--remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5rem;
+    font-size: 1.2rem;
+    color: $orange-color;
+    cursor: pointer;
+    display: none;
+    &:hover {
+      display: block;
+      transform: scale(1.5);
+    }
+  }
+  .goal-first-step--title{
+    position: absolute;
+    color: $orange-color;
+    padding: .5rem;
+    opacity: .8;
+    left: 0;
+    top: 0;
+    text-transform: uppercase;
+    display: block;
+  }
+  p {
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+}
+.goal-of-life--first-step:hover .goal-first-step--edit {
+  display: block;
+}
+.goal-of-life--first-step:hover .goal-first-step--remove {
+  display: block;
+}
+.goal-of-life--first-step:hover .goal-first-step--add {
+  display: block;
+}

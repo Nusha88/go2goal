@@ -1,22 +1,26 @@
 @import "../../../assets/scss/variables";
 
 .gol-of-life__content {
-  margin: 0 auto;
+
   .goal-of-life__header {
-    background-image: linear-gradient(105deg,
-      transparent 0%,
-      transparent 20%,
-      rgba($color-white, .8) 20%,
-      rgba($color-white, .8) 80%,
-      transparent 80%),
-    url("../../../assets/images/luca-bravo-121932.jpg");
-    background-size: 100%;
-    height: 30rem;
-    background-position: center;
-    overflow: hidden;
+    //height: 40rem;
+    //background-position: center;
+    //overflow: hidden;
+    padding: 3rem;
+    .heading-secondary {
+      margin-top: 2rem;
+      color: #ffffff;
+    }
+    .goal-of-life__header--paragraph {
+      font-size: 1.8rem;
+      color: $color-white;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 2rem;
+      letter-spacing: 2px;
+    }
     .form-input {
-      margin-left: 25%;
-      margin-top: 6rem;
+      margin-left: 10rem;
       box-shadow: 0 1rem 2rem rgba($color-black, .1);
       font-size: 1.5rem;
       padding: 1.5rem 2rem;
@@ -43,16 +47,187 @@
       }
     }
     .btn {
-      margin-top: 6.3rem;
       margin-left: 2rem;
     }
-    .heading-secondary {
-      margin-top: 4rem;
-    }
   }
-}
+  .goal-of-life__container {
+    padding: 1rem;
+    .heading-secondary {
+      color: $secondary-text;
+      &:hover {
+        transform: none;
+        text-shadow: none;
+      }
+    }
 
-//#mainGoal {
-//  float: left;
-//  margin-right: 10px;
-//}
+    .goal-of-life--content {
+      position: relative;
+      width: 75%;
+      margin: 0 auto;
+      box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 3px;
+      padding: 6rem;
+      padding-left: 9rem;
+      font-size: 1.6rem;
+      transform: skewX(-12deg);
+      transition: all .4s;
+      backface-visibility: hidden;
+      margin-bottom: 2rem;
+      .goal--title {
+        position: absolute;
+        color: $dark-primary-color;
+        padding: .5rem;
+        opacity: .8;
+        left: 0;
+        top: 0;
+        text-transform: uppercase;
+        display: block;
+      }
+      .goal--add {
+        position: absolute;
+        top: 0rem;
+        right: 4rem;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: #3F51B5;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+      .goal--edit {
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: #3F51B5;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+      .goal--remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: #3F51B5;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+    }
+    .goal-of-life--content:hover .goal--edit {
+      display: block;
+    }
+    .goal-of-life--content:hover .goal--remove {
+      display: block;
+    }
+    .goal-of-life--content:hover .goal--add {
+      display: block;
+    }
+
+    .goal-of-life--first-step {
+      position: relative;
+      width: 75%;
+      margin: 0 auto;
+      box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 3px;
+      padding: 6rem;
+      padding-left: 9rem;
+      font-size: 1.6rem;
+      transform: skewX(-12deg);
+      transition: all .4s;
+      backface-visibility: hidden;
+      margin-bottom: 2rem;
+
+      .goal-first-step--add {
+        position: absolute;
+        top: 0;
+        right: 4rem;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: $orange-color;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+
+      .goal-first-step--edit {
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: $orange-color;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+      .goal-first-step--remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: .5rem;
+        font-size: 1.2rem;
+        color: $orange-color;
+        cursor: pointer;
+        display: none;
+        transition: all .4s;
+        &:hover {
+          display: block;
+          transform: scale(1.5);
+        }
+      }
+      .goal-first-step--title{
+        position: absolute;
+        color: $orange-color;
+        padding: .5rem;
+        opacity: .8;
+        left: 0;
+        top: 0;
+        text-transform: uppercase;
+        display: block;
+      }
+      p {
+        margin: 1rem auto;
+        text-align: center;
+        font-size: 1.6rem;
+      }
+    }
+    .goal-of-life--first-step:hover .goal-first-step--edit {
+      display: block;
+    }
+    .goal-of-life--first-step:hover .goal-first-step--remove {
+      display: block;
+    }
+    .goal-of-life--first-step:hover .goal-first-step--add {
+      display: block;
+    }
+
+
+  }
+
+}

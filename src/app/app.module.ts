@@ -20,12 +20,13 @@ import { GoalOfLifeComponent } from './goals/goal-of-life/goal-of-life.component
 import { GoalOfWeekComponent } from './goals/goal-of-week/goal-of-week.component';
 import { GoalOfYearComponent } from './goals/goal-of-year/goal-of-year.component';
 import { GoalOfMonthComponent } from './goals/goal-of-month/goal-of-month.component';
-import {TodoDataService} from './services/todo-data.service';
+// import {TodoDataService} from './services/todo-data.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserComponent } from './user/user.component';
 import { SubmittingComponent } from './core/forms/submitting.component';
 import {UserFormService} from './services/user-form.service';
 import { FooterComponent } from './footer/footer.component';
+import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/first-level-step.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FooterComponent } from './footer/footer.component';
     UserComponent,
     SubmittingComponent,
     FooterComponent,
+    FirstLevelStepComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { FooterComponent } from './footer/footer.component';
     Title,
     UserService,
     LoginService,
-    TodoDataService,
+    // TodoDataService,
     UserFormService
   ],
   bootstrap: [AppComponent]

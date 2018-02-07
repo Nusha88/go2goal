@@ -20,26 +20,26 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.router.navigate(['/welcome']);
-    // const username = localStorage.getItem('username');
-    // const password = localStorage.getItem('password');
-    //
-    // if (!username && !password) {
-    //   this.router.navigate(['/login']);
-    // } else {
-    //   this.userService.getUsers().subscribe(u => {
-    //     this.users = u;
-    //     this.users.find(user => {
-    //       this.user = user;
-    //       // console.log(this.user.username);
-    //       if (username === this.user.username && password === this.user.password) {
-    //         this.router.navigate(['/', this.user._id]);
-    //         return this.sendUser();
-    //       } else if (!username === this.user.username && !password === this.user.password) {
-    //         this.router.navigate(['/login']);
-    //       }
-    //     });
-    //   });
-    // }
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    if (!username && !password) {
+      this.router.navigate(['/login']);
+    } else {
+      this.userService.getUsers().subscribe(u => {
+        this.users = u;
+        this.users.find(user => {
+          this.user = user;
+          // console.log(this.user.username);
+          if (username === this.user.username && password === this.user.password) {
+            this.router.navigate(['/', this.user._id]);
+            return this.sendUser();
+          } else if (!username === this.user.username && !password === this.user.password) {
+            this.router.navigate(['/login']);
+          }
+        });
+      });
+    }
 
   }
 }

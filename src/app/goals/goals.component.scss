@@ -1,7 +1,13 @@
 @import "../../assets/scss/variables";
 .goals-page__component {
-  background-image: linear-gradient(to right bottom, rgba(48, 63, 159, .8), rgba(63, 81, 181, .8)), url("../../assets/images/luca-bravo-121932.jpg");
-  background-size: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right bottom,
+    rgba($color-white, 0.8),
+    rgba($light-grey-color, 0.8)),
+  url("../../assets/images/diego-jimenez-258123.jpg");
+  background-size: cover;
+  background-position: top;
+  margin: 0 auto;
 
   header {
     font-size: 1.4rem;
@@ -18,18 +24,18 @@
   }
   &--content {
 .content {
-  margin: 3rem auto;
   width: 90%;
-  //height: 90vh;
-  background: $color-white;
-  //padding: 2rem;
   .col-md-3, .col-md-9 {
     padding: 0;}
+  .col-md-3 {
+    padding-left: 15px;
+  }
+  .col-md-9 {
+    padding-right: 15px;
+  }
 }
     .sidebar {
-      background-color: #333333;
       height: 100vh;
-      //width: 20%;
     }
     .navigation {
       position: absolute;
@@ -49,6 +55,7 @@
           }
           a {
             text-transform: uppercase;
+            color: $primary-text;
             &:hover {
               text-decoration: none;
             }
@@ -59,7 +66,7 @@
     .side-nav {
       font-size: 1.4rem;
       list-style: none;
-      padding-top: 3.5rem;
+      padding-top: 20vh;
       &__item {
         position: relative;
         cursor: pointer;
@@ -67,9 +74,9 @@
           transform: scaleY(1);
           width: 100%; }
         &:active::before {
-          background-color: $light-primary-color; }
+          background: $color-white; opacity: .6; color: $dark-primary-color }
         .side-nav__link, .side-nav__link:visited {
-          color: $light-grey-color;
+          color: $primary-text;
           text-decoration: none;
           text-transform: uppercase;
           display: block;
@@ -77,7 +84,12 @@
           position: relative;
           z-index: 10;
           display: flex;
-          align-items: center; }
+          align-items: center;
+          .active {
+            background: $color-white;
+            color: $dark-primary-color;
+          }
+        }
         &:not(:last-child) {
           margin-bottom: .5rem;
         }
@@ -88,12 +100,9 @@
           left: 0;
           height: 100%;
           width: 3px;
-          background-color: $dark-primary-color;
+          background: $light-primary-color;
           transform: scaleY(0);
           transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s; }
-        .active {
-          background-color: $light-primary-color;
-        }
       }
     }
   }

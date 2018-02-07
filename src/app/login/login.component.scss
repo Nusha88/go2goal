@@ -1,43 +1,71 @@
-
-
 @import "../../assets/scss/variables";
 .login-page__content {
+  position: relative;
+  font-family: Lato, sans-serif;
+  color: $color-white;
+  height: 95vh;
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.8),
+    rgba($dark-primary-color, 0.8)),
+  url("../../assets/images/robert-ruggiero-176927.jpg");
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+    img {
+      height: 4.5rem;
+    }
+  }
 }
 .login-form {
   padding: 5rem 0;
-  background-image: linear-gradient(to right bottom,
-    rgba($light-primary-color, 0.8),
-    rgba($dark-primary-color, 0.8));
-  //height: 95vh;
-  .login {
-    margin: 0 auto;
-    width: 90%;
-    background-image: linear-gradient(105deg,
-      transparent 0%,
-      transparent 45%,
-      rgba($color-white, .8) 45%),
-    url("../../assets/images/hugues-de-buyer-mimeure-335733.jpg");
-    background-size: 100%;
-    height: 80vh;
-    border-radius: 3px;
-    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
-    position: relative;
+  position: relative;
+
     .form {
-      width: 100%;
+      margin: 0 auto;
+      width: 70%;
       padding: 3rem;
-      p {
-        font-size: $font-size-default;
+      .u-margin-bottom-small {
+        text-align: center;
+        h2 {
+          color: $color-white;
+          margin-top: 3rem;
+          letter-spacing: 1rem;
+          margin-bottom: 4rem;
+          font-weight: 400;
+        }
+      }
+      p{
+        display: inline-block;
         margin-top: 2rem;
+        font-size: $font-size-default;
+        color: $color-white;
         a {
-          color: $dark-primary-color;
+          color: $color-white;
+          padding-left: 0.5rem;
           &:hover {
             text-decoration: underline;
+            color: $hover-color;
           }
         }
       }
       .form-group {
+        color: $primary-text;
+        label {
+          color: $color-white;
+        }
         button {
           margin-top: 1rem;
+          float: left;
+          margin-right: 3rem;
+          cursor: pointer;
+          color: $dark-primary-color;
+          &:hover {
+            background-color: #ffffff;
+          }
         }
         #remember {
           display: none;
@@ -45,7 +73,7 @@
         .form-checkbox {
           height: 3rem;
           width: 3rem;
-          border: 5px solid $dark-primary-color;
+          border: 5px solid rgba($color-white, .7);
           display: inline-block;
           position: absolute;
           left: 0;
@@ -61,7 +89,7 @@
             left: 50%;
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-            background-color: $dark-primary-color;
+            background-color: rgba($color-white, .7);
             opacity: 0;
             -webkit-transition: opacity .2s;
             transition: opacity .2s;
@@ -84,7 +112,7 @@
         border: none;
         font-family: Lato, sans-serif;
         border-bottom: 3px solid transparent;
-        width: 90%;
+        width: 100%;
         display: block;
         transition: all .3s;
         &:focus {
@@ -96,7 +124,7 @@
           border-bottom: 3px solid orangered !important;
         }
         &::-webkit-input-placeholder {
-          color: $secondary-text;
+          color: $primary-text;
         }
       }
 
@@ -114,7 +142,6 @@
         transform: translateY(-4rem);
       }
     }
-  }
   .logo {
     position: absolute;
     top: 4.5rem;
@@ -123,11 +150,14 @@
     z-index: 2;
   }
   .form-group__checkbox {
-    margin-top: 5rem;
+    margin-top: 4rem;
+    margin-bottom: 2.5rem;
   }
 }
 #remember:checked ~ .checkbox-label .form-checkbox::after {
   opacity: 1; }
 
-
+.footer {
+  margin-top: -11rem;
+}
 
