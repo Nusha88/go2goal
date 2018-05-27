@@ -1,63 +1,137 @@
-<div class="gol-of-life__content">
-  <div class="goal-of-life__header">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h2 class="heading-secondary text center">Goal of Life</h2>
-        <p class="goal-of-life__header--paragraph">Here you can define only one Goal Of Live and several steps which
-          will help you to achieve it.</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <form >
-          <div class="form-group" *ngIf="!user.goals.goal_of_live || edited">
-            <input type="text"
-                   #mainGoal
-                   class="form-input"
-                   id="mainGoal"
-                   placeholder="Enter your main goal">
-            <button type="button" class="btn btn--white" (click)="getMainGoal(mainGoal.value)">{{showAddMain ? 'Add' : 'Edit'}}
-            </button>
-          </div>
-          <div class="form-group" *ngIf="editedFlsP">
-            <input type="text"
-                   #fls_name
-                   class="form-input"
-                   id="firstStep"
-                   placeholder="Enter first-level step">
-            <button type="button" class="btn btn--white" (click)="addFirstStep(fls_name.value)">{{showAdd ? 'Add' : 'Edit'}}</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+<!--<div class="gol-of-life__content">-->
   <div class="goal-of-life__container">
     <div class="row">
-      <div class="col-md-12 text-center">
-        <div class="goal-of-life--content">
-          <h2 class="heading-secondary" *ngIf="user.goals.goal_of_live">{{user.goals.goal_of_live}}</h2>
-          <span class="goal--add" (click)="editedFlsP = !editedFlsP"><i class="ion-android-add"></i></span>
-          <span class="goal--edit" (click)="edited = !edited"><i class="ion-edit"></i></span>
-          <span class="goal--remove"><i class="ion-close-round"></i></span>
-          <span class="goal--title">Goal of Life</span>
+      <div class="col-md-12">
+        <div class="form-group" *ngIf="showAddMain">
+          <input type="text"
+                 #mainGoal
+                 class="form-input"
+                 id="mainGoal"
+                 placeholder="Enter your main goal">
+          <button type="button" class="btn btn--indigo" (click)="getMainGoal(mainGoal.value)">Add</button>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-          <!--&lt;!&ndash;<app-first-level-step (editChanged)="onEditGoalFirstStep($event)"&ndash;&gt;-->
-                                <!--&lt;!&ndash;*ngFor="let goal of user.goals let i = index"&ndash;&gt;-->
-                                <!--&lt;!&ndash;[goal]="goal"&ndash;&gt;-->
-                                <!--&lt;!&ndash;[index]="i"></app-first-level-step>&ndash;&gt;-->
-    <div class="goal-of-life--first-step" *ngIf="user.goals.first_level_steps">
-      <span class="goal-first-step--add"><i class="ion-android-add"></i></span>
-      <span class="goal-first-step--edit" (click)="editFirstStep()"><i class="ion-edit"></i></span>
-      <span class="goal-first-step--title">First Level</span>
-      <span class="goal-first-step--remove"><i class="ion-close-round"></i></span>
-      <p>{{user.goals.first_level_steps}}</p>
-    </div>
-
-    </div>
+    <div class="row" *ngFor="let goal of goals">
+      <div class="col-md-12 text-center">
+        <div class="goal-of-life--content">
+          <h2 class="heading-secondary">{{goal.goal_of_live}}</h2>
+          <span class="goal--add" (click)="addFls = !addFls"><i class="ion-android-add"></i></span>
+          <span class="goal--edit" (click)="editMainGoal()"><i class="ion-edit"></i></span>
+          <span class="goal--remove"><i class="ion-close-round"></i></span>
+          <span class="goal--title">Main Goal</span>
+          <form class="mainGoalInputs" *ngIf="edited">
+            <div class="form-group" *ngIf="edited">
+              <input type="text"
+                     #mainGoalEdit
+                     class="form-input"
+                     id="mainGoalEdit"
+                     value="{{goal.goal_of_live}}">
+              <button type="button" class="btn btn--indigo" (click)="updateMainGoal(mainGoalEdit.value)">Edit</button>
+            </div>
+          </form>
+          <div class="row addFlsForm">
+            <div class="col-md-12">
+              <div *ngIf="addFls">
+                <input type="text"
+                       #fls_name
+                       class="form-input"
+                       id="firstStep"
+                       placeholder="What'll help you to achieve the main goal?">
+                <button type="button" class="btn btn--indigo" (click)="addFirstStep(fls_name.value)">Add</button>
+              </div>
+            </div>
+          </div>
+          <!--first-level-step-->
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="first-step-goals" *ngIf="goal.first_level_steps">
+                <li class="goal-of-life--first-step"
+                    *ngFor="let fls of goal.first_level_steps; let i = index"
+                    [ngClass]="{'is-active': fls.editedFls}">
+                  <!--ADD SECOND LEVEL STEP-->
+                  <div *ngIf="fls.addSls || addSls" class="fls-input addSlsInput">
+                    <input type="text"
+                           #sls_nameAdd
+                           class="form-input"
+                           id="secondStep"
+                           placeholder="What should you do for this?">
+                    <button type="button" class="btn btn--orange" (click)="addSecondStep(sls_nameAdd.value, i)">Add
+                    </button>
+                  </div>
+                  <div class="form-group fls-input" *ngIf="fls.editedFlsP || editedFlsP">
+                    <input type="text"
+                           #fls_nameEdit
+                           class="form-input"
+                           id="firstStepEdit"
+                           value="{{fls.title}}">
+                    <button type="button" class="btn btn--orange" (click)="updateFirstStep(fls_nameEdit.value)">Edit
+                    </button>
+                  </div>
+                  <span class="goal-first-step--add" (click)="fls.addSls = !fls.addSls"><i
+                    class="ion-android-add"></i></span>
+                  <span class="goal-first-step--edit" (click)="fls.editedFlsP = !fls.editedFlsP"><i class="ion-edit"></i></span>
+                  <span class="goal-first-step--title">First Level</span>
+                  <span class="goal-first-step--remove" (click)="deleteFls(fls, i)"><i class="ion-close-round"></i></span>
+                  <p class="fls_title">{{fls.title}}</p>
+                  <ul>
+                    <li class="goal-of-life--second-step" *ngFor="let sls of fls.second_level_steps; let index = index">
+                      <span class="goal-second-step--title">Second Level</span>
+                      <span class="goal-second-step--add" (click)="sls.addTls = !sls.addTls">
+                      <i class="ion-android-add"></i></span>
+                      <span class="goal-second-step--edit" (click)="sls.editedSls = !sls.editedSls">
+                      <i class="ion-edit"></i></span>
+                      <span class="goal-second-step--remove" (click)="deleteSls(sls, i, index)">
+                      <i class="ion-close-round"></i></span>
+                      <div class="row addTlsForm" *ngIf="sls.addTls || addTls">
+                        <input type="text"
+                               #tls_name
+                               class="form-input"
+                               id="thirdStep"
+                               placeholder="What should you do for this?">
+                        <button type="button" class="btn btn--green" (click)="addThirdStep(tls_name.value, i, index)">Add</button>
+                      </div>
+                      <div class="row sls-input" *ngIf="sls.editedSls || editedSls">
+                        <!--EDIT SECOND LEVEL STEP-->
+                        <input type="text"
+                               #sls_nameEdit
+                               class="form-input"
+                               id="secondStepEdit"
+                               value="{{sls.title}}">
+                        <button type="button" class="btn btn--green" (click)="updateSecondStep(sls_nameEdit.value, i)">
+                          Edit
+                        </button>
+                      </div>
+                      <p>{{sls.title}}</p>
+                      <ol>
+                        <li class="goal-of-life--third-step" *ngFor="let tls of sls.third_level_steps; let ind = index">
+                          <span class="goal-third-step--title">Third Level</span>
+                          <span class="goal-third-step--edit" (click)="tls.editedTls = !tls.editedTls">
+                      <i class="ion-edit"></i></span>
+                          <span class="goal-third-step--remove" (click)="deleteTls(tls, ind, i, index)">
+                      <i class="ion-close-round"></i></span>
+                          <div class="row sls-input" *ngIf="tls.editedTls || editedTls">
+                            <!--EDIT SECOND LEVEL STEP-->
+                            <input type="text"
+                                   #tls_nameEdit
+                                   class="form-input"
+                                   id="thirdStepEdit"
+                                   value="{{tls.title}}">
+                            <button type="button" class="btn btn--indigo" (click)="updateThirdStep(tls_nameEdit.value, i, index)">
+                              Edit
+                            </button>
+                          </div>
+                          <p>{{tls.title}}</p>
+                        </li>
+                      </ol>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<!--</div>-->
