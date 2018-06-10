@@ -1,0 +1,123 @@
+<div class="main-page__component">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h2 class="heading-secondary text-center">Welcome to Go2Goal!</h2>
+      <p class="todos__header--paragraph">"<span>A dream</span> written down with a date becomes a goal. <span>A goal</span> broken down into
+        steps becomes a plan. <span>A plan</span> backed by action makes your dreams come true".
+      </p>
+    </div>
+  </div>
+  <div class="main-page__component--content">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card__side card__side--front">
+              <div class="card__picture card__picture--1">
+                &nbsp;
+              </div>
+              <h4 class="card__heading">
+                <span class="card__heading-span card__heading-span--1">Goals</span>
+              </h4>
+              <div class="card__details">
+                <ul>
+                  <li>Goal of Life</li>
+                  <li>Goals of Year</li>
+                  <li>Goals of Month</li>
+                  <li>Goals of Week</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-1">
+              <div class="card__cta">
+                <h4 class="card__side--back__header">My Goals</h4>
+                <div class="card__cta--details">
+                  <ul>
+                    <li>Goal of Life: {{golNumber}}</li>
+                    <li>Goals of Year: 4</li>
+                    <li>Goals of Month: 6</li>
+                    <li>Goals of Week: 2</li>
+                  </ul>
+                </div>
+                <a [routerLink]="'/goals'" class="btn btn--white">Go to Goals!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card__side card__side--front">
+              <div class="card__picture card__picture--2">
+                &nbsp;
+              </div>
+              <h4 class="card__heading">
+                <span class="card__heading-span card__heading-span--2">Todos</span>
+              </h4>
+              <div class="card__details--2">
+                List of todos, curses, books, etc.
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-2">
+              <div class="card__cta">
+                <h4 class="card__side--back__header">My Todos</h4>
+                <div class="card__cta--details">
+                  You have {{todosNumber}} things to do.
+                </div>
+                <a [routerLink]="'/todos'" class="btn btn--white">Go to Todos!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card__side card__side--front">
+              <div class="card__picture card__picture--3">
+                &nbsp;
+              </div>
+              <h4 class="card__heading">
+                <span class="card__heading-span card__heading-span--3">Notes</span>
+              </h4>
+              <div class="card__details--2">
+                Notes, quotes, links, expressions, etc.
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-3">
+              <div class="card__cta">
+                <h4 class="card__side--back__header">My Notes</h4>
+                <div class="card__cta--details">
+                  You have 12 very important and useful notes.
+                </div>
+                <a [routerLink]="'/notes'" class="btn btn--white">Go to Notes!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card__side card__side--front">
+              <div class="card__picture card__picture--4">
+                &nbsp;
+              </div>
+              <h4 class="card__heading">
+                <span class="card__heading-span card__heading-span--4">Posts</span>
+              </h4>
+              <div class="card__details--4">
+                Share your impression, opinion about books, places, events. Recommend it to another people. Use someones
+                experience or recommendations.
+              </div>
+            </div>
+            <div class="card__side card__side--back card__side--back-4">
+              <div class="card__cta">
+                <h4 class="card__side--back__header">My Posts</h4>
+                <div class="card__cta--details">
+                  You have 1 published post.
+                </div>
+                <a [routerLink]="'/posts'" class="btn btn--white">Go to Posts!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

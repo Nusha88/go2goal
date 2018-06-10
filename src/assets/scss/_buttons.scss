@@ -5,7 +5,7 @@
   text-decoration: none;
   padding: 1.5rem 4rem;
   display: inline-block;
-  border-radius: 10rem;
+  border-radius: 10px;
   transition: all .2s;
   position: relative;
   font-size: $font-size-default;
@@ -28,7 +28,7 @@
   display: inline-block;
   width: 100%;
   height: 100%;
-  border-radius: 10rem;
+  border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;
@@ -49,6 +49,42 @@
   margin-right: 2rem;
   &::after {
     background: $dark-primary-color;
+  }
+  &:hover {
+    color: $color-white;
+  }
+}
+.btn--green {
+  background-color: $green-color;
+  color: $color-white;
+  margin-right: 2rem;
+  &::after {
+    background: $green-color;
+  }
+  &:hover {
+    color: $color-white;
+  }
+}
+.btn--orange {
+  background-color: $orange-color;
+  color: $color-white;
+  margin-right: 2rem;
+  &::after {
+    background: $orange-color;
+  }
+  &:hover {
+    color: $color-white;
+  }
+}
+.btn--light-green {
+  background-color: $light-green-color;
+  color: $color-white;
+  margin-right: 2rem;
+  &::after {
+    background: $light-green-color;
+  }
+  &:hover {
+    color: $color-white;
   }
 }
 .btn--transparent {

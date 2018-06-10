@@ -1,5 +1,6 @@
 
 @import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
 .register-page__content {
   font-family: Lato, sans-serif;
   color: $color-white;
@@ -7,7 +8,7 @@
   background-image: linear-gradient(to right bottom,
     rgba($light-primary-color, 0.8),
     rgba($dark-primary-color, 0.8)),
-  url("../../assets/images/robert-ruggiero-176927.jpg");
+  url("../../assets/images/34943640193_0b537367ac_h.jpg");
   background-size: cover;
   background-position: top;
   clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
@@ -128,6 +129,23 @@
   }
 }
 .footer {
-  margin-top: -11rem;
+  margin-top: -15rem;
+  @include respond(tab-land) {
+    margin-top: -19rem;
+  }
 }
 
+.password-container {
+  position: relative;
+
+  span {
+    .fa-eye {
+      position: absolute;
+      top: 17px;
+      font-size: 2rem;
+      right: 1%;
+      color: $dark-primary-color;
+      cursor: pointer;
+    }
+  }
+}

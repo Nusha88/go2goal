@@ -19,12 +19,13 @@
               <label class="form-label" for="username">Username</label>
             </div>
 
-            <div class="form-group">
-              <input type="text"
+            <div class="form-group password-container">
+              <input type="{{type}}"
                      class="form-input"
                      placeholder="Password"
                      id="password"
-                     name="password" required [(ngModel)]="password">
+                     name="password" required [(ngModel)]="password"> <span
+              (click)="toggleShowHidePassword()"><i class="fas fa-eye"></i></span>
               <label class="form-label" for="password">Password</label>
             </div>
 
@@ -33,7 +34,9 @@
               <label for="remember" class="checkbox-label">
                 <span class="form-checkbox"></span>Remember me</label>
             </div>
-
+            <div [hidden]="!warning" class="incorrect-data">
+              Username or password is incorrect!
+            </div>
             <div class="form-group">
               <button class="btn btn--white" [disabled]="!form.valid">Login</button>
               <p>New to site? <a [routerLink]="['/register']">Create an account</a></p>

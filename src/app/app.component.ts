@@ -11,6 +11,7 @@ import {UserService} from './services/user.service';
 export class AppComponent implements OnInit {
   users: any;
   user: any;
+  password: any;
   constructor(private router: Router,
               private userService: UserService,
               public loginService: LoginService) {}
@@ -19,26 +20,21 @@ export class AppComponent implements OnInit {
     this.loginService.sendUser(this.user.username);
   }
   ngOnInit() {
-    this.router.navigate(['/welcome']);
     const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
 
-    if (!username && !password) {
-      this.router.navigate(['/login']);
-    } else {
+    if (username) {
       this.userService.getUsers().subscribe(u => {
         this.users = u;
         this.users.find(user => {
           this.user = user;
-          // console.log(this.user.username);
-          if (username === this.user.username && password === this.user.password) {
-            this.router.navigate(['/', this.user._id]);
+          if (username === this.user.username) {
+            this.password = this.user.password;
             return this.sendUser();
-          } else if (!username === this.user.username && !password === this.user.password) {
-            this.router.navigate(['/login']);
           }
         });
       });
+    } else {
+      this.router.navigate(['/welcome']);
     }
 
   }

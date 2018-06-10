@@ -1,9 +1,7 @@
 body {
   font-family: Lato, sans-serif;
   font-weight: 400;
-  //font-size: 16px;
   line-height: 1.7;
-  padding: 3rem;
   color: $secondary-text;
   hr.white-hr {
     color: $color-white;
@@ -22,6 +20,11 @@ body {
     letter-spacing: 3.5rem;
     animation: moveToLeft 1s ease-in;
     margin-bottom: 3rem;
+
+    @include respond(phone) {
+      letter-spacing: 2rem;
+      font-size: 5rem;
+    }
   }
 
   .heading-primary--sub {
@@ -30,6 +33,11 @@ body {
     font-weight: 400;
     letter-spacing: .87rem;
     animation: moveToRight 1s ease-in;
+
+    @include respond(phone) {
+      letter-spacing: .5rem;
+      text-align: center;
+    }
   }
 }
 .heading-secondary {
@@ -46,11 +54,18 @@ body {
     transform: skewX(15deg) skewY(2deg) scale(1.1);
     text-shadow: $shadow-text;
   }
+
+  @include respond(phone) {
+    padding: 0 2rem;
+  }
 }
 .heading-tertiary {
   font-size: $font-size-default;
   font-weight: 700;
   text-transform: uppercase;
+  @include respond(phone) {
+    clear: both;
+  }
 }
 .paragraph {
   font-size: $font-size-default;

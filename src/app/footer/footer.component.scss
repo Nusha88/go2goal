@@ -1,3 +1,4 @@
+@import "../../assets/scss/mixins";
 .footer-section {
   background-color: #333;
   padding: 9rem 0 7rem 0;
@@ -12,7 +13,12 @@
   .footer__navigation {
     border-top: 1px solid #777;
     padding-top: 2rem;
-    display: inline-block; }
+    display: inline-block;
+    @include respond(tab-port) {
+      width: 100%;
+      text-align: center;
+    }
+  }
   .footer__list {
     list-style: none; }
   .footer__item {
@@ -37,4 +43,9 @@
     width: 100%;
     text-transform: uppercase;
     float: right; }
+  .offset-2 {
+    @include respond(tab-port) {
+      margin-left: 0;
+    }
+  }
 }

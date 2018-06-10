@@ -1,5 +1,5 @@
-import {Todo} from './todo.model';
 import {Goals} from './goals';
+import {TodoListModel} from './todolist.model';
 
 export class UserModel {
   constructor(
@@ -8,7 +8,7 @@ export class UserModel {
     public password: string,
     public email: string,
     public goals?: Goals,
-    public todos?: Todo,
+    public todoLists?: TodoListModel,
     public notes?: any,
     public posts?: any,
   ) {}

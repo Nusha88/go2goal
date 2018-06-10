@@ -1,0 +1,261 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.main-page__component {
+  background-color: $light-grey-color;
+  margin-top: -3rem;
+
+  .content {
+    margin: 3rem auto;
+    width: 90%;
+    padding: 2rem;
+    h1 {
+      color: $primary-text;
+      margin-top: 3rem;
+      span {
+        color: $dark-primary-color;
+      }
+    }
+    .card {
+      perspective: 150rem;
+      -moz-perspective: 150rem;
+      position: relative;
+      height: 45rem;
+      border: none;
+      @include respond(tab-port) {
+        margin-top: 2rem;
+      }
+    }
+    .card__side {
+      height: 45rem;
+      transition: all .8s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      backface-visibility: hidden;
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    }
+    .card__side--front {
+      //background-color: #fff;
+    }
+    .card__side--back {
+      transform: rotateY(180deg);
+    }
+    .card__side--back-1 {
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9);
+    }
+    .card__side--back-2 {
+      background-image: linear-gradient(to right bottom, $light-green-color, $green-color);
+    }
+    .card__side--back-3 {
+      background-image: linear-gradient(to right bottom, $light-orange-color, $orange-color);
+    }
+    .card__side--back-4 {
+      background-image: linear-gradient(to right bottom, $light-blue-color, $blue-color);
+    }
+    .card:hover .card__side--front {
+      transform: rotateY(-180deg);
+    }
+    .card:hover .card__side--back {
+      transform: rotateY(0);
+    }
+    .card__picture {
+      background-size: cover;
+      height: 23rem;
+      background-blend-mode: screen;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+    .card__picture--1 {
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9), url(../../assets/images/goals.jpg);
+    }
+    .card__picture--2 {
+      background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../assets/images/todos.jpg);
+    }
+    .card__picture--3 {
+      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../../assets/images/notes.jpg);
+    }
+    .card__picture--4 {
+      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../../assets/images/posts.jpg);
+    }
+    .card__heading {
+      font-size: 2.8rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      text-align: right;
+      color: #fff;
+      position: absolute;
+      top: 16.5rem;
+      right: 0rem;
+      width: 75%;
+    }
+    .card__heading-span {
+      padding: 1rem 1.5rem;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    .card__heading-span--1 {
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9);
+    }
+    .card__heading-span--2 {
+      background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.85), rgba(40, 180, 133, 0.85));
+    }
+    .card__heading-span--3 {
+      background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85));
+    }
+    .card__heading-span--4 {
+      background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.85), rgba(86, 67, 250, 0.85));
+    }
+    .card__details {
+      padding: 1rem;
+      ul {
+        list-style: none;
+        width: 80%;
+        margin: 0 auto;
+        li {
+          text-align: center;
+          font-size: 1.5rem;
+          padding: 1rem;
+        }
+      }
+    }
+    .card__details--2 {
+      padding: 3rem;
+      padding-top: 8rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .card__details--4 {
+      padding: 3rem;
+      padding-top: 4rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .card__details ul li:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
+    .card__side--back-2 {
+      .card__cta {
+        width: 100%;
+        text-align: center;
+        color: $color-white;
+        .card__cta--details {
+          margin: 0 auto;
+          font-size: 1.5rem;
+          text-align: center;
+          margin-top: 8rem;
+          margin-bottom: 10rem;
+        }
+        .btn--white {
+          margin: 0 auto;
+        }
+      }
+    }
+    .card__side--back-3 {
+      .card__cta {
+        width: 100%;
+        text-align: center;
+        color: $color-white;
+        .card__cta--details {
+          margin: 0 auto;
+          font-size: 1.5rem;
+          text-align: center;
+          margin-top: 8rem;
+          margin-bottom: 10rem;
+        }
+        .btn--white {
+          margin: 0 auto;
+        }
+      }
+    }
+    .card__side--back-4 {
+      .card__cta {
+        width: 100%;
+        text-align: center;
+        color: $color-white;
+        .card__cta--details {
+          margin: 0 auto;
+          font-size: 1.5rem;
+          text-align: center;
+          margin-top: 8rem;
+          margin-bottom: 12rem;
+        }
+        .btn--white {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .card__cta {
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      color: $color-white;
+      .card__cta--details {
+        margin: 0 auto;
+        ul {
+          list-style: none;
+          li {
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 1rem;
+          }
+        }
+      }
+      .btn--white {
+        margin: 0 auto;
+      }
+    }
+    .card__side--back__header {
+      text-align: center;
+      color: #fff;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      margin-top: 5rem;
+      margin-bottom: 2rem;
+    }
+    .row {
+      margin-bottom: 5rem;
+    }
+  }
+}
+
+.jumbotron {
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.5),
+    rgba($dark-primary-color, 0.5)), url("../../assets/images/luca-bravo-370128-unsplash.jpg");
+  margin-bottom: 0;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 10rem 2rem;
+  .heading-secondary {
+    color: $color-white;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+.todos__header--paragraph {
+  font-size: 1.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 2rem 17rem 0;
+  color: $color-white;
+  letter-spacing: 2px;
+  span {
+    color: $hover-color;
+  }
+}
+.author {
+  font-size: 1.8rem;
+  text-align: center;
+  width: 100%;
+  text-transform: none;
+  color: $primary-color;
+
+}

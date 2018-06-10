@@ -16,6 +16,8 @@ import {UserFormService} from '../services/user-form.service';
 export class RegisterComponent implements OnInit {
   @Input() user: UserModel;
   registerForm: FormGroup;
+  type = 'password';
+  show = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,10 +48,17 @@ export class RegisterComponent implements OnInit {
     this.sendUser();
     this.usersService.postUser(this.registerForm.value);
     localStorage.setItem('username', this.registerForm.value.username);
-    localStorage.setItem('password', this.registerForm.value.password);
     localStorage.setItem('remember', 'true');
-    console.log(this.registerForm.value);
-    this.router.navigate(['/'], {queryParams: {firstVisit: true}});
+    this.router.navigate(['/']);
+  }
+
+  toggleShowHidePassword() {
+    this.show = !this.show;
+    if (this.show) {
+      this.type = 'text';
+    } else {
+      this.type = 'password';
+    }
   }
 
 }

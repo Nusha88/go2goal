@@ -1,57 +1,49 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const SecondLevelSteps = new Schema({
-  name: String
+var tls = new Schema({
+  index: String,
+  title: String,
+  third_level_steps: Array
 });
-const FirstLevelSteps = new Schema({
-  name: String,
-  second_level_step: [SecondLevelSteps]
+var sls = new Schema({
+  index: String,
+  title: String,
+  third_level_steps: [tls]
 });
-const ThirdLevelSteps = new Schema({
-  _id: String,
-  name: String
+var fls = new Schema({
+  index: String,
+  title: String,
+  second_level_steps: [sls]
 });
-const GoalOfYear = new Schema({
-  _id: String,
-  name: String
-});
-const GoalOfMonth = new Schema({
-  _id: String,
-  name: String
-});
-const GoalOfWeek = new Schema({
-  _id: String,
-  name: String
+var goals = new Schema({
+  id: String,
+  goal_of_live: String,
+  first_level_steps: [fls]
 });
 
-const goalsSchema = new Schema({
-  // id: String,
-  goal_of_live: String,
-  first_level_steps: [FirstLevelSteps],
-  second_level_steps: [SecondLevelSteps],
-  // third_level_steps: [ThirdLevelSteps],
-  // goals_of_year: [GoalOfYear],
-  // goals_of_month: [GoalOfMonth],
-  // goals_of_week: [GoalOfWeek],
-});
 var todos = new Schema({
+  id: String,
   title: String,
   complete: Boolean,
-})
+});
+
+var todoLists = new Schema({
+  id: String,
+  title: String,
+  isEdited: Boolean,
+  todos: [todos],
+});
 
 const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  goals:
-    {
-      goal_of_live: String,
-      first_level_steps: String
-    },
-  todos: [todos],
+  goals: [goals],
+  todoLists: [todoLists],
 }, {collection: 'go2users'});
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema, 'go2users');
 
 
 

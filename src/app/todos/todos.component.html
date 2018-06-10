@@ -1,35 +1,124 @@
 <div class="todo-component">
-  <app-header></app-header>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h2 class="heading-secondary text-center">Todos</h2>
+      <p class="todos__header--paragraph">"Time is what we want most but what we use worst".
+      </p>
+      <p class="author">William Penn</p>
+    </div>
+  </div>
   <div class="todos-component">
-    <div>
-      <form (submit)="addTodo($event)">
-        <input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
-        <button  type="submit" [disabled]="newTodo===''">Add Todo</button>
-      </form>
+    <div class="todos-content">
+      <p class="todos--paragraph">Create a list of daily activities, curses you want to buy,
+        books you want to read and cross them off. It will help you to manage your time and be more productive.</p>
+      <div class="row">
+        <div class="col-md-12">
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Todo List</h4>
+                <span class="close-popup" (click)="d('Cross click')"><i class="ion-close-round"></i></span>
+            </div>
+            <div class="modal-body">
+              <div class="add-todolist-form-container">
+                <form class="form-group add-todolist-form todos-form" [formGroup]="addTodoListForm">
+                  <p>Enter Todo List Title</p>
+                  <input class="form-input" id="title" type="text" formControlName="title">
+                  <i class="fas fa-clipboard-list"></i>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="todo-button">
+                <button [disabled]="!addTodoListForm.valid"
+                        type="submit" (click)="addTodoList(addTodoListForm.value)"
+                        class="btn btn--indigo"><i class="ion-android-add add-todolist-icon"></i> Add</button>
+              </div>
+            </div>
+            <div class="todo-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+          </ng-template>
+
+          <button class="btn btn--indigo add-todolist-button" (click)="openModal(content)"><i class="ion-android-add"></i> Add Todo List</button>
+          <hr>
+        </div>
+      </div>
+
+      <div class="todo-list" *ngFor="let todoList of todoLists; let index = index">
+        <h3>{{todoList.title}}
+          <span class="edit-block">
+                <span (click)="openTodoModal(todoContent)" class="add_todo"><i class="ion-android-add"></i></span>
+            <span (click)="editTodoList(todoList)" class="todo--edit"><i class="ion-edit"></i></span>
+            <span (click)="deleteTodoList(todoList, index)" class="delete-icon"><i class="ion-close-round"></i></span>
+            </span>
+          <div class="form-group edit-todo-list-form" *ngIf="todoList.isEdited">
+          <input type="text"
+          #todoListVal
+          class="form-input"
+          value="{{todoList.title}}">
+          <button type="button" class="btn btn--indigo"
+          (click)="updateTodoList(todoListVal.value, todoList)">Edit
+          </button>
+          </div>
+        </h3>
+
+        <ng-template #todoContent let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <span class="close-popup" (click)="d('Cross click')"><i class="ion-close-round"></i></span>
+          </div>
+          <div class="modal-body">
+            <div class="add-todolist-form-container">
+              <form class="form-group add-todolist-form todos-form" [formGroup]="addTodoForm">
+                <p>Enter Todo Title</p>
+                <input class="form-input" placeholder="Title" type="text" formControlName="todoTitle">
+                <i class="far fa-edit"></i>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="todo-button">
+              <button [disabled]="!addTodoForm.valid"
+                      type="submit" (click)="addTodo(addTodoForm.value, index)"
+                      class="btn btn--indigo"><i class="ion-android-add add-todolist-icon"></i> Add</button>
+            </div>
+          </div>
+          <div class="todo-icon todo-icon--todo">
+            <i class="far fa-edit"></i>
+          </div>
+        </ng-template>
+
+        <ul *ngIf="todoList.todos">
+          <li *ngFor="let todo of todoLists[index].todos; let i = index">
+            <div class="form-group__checkbox">
+              <input type="checkbox" [(ngModel)]="todo.complete" #complete name="remember" class="checkbox"
+                     id="{{todo.title}}" (click)="updateTodo(todo, complete.checked)">
+              <label for="{{todo.title}}" class="checkbox-label" [ngClass]="{'checked': todo.complete}">
+                <span class="form-checkbox"></span>{{ todo.title }}</label>
+              <span class="todo--edit" (click)="editTodo(todo)"><i class="ion-edit"></i></span>
+              <span (click)="deleteTodo(todo, i, index)" class="delete-icon"><i class="ion-close-round"></i></span>
+
+              <div class="form-group edit-todo-list-form form-todo" *ngIf="todo.isEdited">
+                <input type="text"
+                       #todoEdited
+                       class="form-input"
+                       id="todoEdit"
+                       value="{{todo.title}}">
+                <button type="button" class="btn btn--indigo" (click)="updateTodoTitle(todoEdited.value, todo, i)">Edit
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--<div class="todos-container">-->
+      <!--<ol *ngIf="todos">-->
+      <!--<li *ngFor="let todo of todos; let i=index">-->
+      <!--</li>-->
+      <!--</ol>-->
+      <!--</div>-->
+
     </div>
-
-    <div [hidden]="newTodo">
-      Type in a new todo...
-    </div>
-
-    <div [hidden]="!newTodo">
-      Typing: {{ newTodo }}
-    </div>
-
-    <ul>
-      <li *ngFor="let todo of todos; let i=index">
-        <input type="checkbox" class="checkbox" [(ngModel)]="todo.complete" />
-        <span [ngClass]="{'checked': todo.complete}">{{ todo.title }}</span>
-        <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
-      </li>
-    </ul>
-
-    <div class="mtop20">
-      <button (click)="deleteSelectedTodos()">Delete Selected</button>
-    </div>
-
   </div>
 </div>
-
 
 

@@ -1,0 +1,51 @@
+@import "../../assets/scss/variables";
+
+.notebook-page__component {
+  padding-bottom: 5rem;
+  font-size: 1.5rem;
+  .jumbotron {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/thought-catalog-214785-unsplash.jpg");
+    margin-bottom: 0;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 8rem 2rem;
+  }
+
+  .heading-secondary {
+    color: $color-white;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .notebook__header--paragraph {
+    font-size: 1.8rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2rem 17rem 0;
+    color: $color-white;
+    letter-spacing: 2px;
+  }
+  .author {
+    font-size: 1.8rem;
+    text-align: center;
+    width: 100%;
+    text-transform: none;
+    color: $primary-color;
+
+  }
+  .notebook-content {
+    background-color: $color-white;
+    padding: 2rem 0;
+    font-size: 1.5rem;
+
+    .notebook--paragraph {
+      font-size: 1.6rem;
+      text-align: center;
+      padding: 2rem;
+      color: $primary-text;
+      letter-spacing: 1px;
+    }
+  }
+}

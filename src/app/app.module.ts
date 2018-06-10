@@ -27,6 +27,10 @@ import { SubmittingComponent } from './core/forms/submitting.component';
 import {UserFormService} from './services/user-form.service';
 import { FooterComponent } from './footer/footer.component';
 import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/first-level-step.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import {MatDialog, MatDialogModule} from '@angular/material';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,11 +53,15 @@ import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/f
     SubmittingComponent,
     FooterComponent,
     FirstLevelStepComponent,
+    MainPageComponent,
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    OverlayModule,
+    MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
@@ -62,6 +70,7 @@ import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/f
     UserService,
     LoginService,
     // TodoDataService,
+    MatDialog,
     UserFormService
   ],
   bootstrap: [AppComponent]

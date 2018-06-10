@@ -1,5 +1,400 @@
 @import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
 .todos-component {
-  background-color: $light-grey-color;
-  padding: 5rem 0;
+  background-color: $color-white;
+  padding: 2rem 0;
+  font-size: 1.5rem;
+  .todos--paragraph {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 2rem;
+    color: $primary-text;
+    letter-spacing: 1px;
+  }
+  .todos-content {
+    margin: 3rem auto;
+    width: 90%;
+    //background: $color-white;
+    padding: 2rem;
+    .todos-form {
+      width: 90%;
+      margin: 0 auto;
+      padding: 2rem;
+      div {
+        display: inline-block;
+      }
+      .from-to-value {
+        font-size: 1.4rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
+        input {
+          width: 6rem;
+        }
+      }
+      .todo-input {
+        width: 70%;
+        margin-right: 3rem;
+        @include respond(phone) {
+          width: 90%;
+        }
+      }
+      .todo-button {
+        @include respond(phone) {
+          display: block;
+          text-align: center;
+          margin-top: 2rem;
+        }
+      }
+      .form-input {
+        padding: 1.5rem 2rem;
+        color: inherit;
+        border-radius: 2px;
+        background-color: $light-grey-color;
+        border: none;
+        font-family: Lato, sans-serif;
+        border-bottom: 3px solid transparent;
+        width: 100%;
+        margin-left: 2rem;
+        //float: left;
+        display: block;
+        transition: all .3s;
+        &:focus {
+          outline: none;
+          box-shadow: 0 1rem 2rem rgba($color-black, .1);
+          border-bottom: 3px solid $dark-primary-color;
+        }
+
+        &::-webkit-input-placeholder {
+          color: $primary-text;
+        }
+      }
+      .btn {
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+    .todos-container {
+      width: 90%;
+      margin: 0 auto;
+      button {
+        padding: 1rem 4rem;
+        margin-left: 3rem;
+        &:focus {
+          outline: none;
+        }
+      }
+      #todoEdit {
+        width: 50%;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  .add-todolist-button {
+    margin-bottom: 2rem;
+    background-color: transparent;
+    background-image: linear-gradient(to right,
+      rgba($light-primary-color, 0.9),
+      rgba($dark-primary-color, 0.9));
+  }
+}
+.jumbotron {
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.5),
+    rgba($dark-primary-color, 0.5)), url("../../assets/images/matteo-paganelli-39971-unsplash.jpg");
+  margin-bottom: 0;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 10rem 2rem;
+  .heading-secondary {
+    color: $color-white;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+.todos__header--paragraph {
+  font-size: 1.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 2rem 17rem 0;
+  color: $color-white;
+  letter-spacing: 2px;
+}
+.author {
+  font-size: 1.8rem;
+  text-align: center;
+  width: 100%;
+  text-transform: none;
+  color: $primary-color;
+
+}
+
+.add_todo {
+  position: absolute;
+  right: 0;
+  margin-top: 0;
+  color: $dark-primary-color;
+  cursor: pointer;
+  opacity: .7;
+  transition: all .2s ease-out;
+  &:hover {
+    transform: scale(1.3) rotate(90deg);
+    opacity: 1;
+  }
+}
+
+.add-todolist-form-container {
+  padding: 2rem;
+  position: relative;
+  .form-input {
+    font-size: 1.5rem;
+    padding: 1.5rem 3.8rem;
+    color: inherit;
+    border-radius: 2px;
+    background-color: rgba(#ccc, .1);
+    border: none;
+    font-family: Lato, sans-serif;
+    //border-bottom: 3px solid transparent;
+    width: 100%;
+    display: block;
+    transition: all .3s;
+    border: 3px solid $light-primary-color;
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border: 3px solid transparent;
+      border-bottom: 3px solid $light-primary-color;
+    }
+    &:focus:invalid {
+      border-bottom: 3px solid orangered !important;
+    }
+    &::-webkit-input-placeholder {
+      color: $primary-text;
+    }
+  }
+  button {
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.add-todolist-form {
+  margin-left: 2rem;
+  input {
+    position: relative;
+  }
+  p {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: $secondary-text;
+  }
+  i {
+    position: absolute;
+    margin-left: 13px;
+    font-size: 1.7rem;
+    color: #cccccc;
+    margin-top: -35px;
+  }
+}
+
+.todo-list {
+  padding: 1px;
+  margin-top: 1rem;
+  width: 47%;
+  display: inline-grid;
+  margin-right: 2rem;
+  position: relative;
+  margin-bottom: 2rem;
+  .add_todo {
+    right: 5rem;
+  }
+  h3 {
+    text-transform: uppercase;
+    color: $primary-text;
+    display: inline;
+    margin-bottom: 1rem;
+  }
+  ul {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.3),
+      rgba($dark-primary-color, 0.3));
+    padding: 1rem;
+    border-radius: 5px;
+    list-style: none;
+    color: #000000;
+    li {
+      padding: 2rem;
+      position: relative;
+      .todo-title {
+        margin-left: 3rem;
+      }
+    }
+  }
+  .checkbox {
+    display: none;
+  }
+  .form-checkbox {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid rgba($light-primary-color, .7);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -.4rem;
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      //border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      background-color: rgba($light-primary-color, .7);
+      opacity: 0;
+      -webkit-transition: opacity .2s;
+      transition: opacity .2s;
+    }
+  }
+  .checkbox-label {
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  .form-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s;
+  }
+  .checkbox:checked ~ .checkbox-label .form-checkbox::after {
+    opacity: 1; }
+  .checked {
+    text-decoration: line-through;
+    color: $light-primary-color;
+    opacity: .7;
+  }
+  .delete-icon {
+    position: absolute;
+    right: 0;
+    margin-top: 0;
+    color: $dark-primary-color;
+    cursor: pointer;
+    opacity: .7;
+    transition: all .2s ease-out;
+    &:hover {
+      transform: scale(1.3) rotate(90deg);
+      opacity: 1;
+    }
+  }
+  .todo--edit {
+    position: absolute;
+    right: 2rem;
+    margin-top: 0;
+    color: $dark-primary-color;
+    cursor: pointer;
+    opacity: .7;
+    transition: all .2s ease-out;
+    &:hover {
+      transform: scale(1.3) rotate(90deg);
+      opacity: 1;
+    }
+  }
+}
+.edit-todo-list-form {
+  position: absolute;
+  top: -13px;
+  left: 0px;
+  background-color: $color-white;
+  input {
+    padding: 1rem;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid $orange-color;
+  }
+  button {
+    padding: .5rem 1rem;
+    margin-left: 2rem;
+    font-size: 1.3rem;
+  }
+}
+.form-todo {
+  top: -3px;
+  left: 0px;
+  width: 100%;
+  input {
+    width: 77%;
+  }
+}
+
+.close-popup {
+  position: absolute;
+  top: .5rem;
+  right: 0;
+  color: $light-primary-color;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  padding: .2rem .7rem;
+  transform: rotate(0deg);
+  transition: all ease-out .2s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.3) rotate(90deg);
+  }
+}
+.todo-icon {
+  position: absolute;
+  left: -10rem;
+  top: 5%;
+  color: $color-white;
+  background-color: $light-primary-color;
+  border-radius: 50%;
+  font-size: 6rem;
+  padding: 1rem 4rem;
+  border: 10px solid rgba(#ccc, .5);
+}
+.todo-icon--todo {
+  padding: 1rem 2.5rem;
+}
+.add-todolist-icon {
+  color: $light-primary-color;
+  background-color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  padding: .2rem .7rem;
+}
+.modal-content {
+  border: none;
+  letter-spacing: 1px;
+}
+.modal-header {
+  border-bottom: none;
+  h4 {
+    padding: 1rem 4rem;
+    font-size: 2.5rem;
+    color: $light-primary-color;
+  }
+}
+.modal-footer {
+  button {
+    background-color: $light-primary-color;
+    &::after {
+      background: $light-primary-color;
+    }
+    &:hover {
+      color: $color-white;
+    }
+  }
 }

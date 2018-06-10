@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
   users: any;
   user: any;
   remember = false;
+  warning = false;
+  type = 'password';
+  show = false;
 
   constructor( private router: Router,
                public service: UserService,
@@ -31,32 +34,47 @@ export class LoginComponent implements OnInit {
         this.user = user;
         if (this.username === this.user.username && this.password === this.user.password && this.remember === true) {
           localStorage.setItem('username', this.username);
-          localStorage.setItem('password', this.password);
           localStorage.setItem('remember', 'true');
-          this.router.navigate(['/', this.user._id]);
+          this.router.navigate(['/']);
           return this.sendUser();
         }  else if (this.username === this.user.username && this.password === this.user.password && this.remember === false) {
-          localStorage.removeItem('username');
-          localStorage.removeItem('password');
-          localStorage.removeItem('remember');
-          this.router.navigate(['/', this.user._id]);
+          localStorage.setItem('username', this.username);
+          localStorage.setItem('remember', 'true');
+          this.router.navigate(['/']);
           return this.sendUser();
+        } else {
+          this.warning = true;
         }
       });
     });
   }
 
+  toggleShowHidePassword() {
+         this.show = !this.show;
+         if (this.show) {
+               this.type = 'text';
+           } else {
+               this.type = 'password';
+           }
+     }
 
   login() {
     this.onGetUsers();
   }
   ngOnInit() {
     const storedUsername =  localStorage.getItem('username');
-    const storedPassword =  localStorage.getItem('password');
     const storedRemember =  localStorage.getItem('remember');
-    if (storedUsername && storedPassword && storedRemember) {
+    if (storedUsername && storedRemember === 'true') {
       this.username = storedUsername;
-      this.password = storedPassword;
+      this.service.getUsers().subscribe(users => {
+        this.users = users;
+        this.users.find(user => {
+          this.user = user;
+          if (storedUsername === this.user.username) {
+            this.password = this.user.password;
+          }
+        });
+      });
       this.remember = true;
     } else {
       this.username = '';

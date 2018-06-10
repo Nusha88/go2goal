@@ -1,4 +1,6 @@
 @import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
 .login-page__content {
   position: relative;
   font-family: Lato, sans-serif;
@@ -7,7 +9,7 @@
   background-image: linear-gradient(to right bottom,
     rgba($light-primary-color, 0.8),
     rgba($dark-primary-color, 0.8)),
-  url("../../assets/images/robert-ruggiero-176927.jpg");
+  url("../../assets/images/34943640193_0b537367ac_h.jpg");
   background-size: cover;
   background-position: top;
   clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
@@ -20,128 +22,129 @@
     }
   }
 }
+
 .login-form {
   padding: 5rem 0;
   position: relative;
 
-    .form {
-      margin: 0 auto;
-      width: 70%;
-      padding: 3rem;
-      .u-margin-bottom-small {
-        text-align: center;
-        h2 {
-          color: $color-white;
-          margin-top: 3rem;
-          letter-spacing: 1rem;
-          margin-bottom: 4rem;
-          font-weight: 400;
-        }
-      }
-      p{
-        display: inline-block;
-        margin-top: 2rem;
-        font-size: $font-size-default;
+  .form {
+    margin: 0 auto;
+    width: 70%;
+    padding: 3rem;
+    .u-margin-bottom-small {
+      text-align: center;
+      h2 {
         color: $color-white;
-        a {
-          color: $color-white;
-          padding-left: 0.5rem;
-          &:hover {
-            text-decoration: underline;
-            color: $hover-color;
-          }
-        }
-      }
-      .form-group {
-        color: $primary-text;
-        label {
-          color: $color-white;
-        }
-        button {
-          margin-top: 1rem;
-          float: left;
-          margin-right: 3rem;
-          cursor: pointer;
-          color: $dark-primary-color;
-          &:hover {
-            background-color: #ffffff;
-          }
-        }
-        #remember {
-          display: none;
-        }
-        .form-checkbox {
-          height: 3rem;
-          width: 3rem;
-          border: 5px solid rgba($color-white, .7);
-          display: inline-block;
-          position: absolute;
-          left: 0;
-          top: -.4rem;
-          &::after {
-            content: "";
-            display: block;
-            height: 1.3rem;
-            width: 1.3rem;
-            //border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            background-color: rgba($color-white, .7);
-            opacity: 0;
-            -webkit-transition: opacity .2s;
-            transition: opacity .2s;
-          }
-        }
-        .checkbox-label {
-          font-size: 1.6rem;
-          cursor: pointer;
-          position: relative;
-          padding-left: 4.5rem;
-        }
-
-      }
-      .form-input {
-        font-size: 1.5rem;
-        padding: 1.5rem 2rem;
-        color: inherit;
-        border-radius: 2px;
-        background-color: rgba($color-white, .7);
-        border: none;
-        font-family: Lato, sans-serif;
-        border-bottom: 3px solid transparent;
-        width: 100%;
-        display: block;
-        transition: all .3s;
-        &:focus {
-          outline: none;
-          box-shadow: 0 1rem 2rem rgba($color-black, .1);
-          border-bottom: 3px solid $dark-primary-color;
-        }
-        &:focus:invalid {
-          border-bottom: 3px solid orangered !important;
-        }
-        &::-webkit-input-placeholder {
-          color: $primary-text;
-        }
-      }
-
-      .form-label {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-left: 2rem;
-        margin-top: .7rem;
-        display: block;
-        transition: all .3s;
-      }
-      .form-input:placeholder-shown + .form-label {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-4rem);
+        margin-top: 3rem;
+        letter-spacing: 1rem;
+        margin-bottom: 4rem;
+        font-weight: 400;
       }
     }
+    p {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: $font-size-default;
+      color: $color-white;
+      a {
+        color: $color-white;
+        padding-left: 0.5rem;
+        &:hover {
+          text-decoration: underline;
+          color: $hover-color;
+        }
+      }
+    }
+    .form-group {
+      color: $primary-text;
+      label {
+        color: $color-white;
+      }
+      button {
+        margin-top: 1rem;
+        float: left;
+        margin-right: 3rem;
+        cursor: pointer;
+        color: $dark-primary-color;
+        &:hover {
+          background-color: #ffffff;
+        }
+      }
+      #remember {
+        display: none;
+      }
+      .form-checkbox {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid rgba($color-white, .7);
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+        &::after {
+          content: "";
+          display: block;
+          height: 1.3rem;
+          width: 1.3rem;
+          //border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          background-color: rgba($color-white, .7);
+          opacity: 0;
+          -webkit-transition: opacity .2s;
+          transition: opacity .2s;
+        }
+      }
+      .checkbox-label {
+        font-size: 1.6rem;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+      }
+
+    }
+    .form-input {
+      font-size: 1.5rem;
+      padding: 1.5rem 2rem;
+      color: inherit;
+      border-radius: 2px;
+      background-color: rgba($color-white, .7);
+      border: none;
+      font-family: Lato, sans-serif;
+      border-bottom: 3px solid transparent;
+      width: 100%;
+      display: block;
+      transition: all .3s;
+      &:focus {
+        outline: none;
+        box-shadow: 0 1rem 2rem rgba($color-black, .1);
+        border-bottom: 3px solid $dark-primary-color;
+      }
+      &:focus:invalid {
+        border-bottom: 3px solid orangered !important;
+      }
+      &::-webkit-input-placeholder {
+        color: $primary-text;
+      }
+    }
+
+    .form-label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-left: 2rem;
+      margin-top: .7rem;
+      display: block;
+      transition: all .3s;
+    }
+    .form-input:placeholder-shown + .form-label {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4rem);
+    }
+  }
   .logo {
     position: absolute;
     top: 4.5rem;
@@ -154,10 +157,34 @@
     margin-bottom: 2.5rem;
   }
 }
-#remember:checked ~ .checkbox-label .form-checkbox::after {
-  opacity: 1; }
 
-.footer {
-  margin-top: -11rem;
+#remember:checked ~ .checkbox-label .form-checkbox::after {
+  opacity: 1;
 }
 
+.footer {
+  margin-top: -15rem;
+  @include respond(tab-land) {
+    margin-top: -19rem;
+  }
+}
+
+.incorrect-data {
+  color: orangered;
+  font-size: 1.5rem;
+}
+
+.password-container {
+  position: relative;
+
+  span {
+    .fa-eye {
+      position: absolute;
+      top: 17px;
+      font-size: 2rem;
+      right: 1%;
+      color: $dark-primary-color;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,109 +1,72 @@
 @import "../../assets/scss/variables";
-.goals-page__component {
-  height: 100%;
-  background-image: linear-gradient(to right bottom,
-    rgba($color-white, 0.8),
-    rgba($light-grey-color, 0.8)),
-  url("../../assets/images/diego-jimenez-258123.jpg");
-  background-size: cover;
-  background-position: top;
-  margin: 0 auto;
 
-  header {
-    font-size: 1.4rem;
-    height: 7rem;
-    //background-color: #fff;
-    display: flex;
-    position: relative;
-    img {
-      height: 4.5rem;
-      position: absolute;
-      top: 4rem;
-      left: 4rem;
-    }
+.goals-page__component {
+  padding-bottom: 5rem;
+  font-size: 1.5rem;
+  .jumbotron {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/34943640193_0b537367ac_h.jpg");
+    margin-bottom: 0;
+    background-size: cover;
+    background-attachment: fixed;
   }
-  &--content {
-.content {
-  width: 90%;
-  .col-md-3, .col-md-9 {
-    padding: 0;}
-  .col-md-3 {
-    padding-left: 15px;
+  .goals--paragraph {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 2rem;
+    color: $primary-text;
+    letter-spacing: 1px;
   }
-  .col-md-9 {
-    padding-right: 15px;
+  .heading-secondary {
+    color: $color-white;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
   }
-}
-    .sidebar {
-      height: 100vh;
-    }
-    .navigation {
-      position: absolute;
-      right: 0rem;
-      .main-navigation {
-        font-size: 1.4rem;
-        list-style: none;
-        padding: 1.5rem;
-        padding-left: 20rem;
-        li {
-          display: inline-block;
-          padding: 1rem;
-          margin-right: 7rem;
-          cursor: pointer;
-          &:hover {
-            text-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
-          }
-          a {
-            text-transform: uppercase;
-            color: $primary-text;
-            &:hover {
-              text-decoration: none;
-            }
-          }
-        }
+  .goals__header--paragraph {
+    font-size: 1.8rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2rem 17rem 0;
+    color: $color-white;
+    letter-spacing: 2px;
+  }
+  .author {
+    font-size: 1.8rem;
+    text-align: center;
+    width: 100%;
+    text-transform: none;
+    color: $primary-color;
+
+  }
+
+  .nav.nav-tabs {
+    border-bottom: 1px solid transparent;
+    margin-top: 5rem;
+    .active {
+      background-color: transparent;
+      border: 1px solid $color-white;
+      color: $light-primary-color;
+      a {
+        color: $light-primary-color;
       }
     }
-    .side-nav {
-      font-size: 1.4rem;
-      list-style: none;
-      padding-top: 20vh;
-      &__item {
-        position: relative;
-        cursor: pointer;
-        &:hover::before, &--active::before {
-          transform: scaleY(1);
-          width: 100%; }
-        &:active::before {
-          background: $color-white; opacity: .6; color: $dark-primary-color }
-        .side-nav__link, .side-nav__link:visited {
-          color: $primary-text;
-          text-decoration: none;
-          text-transform: uppercase;
-          display: block;
-          padding: 1.5rem 3rem;
-          position: relative;
-          z-index: 10;
-          display: flex;
-          align-items: center;
-          .active {
-            background: $color-white;
-            color: $dark-primary-color;
-          }
-        }
-        &:not(:last-child) {
-          margin-bottom: .5rem;
-        }
-        &:before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 3px;
-          background: $light-primary-color;
-          transform: scaleY(0);
-          transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s; }
+    li {
+      color: $color-white;
+      a {
+        color: $color-white;
+      }
+      .nav-link:focus, .nav-link:hover {
+        border-color: $color-white;
       }
     }
+
+  }
+
+  .goals_content {
+    background-color: $color-white;
+    color: $primary-text;
+    margin: 0;
   }
 }

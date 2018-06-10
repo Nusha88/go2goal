@@ -9,6 +9,8 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const User = require('./models/user');
 const Todo = require('./models/todo');
+const Goals = require('./models/goals');
+const TodoListModel = require("./models/todolist");
 
 /*
  |--------------------------------------
@@ -63,7 +65,8 @@ module.exports = function (app, config) {
       email: req.body.email,
       password: req.body.password,
       goals: req.body.goals,
-      todos: '',
+      goal_of_live: req.body.goal_of_live,
+      todoLists: req.body.todoLists
     });
     user.save(function (err, user) {
       if (err) {
@@ -113,41 +116,54 @@ module.exports = function (app, config) {
           return next(err)
         }
         res.status(201).json(user);
-        console.log(user);
       })
     });
   });
 
-  app.put('/api/users/:id/todos', function(req, res) {
+  app.post('/api/users/:id/todolists', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      var todolist = new TodoListModel({
+        id: req.body.id,
+        title: req.body.title,
+        isEdited: false,
+        todos: []
+      });
+      user.todoLists.push(todolist);
+      user.save(function (err) {
+        if (err) {
+          return next(err)
+        }
+        res.status(201).json(user);
+      })
+    });
+  });
+  app.put('/api/users/:id/todolists', function(req, res) {
     const userId = req.params.id;
-    const todos = req.body;
-    console.log('update');
-    User.findById({_id: userId}, todos, (err, user) => {
-      user.todos.push(todos);
-      console.log(todos);
+    const todoLists = req.body.todoLists;
+    console.log(req.body);
 
+    User.findById({_id: userId}, (err, user) => {
+
+      user.todoLists = todoLists;
       user.save((err, user) => {
         if (err) {
           return next(err);
         }
-        console.log(user);
-        res.send(todos);
+        res.send(user);
       });
     });
   });
-//
-//   app.put('/api/users/:id/todos', function (req, res) {
-//     const userId = req.params.id;
-//     const todos = req.body;
-//     console.log(todos);
-//     User.findById({_id: userId}, todos)
-//       .then(() => User.findById({_id: userId}))
-//       .then(user =>{
-//         console.log(user.todos);
-//         res.send(user.todos);
-//       })
-//       .catch(err);
-//   });
-// // PUT TODOS
 
+
+  app.put('/api/users/:id', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.goals = req.body.goals;
+      user.save(function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(user);
+      })
+    });
+  });
 };

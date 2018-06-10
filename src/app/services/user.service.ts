@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable, throwError} from 'rxjs';
+import {map, catchError} from 'rxjs/operators';
 import {UserModel} from '../models/user.model';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Todo} from '../models/todo.model';
+import {Goals} from '../models/goals';
+import {TodoListModel} from '../models/todolist.model';
 
 @Injectable()
 export class UserService {
@@ -13,37 +13,30 @@ export class UserService {
   constructor(private httpClient: HttpClient
   ) { }
 
-  getUsers(): Observable<UserModel[]> {
+  getUsers(): any {
     return this.httpClient.get('http://localhost:8083/api/users')
-      .catch(this._handleError)
-      .map(res => res);
+      .pipe(map(res => res),
+        catchError(this._handleError));
   }
 
-  getUserById$(id: string): Observable<UserModel> {
+  getUserById$(id: string): any {
     return this.httpClient
       .get(`http://localhost:8083/api/users/${id}/todos`)
-      .map(res => res)
-      .catch(this._handleError);
+      .pipe(map(res => res),
+      catchError(this._handleError));
   }
 
-  getUserTodos(id: string): Observable<UserModel> {
+  getUserTodos(id: string): any {
     return this.httpClient
       .get(`http://localhost:8083/api/users/${id}`)
-      .map(res => res)
-      .catch(this._handleError);
+      .pipe(map(res => res),
+      catchError(this._handleError));
   }
 
-  updateUser(id: string, user: UserModel): Observable<UserModel> {
+  updateUser(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${id}`, user)
-      .map(todo => todo)
-      .catch(this._handleError);
-  }
-
-  updateUserGoals(id: string, user: UserModel): Observable<UserModel> {
-    return this.httpClient
-      .put(`http://localhost:8083/api/users/${id}/goals/goal-of-life`, user)
-      .catch(this._handleError);
+      .put(`http://localhost:8083/api/users/${user._id}`, user)
+      .pipe(catchError(this._handleError));
   }
 
   postUser(data: Observable<UserModel[]>) {
@@ -77,16 +70,53 @@ export class UserService {
         return todo;
       });
   }
+  postTodoList(data: Observable<TodoListModel[]>, id: string) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.httpClient.post<TodoListModel>(`http://localhost:8083/api/users/${id}/todolists`,
+      JSON.stringify(data), {
+        headers: headers
+      }
+    )
+      .subscribe(todo => {
+        return todo;
+      });
+  }
 
-  // updateTodos(id: string, user: UserModel): Observable<UserModel> {
-  //   return this.httpClient
-  //     .put(`http://localhost:8083/api/users/${id}`, user)
-  //     .catch(this._handleError);
-  // }
 
+  updateUserTodos(user: UserModel): any {
+    console.log(user);
+    return this.httpClient
+      .put(`http://localhost:8083/api/users/${user._id}/todolists`, user)
+      .pipe(catchError(this._handleError));
+  }
+
+  // GOALS
+  postGoals(data: Observable<Goals[]>, id: string) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+      .set('Access-Control-Allow-Origin', '*');
+
+    return this.httpClient.post<Goals>(`http://localhost:8083/api/users/${id}/goals`,
+      JSON.stringify(data), {
+        headers: headers
+      }
+    )
+      .subscribe(goal => {
+        return goal;
+      });
+  }
+  updateGoals(user: UserModel): any {
+    return this.httpClient
+      .put(`http://localhost:8083/api/users/${user._id}/goals`, user)
+      .pipe(catchError(this._handleError));
+  }
   private _handleError(err: HttpErrorResponse | any) {
     const errorMsg = err.message || 'Error: Unable to complete request.';
-    return Observable.throw(errorMsg);
+    return throwError(errorMsg);
   }
 
 }
