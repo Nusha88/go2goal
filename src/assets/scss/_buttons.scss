@@ -76,6 +76,17 @@
     color: $color-white;
   }
 }
+.btn--light-orange {
+  background-color: $light-orange-color;
+  color: $color-white;
+  margin-right: 2rem;
+  &::after {
+    background: $light-orange-color;
+  }
+  &:hover {
+    color: $color-white;
+  }
+}
 .btn--light-green {
   background-color: $light-green-color;
   color: $color-white;

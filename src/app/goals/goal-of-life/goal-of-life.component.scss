@@ -40,7 +40,16 @@
 .goal-of-life__container {
   padding: 1rem;
   .heading-secondary {
-    //color: $color-white;
+    padding: 3rem;
+    padding-bottom: 0;
+    line-height: 1.5;
+    i {
+      display: inline-block;
+      background-image: linear-gradient(to right, $light-primary-color, $dark-primary-color);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-right: 3rem;
+    }
     &:hover {
       transform: none;
       text-shadow: none;
@@ -53,10 +62,7 @@
     margin: 0 auto;
     box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
     border-radius: 3px;
-    padding: 3rem;
-    padding-left: 9rem;
     font-size: 1.6rem;
-    outline: 1px solid $light-primary-color;
     transition: all .4s;
     backface-visibility: hidden;
     margin-bottom: 2rem;
@@ -91,14 +97,9 @@
       }
     }
     form.mainGoalInputs {
-      //position: absolute;
-      //top: 0;
-      //left: 0;
-      //background-color: $color-white;
       padding: 1rem;
       width: 100%;
       box-sizing: border-box;
-      //height: 20rem;
       padding-top: 3rem;
       z-index: 3;
       input {
@@ -134,12 +135,15 @@ li.is-active {
   box-sizing: border-box;
   list-style: none;
   position: relative;
-  width: 47%;
+  width: 48%;
   display: inline-block;
   margin: 0 auto;
   margin-right: 2rem;
   box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
-  background-color: $light-grey-color;
+  //background-color: $light-grey-color;
+  background-image: linear-gradient(to right bottom,
+    rgba($light-orange-color, 0.3),
+    rgba($orange-color, 0.3));
   border-radius: 3px;
   padding: 2rem;
   font-size: 1.6rem;
@@ -181,7 +185,6 @@ li.is-active {
     margin: 1rem auto;
     text-align: center;
     font-size: 2rem;
-    text-transform: uppercase;
     padding: 2.5rem;
     color: $orange-color;
   }
@@ -208,16 +211,19 @@ li.is-active {
       margin-top: 2.8rem;
     }
   }
+  &:nth-child(even) {
+    margin-right: 0;
+  }
 }
 
 .goal-of-life--second-step {
   box-sizing: border-box;
   list-style: none;
   position: relative;
-  width: 100%;
+  width: 49%;
   display: inline-block;
   margin: 0 auto;
-  margin-right: 1rem;
+  margin-right: 1%;
   background-color: $color-white;
   //outline: 1px solid $green-color;
   border-radius: 3px;
@@ -259,7 +265,7 @@ li.is-active {
   p {
     margin: 1.5rem auto;
     text-align: center;
-    text-transform: uppercase;
+
     color: $green-color;
     //border-bottom: 1px solid $green-color;
   }
@@ -267,10 +273,9 @@ li.is-active {
     margin-top: 1.2rem;
     input {
       margin-left: 0;
-      margin-right: 2rem;
       margin-top: .5rem;
       padding: .5rem;
-      width: 59%;
+      width: 100%;
       &:focus {
         outline: none;
         box-shadow: 0 1rem 2rem rgba($green-color, .1);
@@ -282,15 +287,17 @@ li.is-active {
       margin-top: .5rem;
     }
   }
+  &:nth-child(even) {
+    margin-right: 0;
+  }
 }
 
 .addTlsForm {
   margin-top: 1.2rem;
   input {
-    margin: .5rem 2rem 0 0;
-
+    margin: .5rem 0 0 0;
     padding: .5rem;
-    width: 59%;
+    width: 100%;
     &:focus {
       outline: none;
       box-shadow: 0 1rem 2rem rgba($green-color, .1);
@@ -305,13 +312,29 @@ li.is-active {
 .addFthlsForm {
   margin-top: 1.2rem;
   input {
-    margin: .5rem 2rem 0 0;
-
+    margin: .5rem 0 0 0;
     padding: .5rem;
-    width: 59%;
+    width: 100%;
     &:focus {
       outline: none;
       box-shadow: 0 1rem 2rem rgba($green-color, .1);
+    }
+  }
+  button {
+    padding: 0.5rem 2rem;
+    margin: 0;
+    margin-top: .5rem;
+  }
+}
+.addFithlsForm {
+  margin-top: 1.2rem;
+  input {
+    margin: .5rem 0 0 0;
+    padding: .5rem;
+    width: 100%;
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($light-orange-color, .1);
     }
   }
   button {
@@ -329,8 +352,9 @@ li.is-active {
   display: inline-block;
   margin: 0 auto;
   margin-right: 1rem;
-  background-color: $light-grey-color;
-  //outline: 1px solid $green-color;
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.3),
+    rgba($dark-primary-color, 0.3));
   border-radius: 3px;
   padding: 2rem;
   font-size: 1.4rem;
@@ -393,6 +417,15 @@ li.is-active {
     @include step-title;
   }
 
+  .goal-fourth-step--add {
+    right: 4rem;
+    color: $light-green-color;
+    @include step-info;
+    &:hover {
+      transform: scale(1.5) rotate(90deg);
+    }
+  }
+
   .goal-fourth-step--edit {
     right: 2rem;
     color: $light-green-color;
@@ -411,6 +444,51 @@ li.is-active {
   }
   p {
     color: $light-green-color;
+    //border-bottom: 1px solid $dark-primary-color;
+  }
+}
+
+.goal-of-life--fifth-step {
+  box-sizing: border-box;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  margin: 0 auto;
+  margin-right: 1rem;
+  background-image: linear-gradient(to right bottom,
+    rgba($orange-color, 0.3),
+    rgba($light-orange-color, 0.3));
+  border-radius: 3px;
+  padding: 2rem;
+  font-size: 1.4rem;
+  transition: all .4s;
+  backface-visibility: hidden;
+  margin-bottom: 2rem;
+  vertical-align: top;
+  .goal-fifth-step--title {
+    color: $light-orange-color;
+    @include step-title;
+  }
+
+  .goal-fifth-step--edit {
+    right: 2rem;
+    color: $light-orange-color;
+    @include step-info;
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+  .goal-fifth-step--remove {
+    right: 0;
+    color: $light-orange-color;
+    @include step-info;
+    &:hover {
+      transform: scale(1.5) rotate(90deg);
+    }
+  }
+  p {
+    color: $light-orange-color;
     //border-bottom: 1px solid $dark-primary-color;
   }
 }
@@ -456,6 +534,17 @@ li.is-active {
 }
 
 .goal-of-life--fourth-step:hover .goal-fourth-step--remove {
+  display: block;
+}
+.goal-of-life--fourth-step:hover .goal-fourth-step--add {
+  display: block;
+}
+
+.goal-of-life--fifth-step:hover .goal-fifth-step--edit {
+  display: block;
+}
+
+.goal-of-life--fifth-step:hover .goal-fifth-step--remove {
   display: block;
 }
 

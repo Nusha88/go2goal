@@ -5,12 +5,15 @@
  |--------------------------------------
  */
 
+
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const User = require('./models/user');
 const Todo = require('./models/todo');
 const Goals = require('./models/goals');
+const Post = require('./models/posts');
 const TodoListModel = require("./models/todolist");
+const NoteModel = require('./models/note');
 
 /*
  |--------------------------------------
@@ -66,7 +69,14 @@ module.exports = function (app, config) {
       password: req.body.password,
       goals: req.body.goals,
       goal_of_live: req.body.goal_of_live,
-      todoLists: req.body.todoLists
+      goals_of_the_year: req.body.goals_of_the_year,
+      goals_of_the_month: req.body.goals_of_the_month,
+      goals_of_the_week: req.body.goals_of_the_week,
+      first_level_steps: req.body.first_level_steps,
+      todoLists: req.body.todoLists,
+      notes: req.body.notes,
+      dates: req.body.dates,
+      posts: req.body.posts
     });
     user.save(function (err, user) {
       if (err) {
@@ -126,7 +136,8 @@ module.exports = function (app, config) {
         id: req.body.id,
         title: req.body.title,
         isEdited: false,
-        todos: []
+        todos: [],
+        notes: []
       });
       user.todoLists.push(todolist);
       user.save(function (err) {
@@ -137,10 +148,10 @@ module.exports = function (app, config) {
       })
     });
   });
+
   app.put('/api/users/:id/todolists', function(req, res) {
     const userId = req.params.id;
     const todoLists = req.body.todoLists;
-    console.log(req.body);
 
     User.findById({_id: userId}, (err, user) => {
 
@@ -154,10 +165,112 @@ module.exports = function (app, config) {
     });
   });
 
-
-  app.put('/api/users/:id', (req, res) => {
+  app.post('/api/users/:id/notes', (req, res, next) => {
     User.findById(req.params.id, function (err, user) {
-      user.goals = req.body.goals;
+      var note = new NoteModel({
+        id: req.body.id,
+        title: req.body.title,
+        isEdited: false,
+      });
+      user.notes.push(note);
+      user.save(function (err) {
+        if (err) {
+          return next(err)
+        }
+        res.status(201).json(user);
+      })
+    });
+  });
+
+  app.put('/api/users/:id/notes', function(req, res, next) {
+    const userId = req.params.id;
+    const notes = req.body.notes;
+
+    User.findById({_id: userId}, (err, user) => {
+
+      user.notes = notes;
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
+    });
+  });
+
+  app.put('/api/users/:id/posts', function(req, res) {
+    const userId = req.params.id;
+    const posts = req.body.posts;
+
+    User.findById({_id: userId}, (err, user) => {
+
+      user.posts = posts;
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
+    });
+  });
+
+  // POSTS
+
+  app.get('/api/posts', function (req, res) {
+
+    Post.find({}, function (err, posts) {
+      let postsArr = [];
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (posts) {
+        posts.forEach(function (post) {
+          postsArr.push(post);
+        })
+        ;
+      }
+      res.send(postsArr);
+    });
+  });
+
+  app.post('/api/posts', (req, res) => {
+    var post = new Post({
+      title: req.body.title,
+      isEdited: req.body.isEdited,
+      postText: req.body.postText,
+      upload: req.body.upload,
+      author: req.body.author,
+      date: req.body.date,
+      category: req.body.category,
+      likes: req.body.likes,
+      favorites: req.body.favorites,
+      isLiked: req.body.isLiked,
+    });
+    post.save(function (err, post) {
+      if (err) {
+        return next(err)
+      }
+      res.status(201).json(post)
+    })
+  });
+
+  app.put('/api/posts/:id', function(req, res) {
+    const postId = req.params.id;
+    Post.findById({_id: postId}, (err, post) => {
+      post.likes = req.body.likes;
+      post.isLiked = req.body.isLiked;
+      post.save((err, post) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(post);
+      });
+    });
+  });
+
+  app.put('/api/users/:id/dates-year', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.datesY = req.body.datesY;
       user.save(function (err) {
         if (err) {
           console.log(err);
@@ -166,4 +279,102 @@ module.exports = function (app, config) {
       })
     });
   });
+
+  app.put('/api/users/:id/dates-month', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.datesM = req.body.datesM;
+      user.save(function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(user);
+      })
+    });
+  });
+
+  app.put('/api/users/:id/dates-week', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.datesW = req.body.datesW;
+      user.save(function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(user);
+      })
+    });
+  });
+
+  app.put('/api/users/:id/goals/goals-of-year', function(req, res) {
+    const userId = req.params.id;
+    User.findById({_id: userId}, (err, user) => {
+      user.goals_of_the_year = req.body.goals_of_the_year;
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
+    });
+  });
+
+  app.put('/api/users/:id/goals/goals-of-month', function(req, res) {
+    const userId = req.params.id;
+    User.findById({_id: userId}, (err, user) => {
+      user.goals_of_the_month = req.body.goals_of_the_month;
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
+    });
+  });
+
+  app.put('/api/users/:id/goals/goals-of-week', function(req, res) {
+    const userId = req.params.id;
+    User.findById({_id: userId}, (err, user) => {
+      user.goals_of_the_week = req.body.goals_of_the_week;
+      user.save((err, user) => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
+    });
+  });
+  app.put('/api/users/:id/goals/goal-of-life', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.goal_of_live = req.body.goal_of_live;
+      user.save(function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(user);
+      })
+    });
+  });
+
+  app.put('/api/users/:id/goals/first-level-steps', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.first_level_steps = req.body.first_level_steps;
+      user.save(function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(user);
+      })
+    });
+  });
+  //
+  // app.put('/api/users/:id', (req, res) => {
+  //   User.findById(req.params.id, function (err, user) {
+  //     user.goals = req.body.goals;
+  //     user.save(function (err) {
+  //       if (err) {
+  //         console.log(err);
+  //       }
+  //       res.send(user);
+  //     })
+  //   });
+  // });
 };

@@ -1,6 +1,8 @@
 import {BrowserModule, Title} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
@@ -28,9 +30,16 @@ import {UserFormService} from './services/user-form.service';
 import { FooterComponent } from './footer/footer.component';
 import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/first-level-step.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import {MatDialog, MatDialogModule} from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatNativeDateModule} from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDialog, MatDialogModule} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TruncatePipe} from './pipes/truncate-pipe';
 
 @NgModule({
   declarations: [
@@ -54,16 +63,24 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     FirstLevelStepComponent,
     MainPageComponent,
+    TruncatePipe
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     OverlayModule,
     MatDialogModule,
+    MatIconModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatTabsModule
   ],
   providers: [
     Title,

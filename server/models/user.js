@@ -1,46 +1,114 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var tls = new Schema({
+let fthls = new Schema({
   index: String,
   title: String,
-  third_level_steps: Array
+  fifth_level_steps: Array
 });
-var sls = new Schema({
+let tls = new Schema({
+  index: String,
+  title: String,
+  fourth_level_steps: [fthls]
+});
+let sls = new Schema({
   index: String,
   title: String,
   third_level_steps: [tls]
 });
-var fls = new Schema({
+let fls = new Schema({
   index: String,
   title: String,
   second_level_steps: [sls]
 });
-var goals = new Schema({
-  id: String,
-  goal_of_live: String,
-  first_level_steps: [fls]
-});
 
-var todos = new Schema({
+let datesY = new Schema({
+  from: String,
+  to: String
+});
+let datesM = new Schema({
+  from: String,
+  to: String
+});
+let datesW = new Schema({
+  from: String,
+  to: String
+});
+let goals_of_the_year = new Schema({
+  id: String,
+  title: String,
+  isEdited: Boolean,
+  complete: Boolean
+});
+let goals_of_the_month = new Schema({
+  id: String,
+  title: String,
+  isEdited: Boolean,
+  complete: Boolean
+});
+let goals_of_the_week = new Schema({
+  id: String,
+  title: String,
+  isEdited: Boolean,
+  complete: Boolean
+});
+let gol = new Schema({
+  index: String,
+  title: String
+})
+let todos = new Schema({
   id: String,
   title: String,
   complete: Boolean,
 });
 
-var todoLists = new Schema({
+let todoLists = new Schema({
   id: String,
   title: String,
   isEdited: Boolean,
   todos: [todos],
+});
+let notes = new Schema({
+  id: String,
+  title: String,
+  isEdited: Boolean
+});
+let liker = new Schema({
+  username: String,
+  isLike: Boolean
+});
+let likes = new Schema({
+  count: Number,
+  likers: [liker]
+});
+let posts = new Schema({
+  title: String,
+  isEdited: Boolean,
+  postText: String,
+  upload: String,
+  author: String,
+  date: String,
+  likes: [likes],
+  category: String,
+  isLiked: Boolean,
 });
 
 const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  goals: [goals],
   todoLists: [todoLists],
+  notes: [notes],
+  posts: [posts],
+  datesY: [datesY],
+  datesM: [datesM],
+  datesW: [datesW],
+  goal_of_live: [gol],
+  first_level_steps: [fls],
+  goals_of_the_year: [goals_of_the_year],
+  goals_of_the_month: [goals_of_the_month],
+  goals_of_the_week: [goals_of_the_week]
+
 }, {collection: 'go2users'});
 
 module.exports = mongoose.model('User', userSchema, 'go2users');

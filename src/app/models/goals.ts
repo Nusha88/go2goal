@@ -1,12 +1,10 @@
-export class Goals {
 
+export class GoalOfLife {
   constructor(
-    public id: string,
-    public goal_of_live?: string,
-    public first_level_steps?: FirstLevelSteps,
+    public index: number,
+    public title?: string,
   ) {}
 }
-
 export class FirstLevelSteps {
   constructor(
     public index: number,
@@ -34,6 +32,14 @@ export class FourthLevelSteps {
   constructor(
     public index: number,
     public title?: string,
-    // public second_level_steps?: SecondLevelSteps
+    public fifth_level_steps?: FifthLevelSteps
   ) {}
 }
+
+export class FifthLevelSteps {
+  constructor(
+    public index: number,
+    public title?: string,
+  ) {}
+}
+

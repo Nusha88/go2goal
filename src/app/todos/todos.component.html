@@ -52,13 +52,13 @@
             <span (click)="deleteTodoList(todoList, index)" class="delete-icon"><i class="ion-close-round"></i></span>
             </span>
           <div class="form-group edit-todo-list-form" *ngIf="todoList.isEdited">
-          <input type="text"
-          #todoListVal
-          class="form-input"
-          value="{{todoList.title}}">
-          <button type="button" class="btn btn--indigo"
-          (click)="updateTodoList(todoListVal.value, todoList)">Edit
-          </button>
+            <input type="text"
+                   #todoListVal
+                   class="form-input"
+                   value="{{todoList.title}}">
+            <button type="button" class="btn btn--indigo"
+                    (click)="updateTodoList(todoListVal.value, todoList)">Edit
+            </button>
           </div>
         </h3>
 

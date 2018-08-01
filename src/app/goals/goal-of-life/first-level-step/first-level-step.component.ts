@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserModel} from '../../../models/user.model';
 import {UserService} from '../../../services/user.service';
-import {Goals} from '../../../models/goals';
 
 @Component({
   selector: 'app-first-level-step',

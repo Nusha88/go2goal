@@ -1,3 +1,63 @@
-<p>
-  goal-of-year works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="container">
+      <h2 class="heading-secondary">My Goals For The Next Year</h2>
+      <div class="goal-of-year--edit" *ngIf="datesY.length > 0">
+        <p *ngFor="let date of datesY">({{date.from}} - {{date.to}})
+          <span (click)="editDate(dates)"><i class="ion-edit"></i></span>
+          </p>
+        </div>
+      <hr>
+      <div class="goals-content">
+        <div class="row">
+          <div class="col-md-12" style="padding: 0;">
+            <div *ngIf="!datesY || isEdited">
+              <label for="from">From</label>
+              <input type="text" #from id="from" class="dates-input">
+              <label for="to">To</label>
+              <input type="text" #to id="to" class="dates-input">
+              <span *ngIf="datesY.length < 1" class="add-dates" (click)="addDates(from.value, to.value)">
+                <i class="fas fa-plus-circle"></i></span>
+              <span *ngIf="isEdited" class="add-dates" (click)="updateDates(from.value, to.value)">
+                <i class="fas fa-check"></i>
+              </span>
+            </div>
+            <div class="form-group goals-of-year">
+              <form class="add-goals-form goal-of-year-form" [formGroup]="addGoalOfYearForm">
+                <input type="text"
+                       class="form-input"
+                       id="goal"
+                       placeholder="Enter your goal" formControlName="title">
+                <button type="submit" class="btn btn--indigo" (click)="addGoalOfYear(addGoalOfYearForm.value)">Add
+                </button>
+              </form>
+              <ul *ngIf="goalsOfYear">
+                <li *ngFor="let goal of goalsOfYear; let i = index">
+                  <div class="form-group__checkbox">
+                    <input type="checkbox" [(ngModel)]="goal.complete" #complete name="remember" class="checkbox"
+                           id="{{goal.title}}" (click)="updateGoal(goal, complete.checked)">
+                    <label for="{{goal.title}}" class="checkbox-label" [ngClass]="{'checked': goal.complete}">
+                      <span class="form-checkbox"></span>{{ goal.title }}</label>
+                    <span class="goal--edit" (click)="editGoal(goal)"><i class="ion-edit"></i></span>
+                    <span (click)="deleteGoal(i)" class="delete-icon"><i class="ion-close-round"></i></span>
+
+                    <div class="form-group edit-goal-list-form form-goal" *ngIf="goal.isEdited">
+                      <input type="text"
+                             #goalEdited
+                             class="form-input"
+                             id="goalEdit"
+                             value="{{goal.title}}">
+                      <button type="button" class="btn btn--indigo"
+                              (click)="updateGoalTitle(goalEdited.value, goal)">Edit
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

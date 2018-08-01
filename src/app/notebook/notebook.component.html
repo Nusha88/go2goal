@@ -14,7 +14,33 @@
       <div class="col-md-12 notebook-content">
         <p class="notebook--paragraph">Leave here any notes, your favorite quotes and expressions, useful resources,
           links. Everything you don't want to forget or lose.</p>
-        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="notebook-content__area">
+              <form [formGroup]="addNoteForm">
+                <textarea #note name="note" id="note" placeholder="Enter Note Here..."
+                          formControlName="note"></textarea>
+              </form>
+              <button [disabled]="!addNoteForm.valid" type="submit" (click)="addNote(note.value)"><i
+                class="ion-android-add add-todolist-icon"></i></button>
+            </div>
+            <div class="notebook-content__area note-content" *ngFor="let note of notes; let index = index">
+              <span (click)="editNote(note)" class="todo--edit"><i class="ion-edit"></i></span>
+              <span (click)="deleteNote(note, index)" class="delete-icon"><i class="ion-close-round"></i></span>
+              <p>{{note.title}}</p>
+              <div class="form-group edit-note-form" *ngIf="note.isEdited">
+              <textarea type="text"
+                        #noteUpdate
+                        class="form-input"
+                        value="{{note.title}}">
+                 </textarea>
+              <button type="button" class="btn edit-button"
+                      (click)="updateNote(noteUpdate.value, note)"><i class="ion-edit"></i>
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

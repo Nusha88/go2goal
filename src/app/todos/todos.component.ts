@@ -76,6 +76,7 @@ export class TodosComponent implements OnInit {
     console.log(this.todoLists);
     this.todoLists.push(this.todoObj);
     this.service.postTodoList(this.todoObj, this.id);
+    this.addTodoListForm.reset();
     this.closeModal();
   }
 
@@ -88,8 +89,7 @@ export class TodosComponent implements OnInit {
     };
     this.todoLists[index].todos.push(this.todoObj);
     this.service.updateUserTodos(this.user).subscribe(user => user);
-    // console.log(this.user.todoLists);
-    // event.preventDefault();
+    this.addTodoForm.reset();
     this.closeModal2();
   }
 

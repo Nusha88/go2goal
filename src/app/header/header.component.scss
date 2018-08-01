@@ -20,9 +20,6 @@ nav {
       margin-left: 0;
       text-align: center;
     }
-    .active-link {
-      color: $primary-color;
-    }
     li {
       margin-left: 8rem;
       position: relative;
@@ -86,4 +83,8 @@ nav {
     outline: none;
     border: none;
   }
+}
+
+.active {
+  color: $primary-color !important;
 }
