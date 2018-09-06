@@ -10,9 +10,8 @@ export class Posts {
     public author: string,
     public date: Date,
     public category: string,
-    public likes: Likes,
-    public favorites: Favorites,
-    public isLiked: boolean
+    public likes?: Likes[],
+    public favorites?: Favorites[],
   ) {
   }
 }

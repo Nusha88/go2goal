@@ -4,34 +4,21 @@ import {map, catchError} from 'rxjs/operators';
 import {UserModel} from '../models/user.model';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {TodoListModel} from '../models/todolist.model';
-import {GoalOfTheYearModel} from '../models/goal-of-the-year.model';
 import {Posts} from '../models/posts';
+import {NoteModel} from '../models/note.model';
 
 @Injectable()
 export class UserService {
 
-  constructor(private httpClient: HttpClient
-  ) {
+  constructor(private httpClient: HttpClient) {
   }
+
+  // USERS
 
   getUsers(): any {
     return this.httpClient.get('http://localhost:8083/api/users')
       .pipe(map(res => res),
         catchError(this._handleError));
-  }
-
-  getUserById$(id: string): any {
-    return this.httpClient
-      .get(`http://localhost:8083/api/users/${id}/todos`)
-      .pipe(map(res => res),
-        catchError(this._handleError));
-  }
-
-  updateUser(user: UserModel): any {
-    console.log(user);
-    return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}`, user)
-      .pipe(catchError(this._handleError));
   }
 
   postUser(data: Observable<UserModel[]>) {
@@ -50,11 +37,51 @@ export class UserService {
       });
   }
 
+  getUserById$(id: string): any {
+    return this.httpClient
+      .get(`http://localhost:8083/api/users/${id}/todos`)
+      .pipe(map(res => res),
+        catchError(this._handleError));
+  }
+
+  // updateUser(user: UserModel): any {
+  //   console.log(user);
+  //   return this.httpClient
+  //     .put(`http://localhost:8083/api/users/${user._id}`, user)
+  //     .pipe(catchError(this._handleError));
+  // }
+
+  postUserPost(data: Observable<Posts[]>, id: string) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+      .set('Access-Control-Allow-Origin', '*');
+    console.log(data);
+    return this.httpClient.post<Posts>(`http://localhost:8083/api/users/${id}/posts`,
+      JSON.stringify(data), {
+        headers: headers
+      }
+    )
+      .subscribe(post => {
+        return post;
+      });
+  }
+
+  updateUserPosts(user: UserModel): any {
+    console.log(user);
+    return this.httpClient
+      .put(`http://localhost:8083/api/users/${user._id}/posts`, user)
+      .pipe(catchError(this._handleError));
+  }
+
+  // TODOLISTS
+
   postTodoList(data: Observable<TodoListModel[]>, id: string) {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
+    console.log(data + ',' + id);
     return this.httpClient.post<TodoListModel>(`http://localhost:8083/api/users/${id}/todolists`,
       JSON.stringify(data), {
         headers: headers
@@ -68,13 +95,6 @@ export class UserService {
   updateUserTodos(user: UserModel): any {
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/todolists`, user)
-      .pipe(catchError(this._handleError));
-  }
-
-  updateUserPosts(user: UserModel): any {
-    console.log(user);
-    return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/posts`, user)
       .pipe(catchError(this._handleError));
   }
 
@@ -103,10 +123,10 @@ export class UserService {
       });
   }
 
-  updatePost(id, post: Posts): any {
-console.log(id + post);
+  updatePost(post: Posts): any {
+    console.log(post);
     return this.httpClient
-      .put(`http://localhost:8083/api/posts/${id}`, post)
+      .put(`http://localhost:8083/api/posts/${post._id}`, post)
       .pipe(catchError(this._handleError));
   }
 
@@ -117,11 +137,13 @@ console.log(id + post);
       .put(`http://localhost:8083/api/users/${user._id}/dates-year`, user)
       .pipe(catchError(this._handleError));
   }
+
   updateUserDatesMonth(user: UserModel): any {
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/dates-month`, user)
       .pipe(catchError(this._handleError));
   }
+
   updateUserDatesWeek(user: UserModel): any {
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/dates-week`, user)
@@ -145,6 +167,7 @@ console.log(id + post);
       .put(`http://localhost:8083/api/users/${user._id}/goals/goals-of-year`, user)
       .pipe(catchError(this._handleError));
   }
+
   updateGoalsOfMonth(user: UserModel): any {
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/goals/goals-of-month`, user)
@@ -157,20 +180,20 @@ console.log(id + post);
       .pipe(catchError(this._handleError));
   }
 
-  // postNotes(user: UserModel, id: string) {
-  //   const headers = new HttpHeaders()
-  //     .set('Content-Type', 'application/json')
-  //     .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
-  //     .set('Access-Control-Allow-Origin', '*');
-  //   return this.httpClient.post<TodoListModel>(`http://localhost:8083/api/users/${id}/notes`,
-  //     JSON.stringify(data), {
-  //       headers: headers
-  //     }
-  //   )
-  //     .subscribe(todo => {
-  //       return todo;
-  //     });
-  // }
+  postNotes(data: Observable<NoteModel[]>, id: string) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.httpClient.post<NoteModel>(`http://localhost:8083/api/users/${id}/notes`,
+      JSON.stringify(data), {
+        headers: headers
+      }
+    )
+      .subscribe(note => {
+        return note;
+      });
+  }
 
   updateNotes(user: UserModel): any {
     return this.httpClient

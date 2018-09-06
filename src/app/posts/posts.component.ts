@@ -16,9 +16,12 @@ export class PostsComponent implements OnInit {
   user: any;
   allPosts: any;
   userPosts: any;
+  postAuthor: any;
   isLike: boolean;
   likes: number;
   likers: any;
+  addedPost: any;
+  storedUsername = localStorage.getItem('username');
 
   constructor(private modalService: NgbModal, public service: UserService) {
     this.allPosts = [];
@@ -54,8 +57,7 @@ export class PostsComponent implements OnInit {
       'author': new FormControl(this.user.username),
       'category': new FormControl(category, Validators.required),
       'likes': new FormControl([]),
-      'favorites': new FormControl([]),
-      'isLiked': new FormControl(false)
+      'favorites': new FormControl([])
     });
   }
 
@@ -64,38 +66,66 @@ export class PostsComponent implements OnInit {
   }
 
   onAddLike(post, i) {
-    this.isLike = post.isLiked;
-    post.likes += (this.isLike) ? -1 : 1;
+    post.likes[0].count += (this.isLike) ? -1 : 1;
     this.isLike = !this.isLike;
-    post.isLiked = this.isLike;
-    this.user.posts.forEach(like => {
-      like.isLiked = this.isLike;
-    });
-
-      this.service.updateUserPosts(this.user).subscribe(user => user);
-  }
-  onAddPostLike(post, i) {
-    this.isLike = post.isLiked;
-    this.likes += (this.isLike) ? -1 : 1;
-    this.isLike = !this.isLike;
-    post.likes.count = this.likes;
-    post.isLiked = this.isLike;
+    // post.likes[0].count = this.likes;
     if (this.isLike) {
-      this.likers.push(this.user.username);
+      let liker = {
+        username: this.user.username,
+        isLike: this.isLike
+      };
+      this.likers.push(liker);
     } else {
       this.likers.find(user => {
         this.user.username = user;
         this.likers.splice(this.likers.indexOf(post));
+        this.isLike = false;
       });
     }
     post.likes.likers = this.likers;
-    // post.likers.push(storedUsername);
-    // this.allPosts.forEach(p => {
-    //   p.isLiked = this.isLike;
-    // });
-    console.log(post);
-      // this.service.updatePost(post._id, post).subscribe(p => p);
+console.log(this.user);
+    this.service.updateUserPosts(this.user).subscribe(user => user);
   }
+
+  onAddPostLike(post, i) {
+    // this.isLike = post.likes.likers.isLike;
+    this.likes += (this.isLike) ? -1 : 1;
+    this.isLike = !this.isLike;
+    post.likes.count = this.likes;
+    if (this.isLike) {
+      let liker = {
+        username: this.user.username,
+        isLike: this.isLike
+      };
+      this.likers.push(liker);
+    } else {
+      this.likers.find(user => {
+        this.user.username = user;
+        this.likers.splice(this.likers.indexOf(post));
+        this.isLike = false;
+      });
+    }
+    post.likes.likers = this.likers;
+    this.addedPost = post;
+    this.addedPost.likes = post.likes;
+    // this.service.updatePost(this.addedPost).subscribe(p => p);
+
+    this.service.getUsers().subscribe(users => {
+      users.forEach(user => {
+        if (post.author === user.username) {
+          this.postAuthor = user;
+          this.postAuthor.posts.forEach(p => {
+            if (post.title === p.title) {
+              p.likes.likers = this.likers;
+              p.likes.count = this.likes;
+            }
+          });
+          this.service.updateUserPosts(this.postAuthor);
+        }
+      });
+    });
+  }
+
   formatDate(date) {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
@@ -112,9 +142,11 @@ export class PostsComponent implements OnInit {
 
   addPost() {
     this.allPosts.push(this.addPostForm.value);
-    this.user.posts.push(this.addPostForm.value);
+    this.userPosts.push(this.addPostForm.value);
+    this.user.posts = this.userPosts;
+    // this.service.postUserPost(this.addPostForm.value, this.user._id);
     this.service.updateUserPosts(this.user).subscribe(user => user);
-    this.service.postPost(this.addPostForm.value);
+    // this.service.postPost(this.addPostForm.value);
     this.addPostForm.reset();
     this.closeModal();
   }
@@ -122,29 +154,43 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.service.getUsers().subscribe((users) => {
       users.forEach((user) => {
-        const storedUsername = localStorage.getItem('username');
-        if (storedUsername === user.username) {
+        if (this.storedUsername === user.username) {
           this.user = user;
           this.userPosts = this.user.posts;
-          this.user.posts.forEach(post =>  {
-            this.isLike = post.isLiked;
-          });
+          // this.userPosts.forEach(post => {
+          //   if (post.likes = []) {
+          //     .likes = 0;
+          //     // this.likers = [];
+          //     console.log(this.likes);
+          //   } else {
+          //     this.likes = post.likes.count;
+          //     console.log(this.likes);
+          //   }
+          // });
           this.initForm();
         }
       });
     });
-    this.service.getPosts().subscribe((posts) => {
-     this.allPosts = posts;
-     this.allPosts.forEach(post => {
-       if (post.likes = []) {
-         this.likes = 0;
-         this.likers = [];
-       } else {
-         this.likes = post.likes.count;
-         this.likers = post.likes.likers;
-       }
-     });
-    });
+    // this.service.getPosts().subscribe((posts) => {
+    //   this.allPosts = posts;
+    //   this.allPosts.forEach(post => {
+    //     if (post.likes = []) {
+    //       this.likes = post.likes.count = 0;
+    //       this.likers = [];
+    //     } else {
+    //       this.likes = post.likes.count;
+    //       this.likers = post.likes.likers;
+    //     }
+    //
+    //     this.likers.forEach(liker => {
+    //       if (liker.username === this.storedUsername) {
+    //         this.isLike = true;
+    //       } else {
+    //         this.isLike = false;
+    //       }
+    //     });
+    //   });
+    // });
   }
 
 }

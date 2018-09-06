@@ -33,14 +33,12 @@ export class NotebookComponent implements OnInit {
   }
 
   addNote(value) {
-    console.log(value);
     this.noteObj = {
       title: value,
       isEdited: false,
     };
     this.notes.push(this.noteObj);
-    this.user.notes = this.notes;
-    this.service.updateNotes(this.user);
+    this.service.postNotes(this.noteObj, this.user._id);
     this.addNoteForm.reset();
   }
 

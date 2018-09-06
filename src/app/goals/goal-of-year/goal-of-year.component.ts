@@ -13,7 +13,6 @@ export class GoalOfYearComponent implements OnInit {
   to: any;
   goal: any;
   isEdited = false;
-  goals_of_year: any;
   @Input() goalsOfYear: any;
   datesY: any;
 

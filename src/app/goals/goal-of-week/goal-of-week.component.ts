@@ -87,7 +87,6 @@ export class GoalOfWeekComponent implements OnInit {
 
   editDate(date) {
     this.isEdited = true;
-    console.log('date', date);
   }
 
   ngOnInit() {

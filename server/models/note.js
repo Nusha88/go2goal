@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
-  id: String,
+  _id: String,
   title: String,
   isEdited: Boolean
 }, { collection : 'go2users' });

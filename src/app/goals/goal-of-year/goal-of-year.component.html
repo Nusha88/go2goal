@@ -4,7 +4,7 @@
       <h2 class="heading-secondary">My Goals For The Next Year</h2>
       <div class="goal-of-year--edit" *ngIf="datesY.length > 0">
         <p *ngFor="let date of datesY">({{date.from}} - {{date.to}})
-          <span (click)="editDate(dates)"><i class="ion-edit"></i></span>
+          <span (click)="editDate(datesY)"><i class="ion-edit"></i></span>
           </p>
         </div>
       <hr>

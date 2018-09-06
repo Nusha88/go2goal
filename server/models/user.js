@@ -57,19 +57,18 @@ let gol = new Schema({
   title: String
 })
 let todos = new Schema({
-  id: String,
   title: String,
+  isEdited: Boolean,
   complete: Boolean,
 });
 
 let todoLists = new Schema({
-  id: String,
   title: String,
   isEdited: Boolean,
   todos: [todos],
 });
 let notes = new Schema({
-  id: String,
+  _id: String,
   title: String,
   isEdited: Boolean
 });
@@ -82,15 +81,16 @@ let likes = new Schema({
   likers: [liker]
 });
 let posts = new Schema({
+  id: String,
   title: String,
   isEdited: Boolean,
   postText: String,
   upload: String,
   author: String,
   date: String,
-  likes: [likes],
   category: String,
-  isLiked: Boolean,
+  likes: [likes],
+  favorites: []
 });
 
 const userSchema = new Schema({

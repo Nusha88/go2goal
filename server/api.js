@@ -35,15 +35,6 @@ module.exports = function (app, config) {
     algorithm: 'RS256'
   });
 
-  /*
-   |--------------------------------------
-   | API Routes
-   |--------------------------------------
-   */
-
-  app.get('/api/', function (req, res) {
-    res.send("Api works!");
-  });
 // GET USERS
   app.get('/api/users', function (req, res) {
 
@@ -67,15 +58,16 @@ module.exports = function (app, config) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      goals: req.body.goals,
       goal_of_live: req.body.goal_of_live,
       goals_of_the_year: req.body.goals_of_the_year,
       goals_of_the_month: req.body.goals_of_the_month,
       goals_of_the_week: req.body.goals_of_the_week,
+      datesW: req.body.datesW,
+      datesM: req.body.datesM,
+      datesY: req.body.datesY,
       first_level_steps: req.body.first_level_steps,
       todoLists: req.body.todoLists,
       notes: req.body.notes,
-      dates: req.body.dates,
       posts: req.body.posts
     });
     user.save(function (err, user) {
@@ -100,55 +92,56 @@ module.exports = function (app, config) {
     });
   });
 
-  app.get('/api/users/:id/todos', function (req, res) {
+  // app.get('/api/users/:id/todos', function (req, res) {
+  //
+  //   User.findById(req.params.id, function (err, user) {
+  //     if (err) {
+  //       return res.status(500).send({message: err.message});
+  //     }
+  //     if (!user) {
+  //       return res.status(400).send({message: 'User not found.'});
+  //     }
+  //     res.send(user.todos);
+  //   });
+  // });
 
-    User.findById(req.params.id, function (err, user) {
-      if (err) {
-        return res.status(500).send({message: err.message});
-      }
-      if (!user) {
-        return res.status(400).send({message: 'User not found.'});
-      }
-      res.send(user.todos);
-    });
-  });
+  // app.post('/api/users/:id/todos', (req, res) => {
+  //   User.findById(req.params.id, function (err, user) {
+  //     var todo = new Todo({
+  //       id: req.body.id,
+  //       title: req.body.title,
+  //       complete: req.body.complete
+  //     });
+  //     user.todos.push(todo);
+  //     user.save(function (err) {
+  //       if (err) {
+  //         return next(err)
+  //       }
+  //       res.status(201).json(user);
+  //     })
+  //   });
+  // });
 
-  app.post('/api/users/:id/todos', (req, res) => {
-    User.findById(req.params.id, function (err, user) {
-      var todo = new Todo({
-        id: req.body.id,
-        title: req.body.title,
-        complete: req.body.complete
-      });
-      user.todos.push(todo);
-      user.save(function (err) {
-        if (err) {
-          return next(err)
-        }
-        res.status(201).json(user);
-      })
-    });
-  });
+  // POST TODOLIST
 
   app.post('/api/users/:id/todolists', (req, res) => {
     User.findById(req.params.id, function (err, user) {
       var todolist = new TodoListModel({
-        id: req.body.id,
         title: req.body.title,
         isEdited: false,
         todos: [],
-        notes: []
       });
-      user.todoLists.push(todolist);
-      user.save(function (err) {
+      user.todoLists = user.todoLists.concat([todolist]);
+      user.save(err => {
         if (err) {
-          return next(err)
+          return res.status(500).send({message: err.message});
         }
-        res.status(201).json(user);
+        res.status(201).json(user)
       })
     });
   });
 
+  // UPDATE TODOLIST
   app.put('/api/users/:id/todolists', function(req, res) {
     const userId = req.params.id;
     const todoLists = req.body.todoLists;
@@ -158,30 +151,31 @@ module.exports = function (app, config) {
       user.todoLists = todoLists;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
     });
   });
 
+  // POST NOTE
   app.post('/api/users/:id/notes', (req, res, next) => {
     User.findById(req.params.id, function (err, user) {
       var note = new NoteModel({
-        id: req.body.id,
         title: req.body.title,
         isEdited: false,
       });
-      user.notes.push(note);
+      user.notes = user.notes.concat([note]);
       user.save(function (err) {
         if (err) {
-          return next(err)
+          return res.status(500).send({message: err.message});
         }
         res.status(201).json(user);
       })
     });
   });
 
+  // UPDATE NOTE
   app.put('/api/users/:id/notes', function(req, res, next) {
     const userId = req.params.id;
     const notes = req.body.notes;
@@ -191,23 +185,47 @@ module.exports = function (app, config) {
       user.notes = notes;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
     });
   });
 
+  // POST POST
+  app.post('/api/users/:id/posts', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      var post = new Post({
+        id: req.body.id,
+        title: req.body.title,
+        isEdited: false,
+        postText: req.body.postText,
+        upload: req.body.upload,
+        author: req.body.author,
+        date: req.body.date,
+        category: req.body.category,
+        likes: req.body.likes,
+        favorites: req.body.favorites
+      });
+      user.posts = user.posts.concat([post]);
+      user.save(function (err) {
+        if (err) {
+          return res.status(500).send({message: err.message});
+        }
+        res.status(201).json(user);
+      })
+    });
+  });
+
   app.put('/api/users/:id/posts', function(req, res) {
     const userId = req.params.id;
     const posts = req.body.posts;
-
     User.findById({_id: userId}, (err, user) => {
 
       user.posts = posts;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
@@ -243,25 +261,28 @@ module.exports = function (app, config) {
       date: req.body.date,
       category: req.body.category,
       likes: req.body.likes,
-      favorites: req.body.favorites,
-      isLiked: req.body.isLiked,
+      favorites: req.body.favorites
     });
     post.save(function (err, post) {
       if (err) {
-        return next(err)
+        return res.status(500).send({message: err.message});
       }
       res.status(201).json(post)
     })
   });
 
-  app.put('/api/posts/:id', function(req, res) {
+  app.put('/api/posts/:id/', function(req, res) {
     const postId = req.params.id;
     Post.findById({_id: postId}, (err, post) => {
-      post.likes = req.body.likes;
-      post.isLiked = req.body.isLiked;
+      // post.likes.count = req.body.likes.count;
+      // post.likes.likers = req.body.likes.likers;
+      // post.likes = {
+      //   username: req.body.likes.likers.username,
+      //   isLike: req.body.likes.likers.isLike
+      // };
       post.save((err, post) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(post);
       });
@@ -273,7 +294,7 @@ module.exports = function (app, config) {
       user.datesY = req.body.datesY;
       user.save(function (err) {
         if (err) {
-          console.log(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       })
@@ -285,7 +306,7 @@ module.exports = function (app, config) {
       user.datesM = req.body.datesM;
       user.save(function (err) {
         if (err) {
-          console.log(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       })
@@ -297,7 +318,7 @@ module.exports = function (app, config) {
       user.datesW = req.body.datesW;
       user.save(function (err) {
         if (err) {
-          console.log(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       })
@@ -310,7 +331,7 @@ module.exports = function (app, config) {
       user.goals_of_the_year = req.body.goals_of_the_year;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
@@ -323,7 +344,7 @@ module.exports = function (app, config) {
       user.goals_of_the_month = req.body.goals_of_the_month;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
@@ -336,7 +357,7 @@ module.exports = function (app, config) {
       user.goals_of_the_week = req.body.goals_of_the_week;
       user.save((err, user) => {
         if (err) {
-          return next(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       });
@@ -347,7 +368,7 @@ module.exports = function (app, config) {
       user.goal_of_live = req.body.goal_of_live;
       user.save(function (err) {
         if (err) {
-          console.log(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       })
@@ -359,22 +380,22 @@ module.exports = function (app, config) {
       user.first_level_steps = req.body.first_level_steps;
       user.save(function (err) {
         if (err) {
-          console.log(err);
+          return res.status(500).send({message: err.message});
         }
         res.send(user);
       })
     });
   });
-  //
-  // app.put('/api/users/:id', (req, res) => {
-  //   User.findById(req.params.id, function (err, user) {
-  //     user.goals = req.body.goals;
-  //     user.save(function (err) {
-  //       if (err) {
-  //         console.log(err);
-  //       }
-  //       res.send(user);
-  //     })
-  //   });
-  // });
+
+  app.put('/api/users/:id/posts', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.posts = req.body.posts;
+      user.save(function (err) {
+        if (err) {
+          return res.status(500).send({message: err.message});
+        }
+        res.send(user);
+      })
+    });
+  });
 };

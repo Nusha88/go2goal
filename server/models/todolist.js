@@ -6,6 +6,6 @@ const todoListSchema = new Schema({
   title: String,
   isEdited: Boolean,
   todos: Array
-}, { collection : 'go2users' });
+}, { usePushEach: true }, { collection : 'go2users' });
 
 module.exports = mongoose.model('TodoList', todoListSchema);

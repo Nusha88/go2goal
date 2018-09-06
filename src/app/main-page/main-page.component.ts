@@ -30,7 +30,7 @@ export class MainPageComponent implements OnInit {
           this.user = user;
           if (storedUsername === this.user.username) {
             this.user = user;
-            if (this.user.goals[0]) {
+            if (this.user.goals) {
               this.golNumber = 1;
             } else {
               this.golNumber = 0;

@@ -1,18 +1,13 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../services/user.service';
-import {UserModel} from '../../models/user.model';
-import {Subscription} from 'rxjs/Subscription';
 import {LoginService} from '../../services/login.service';
-import {Todo} from '../../models/todo.model';
-
-// import {FirstLevelSteps, Goals, SecondLevelSteps} from '../../models/goals';
 
 @Component({
   selector: 'app-goal-of-life',
   templateUrl: './goal-of-life.component.html',
   styleUrls: ['./goal-of-life.component.scss']
 })
-export class GoalOfLifeComponent implements OnInit, OnDestroy {
+export class GoalOfLifeComponent implements OnInit {
 
   @ViewChild('mainGoal') mainValue: ElementRef;
   id: string;
@@ -36,9 +31,6 @@ export class GoalOfLifeComponent implements OnInit, OnDestroy {
   third_level_steps: any;
   fourth_level_steps: any;
   fifth_level_steps: any;
-  goals_of_year: any;
-  goals_of_month: any;
-  goals_of_week: any;
   goal: any;
   goals: any;
   index: number;
@@ -59,7 +51,6 @@ export class GoalOfLifeComponent implements OnInit, OnDestroy {
             this.user = user;
             this.goals = this.user.goal_of_live;
             this.first_level_steps = this.user.first_level_steps;
-            console.log(this.goals);
             if (this.goals.length > 0) {
               this.showAddMain = false;
             } else {
@@ -79,7 +70,6 @@ export class GoalOfLifeComponent implements OnInit, OnDestroy {
     };
     this.goals.push(gol);
     this.user.goal_of_live = this.goals;
-    console.log(this.user);
     this.userService.updateGoalOfLife(this.user).subscribe(goal => goal);
     this.showAddMain = false;
   }
@@ -243,9 +233,5 @@ export class GoalOfLifeComponent implements OnInit, OnDestroy {
   deleteFithls(tls, i, index, ind, ind4, ind5) {
     this.first_level_steps[i].second_level_steps[index].third_level_steps[ind].fourth_level_steps[ind4].fifth_level_steps.splice(ind5, 1);
     this.userService.updateFirstLevelSteps(this.user).subscribe(user => user);
-  }
-
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
   }
 }

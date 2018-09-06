@@ -24,10 +24,7 @@ export class TodosComponent implements OnInit {
   @Input() username: string;
   user: any;
   todo: any;
-  edited = false;
-  showInput = false;
   isEdited = false;
-  closeResult: string;
   addTodoListForm: FormGroup;
   addTodoForm: FormGroup;
   public mr: NgbModalRef;
@@ -68,12 +65,10 @@ export class TodosComponent implements OnInit {
 
   addTodoList(todolist) {
     this.todoObj = {
-      id: this.todoLists.id,
       title: todolist.title,
       isEdited: false,
       todos: []
     };
-    console.log(this.todoLists);
     this.todoLists.push(this.todoObj);
     this.service.postTodoList(this.todoObj, this.id);
     this.addTodoListForm.reset();
@@ -82,7 +77,6 @@ export class TodosComponent implements OnInit {
 
   addTodo(value, index) {
     this.todoObj = {
-      id: this.id,
       title: value.todoTitle,
       isEdited: false,
       complete: this.complete
@@ -107,13 +101,11 @@ export class TodosComponent implements OnInit {
     todo.title = value;
     todo.isEdited = false;
     this.service.updateUserTodos(this.user).subscribe(user => user);
-    console.log(todo);
   }
   updateTodoList(value, todolist) {
     todolist.title = value;
     todolist.isEdited = false;
     this.service.updateUserTodos(this.user).subscribe(user => user);
-    console.log(todolist);
   }
   deleteTodo(todo, index, ind) {
     this.todoLists[ind].todos.splice(index, 1);

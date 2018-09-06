@@ -29,7 +29,7 @@
                 </div>
                 <hr>
                 <div class="post-icons">
-                  <span class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes.count}}</span></span>
+                  <span class="like-post"><i class="fas fa-heart"></i> <span>{{likes.count}}</span></span>
                   <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                   <span class="show-post" (click)="openFullPost(content2)">Read More <i class="fas fa-angle-double-right"></i></span>
                 </div>
@@ -51,7 +51,7 @@
                   </div>
                   <div class="modal-footer">
                     <div class="post-icons">
-                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddPostLike(post, i)"><i class="far fa-heart"></i> <span>{{post.likes.count}}</span></span>
+                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddPostLike(post, i)"><i class="far fa-heart"></i> <span>{{likes.count}}</span></span>
                       <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                     </div>
                   </div>
@@ -77,7 +77,7 @@
                 </div>
                 <hr>
                 <div class="post-icons">
-                  <span class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes}}</span></span>
+                  <span class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
                   <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                   <span class="show-post" (click)="openFullPost(content2)">Read More <i class="fas fa-angle-double-right"></i></span>
                 </div>
@@ -99,7 +99,7 @@
                   </div>
                   <div class="modal-footer">
                     <div class="post-icons">
-                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddLike(post, i)"><i class="far fa-heart"></i> <span>{{post.likes}}</span></span>
+                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddLike(post, i)"><i class="far fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
                       <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                     </div>
                   </div>
