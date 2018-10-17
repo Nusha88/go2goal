@@ -34,9 +34,9 @@
                 <div class="card__cta--details">
                   <ul>
                     <li>Goal of Life: {{golNumber}}</li>
-                    <li>Goals of Year: 4</li>
-                    <li>Goals of Month: 6</li>
-                    <li>Goals of Week: 2</li>
+                    <li>Goals of Year: {{goyNumber}}</li>
+                    <li>Goals of Month: {{gomNumber}}</li>
+                    <li>Goals of Week: {{gowNumber}}</li>
                   </ul>
                 </div>
                 <a [routerLink]="'/goals'" class="btn btn--white">Go to Goals!</a>
@@ -54,7 +54,7 @@
                 <span class="card__heading-span card__heading-span--2">Todos</span>
               </h4>
               <div class="card__details--2">
-                List of todos, curses, books, etc.
+                Lists of todos, curses, books, etc.
               </div>
             </div>
             <div class="card__side card__side--back card__side--back-2">
@@ -85,7 +85,7 @@
               <div class="card__cta">
                 <h4 class="card__side--back__header">My Notes</h4>
                 <div class="card__cta--details">
-                  You have 12 very important and useful notes.
+                  You have {{notesNumber}} very important and useful notes.
                 </div>
                 <a [routerLink]="'/notes'" class="btn btn--white">Go to Notes!</a>
               </div>
@@ -110,7 +110,7 @@
               <div class="card__cta">
                 <h4 class="card__side--back__header">My Posts</h4>
                 <div class="card__cta--details">
-                  You have 1 published post.
+                  You have {{postsNumber}} published post.
                 </div>
                 <a [routerLink]="'/posts'" class="btn btn--white">Go to Posts!</a>
               </div>

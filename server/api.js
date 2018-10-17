@@ -196,7 +196,6 @@ module.exports = function (app, config) {
   app.post('/api/users/:id/posts', (req, res) => {
     User.findById(req.params.id, function (err, user) {
       var post = new Post({
-        id: req.body.id,
         title: req.body.title,
         isEdited: false,
         postText: req.body.postText,
@@ -217,18 +216,30 @@ module.exports = function (app, config) {
     });
   });
 
-  app.put('/api/users/:id/posts', function(req, res) {
-    const userId = req.params.id;
-    const posts = req.body.posts;
-    User.findById({_id: userId}, (err, user) => {
+//   app.put('/api/users/:id/posts', function(req, res) {
+//     const userId = req.params.id;
+//     const posts = req.body.posts;
+//     User.findById({_id: userId}, (err, user) => {
+// console.log(posts);
+//       user.posts = posts;
+//       user.save((err, user) => {
+//         if (err) {
+//           return res.status(500).send({message: err.message});
+//         }
+//         res.send(user);
+//       });
+//     });
+//   });
 
-      user.posts = posts;
-      user.save((err, user) => {
+  app.put('/api/users/:id/posts', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.posts = req.body.posts;
+      user.save(function (err) {
         if (err) {
           return res.status(500).send({message: err.message});
         }
         res.send(user);
-      });
+      })
     });
   });
 
@@ -274,12 +285,11 @@ module.exports = function (app, config) {
   app.put('/api/posts/:id/', function(req, res) {
     const postId = req.params.id;
     Post.findById({_id: postId}, (err, post) => {
-      // post.likes.count = req.body.likes.count;
-      // post.likes.likers = req.body.likes.likers;
-      // post.likes = {
-      //   username: req.body.likes.likers.username,
-      //   isLike: req.body.likes.likers.isLike
-      // };
+      post.title = req.body.title;
+      post.postText = req.body.postText;
+      post.upload = req.body.upload;
+      post.category = req.body.category;
+      post.likes = req.body.likes[0];
       post.save((err, post) => {
         if (err) {
           return res.status(500).send({message: err.message});
@@ -288,6 +298,8 @@ module.exports = function (app, config) {
       });
     });
   });
+
+  // DATES
 
   app.put('/api/users/:id/dates-year', (req, res) => {
     User.findById(req.params.id, function (err, user) {
@@ -324,6 +336,8 @@ module.exports = function (app, config) {
       })
     });
   });
+
+  // GOALS
 
   app.put('/api/users/:id/goals/goals-of-year', function(req, res) {
     const userId = req.params.id;
@@ -387,15 +401,4 @@ module.exports = function (app, config) {
     });
   });
 
-  app.put('/api/users/:id/posts', (req, res) => {
-    User.findById(req.params.id, function (err, user) {
-      user.posts = req.body.posts;
-      user.save(function (err) {
-        if (err) {
-          return res.status(500).send({message: err.message});
-        }
-        res.send(user);
-      })
-    });
-  });
 };

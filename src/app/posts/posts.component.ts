@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../services/user.service';
+import {PostService} from '../services/post.service';
 
 @Component({
   selector: 'app-posts',
@@ -11,42 +12,75 @@ import {UserService} from '../services/user.service';
 export class PostsComponent implements OnInit {
   public mr: NgbModalRef;
   public mr2: NgbModalRef;
+  public edit: NgbModalRef;
+
   addPostForm: FormGroup;
+  editPostForm: FormGroup;
+
   image: string;
   user: any;
   allPosts: any;
   userPosts: any;
   postAuthor: any;
   isLike: boolean;
-  likes: number;
+  likes: any;
   likers: any;
+  count: number;
   addedPost: any;
   storedUsername = localStorage.getItem('username');
 
-  constructor(private modalService: NgbModal, public service: UserService) {
+  constructor(private modalService: NgbModal, public service: UserService, public postService: PostService) {
     this.allPosts = [];
+    this.likes = [];
   }
 
-  public openModal(content: string) {
+  public openModal(content: any) {
     this.mr = this.modalService.open(content);
   }
 
-  public openFullPost(content: string) {
-    this.mr2 = this.modalService.open(content);
+  public editPost(content: any) {
+    if (content) {
+      this.editPostForm = new FormGroup({
+        'title': new FormControl(content._parentView.context.$implicit.title),
+        'postText': new FormControl(content._parentView.context.$implicit.postText),
+        'upload': new FormControl(content._parentView.context.$implicit.upload),
+        'category': new FormControl(content._parentView.context.$implicit.category),
+      });
+    }
+    this.edit = this.modalService.open(content);
+  }
+
+  public openFullPost(content: any) {
+    if (content._parentView.context.$implicit.likes[0].likers.length < 1) {
+      this.isLike = false;
+      this.mr2 = this.modalService.open(content);
+    } else {
+      const userLiker = content._parentView.context.$implicit.likes[0].likers.find(liker => liker.username === this.storedUsername);
+      if (userLiker) {
+        this.isLike = true;
+      } else {
+        this.isLike = false;
+      }
+      this.mr2 = this.modalService.open(content);
+    }
   }
 
   public closeModal() {
     this.mr.close();
   }
 
-  // public closeModal() {
-  //   this.mr2.close();
-  // }
   private initForm() {
     const title = '';
     const postText = '';
     const category = '';
     const upload = null;
+    const count = 0;
+
+    const likes = new FormGroup({
+      'count': new FormControl(count),
+      'isLike': new FormControl(false),
+      'likers': new FormControl([]),
+    });
 
     this.addPostForm = new FormGroup({
       'title': new FormControl(title, Validators.required),
@@ -56,8 +90,7 @@ export class PostsComponent implements OnInit {
       'date': new FormControl(this.formatDate(new Date())),
       'author': new FormControl(this.user.username),
       'category': new FormControl(category, Validators.required),
-      'likes': new FormControl([]),
-      'favorites': new FormControl([])
+      'likes': new FormControl([likes.value])
     });
   }
 
@@ -65,71 +98,50 @@ export class PostsComponent implements OnInit {
     this.image = event.target.value;
   }
 
-  onAddLike(post, i) {
+  onAddPostLike(post) {
+    let like, isLiked, postLike;
     post.likes[0].count += (this.isLike) ? -1 : 1;
     this.isLike = !this.isLike;
-    // post.likes[0].count = this.likes;
+    isLiked = this.isLike;
+    like = post.likes[0].count;
     if (this.isLike) {
-      let liker = {
+      const liker = {
         username: this.user.username,
         isLike: this.isLike
       };
-      this.likers.push(liker);
+      postLike = liker;
+      post.likes[0].likers.push(liker);
+      console.log(post);
     } else {
-      this.likers.find(user => {
-        this.user.username = user;
-        this.likers.splice(this.likers.indexOf(post));
-        this.isLike = false;
+      post.likes[0].likers.find(user => {
+        if (this.user.username = user) {
+          post.likes[0].likers.splice(post.likes[0].likers.indexOf(post));
+          this.isLike = false;
+        }
       });
     }
-    post.likes.likers = this.likers;
-console.log(this.user);
-    this.service.updateUserPosts(this.user).subscribe(user => user);
-  }
-
-  onAddPostLike(post, i) {
-    // this.isLike = post.likes.likers.isLike;
-    this.likes += (this.isLike) ? -1 : 1;
-    this.isLike = !this.isLike;
-    post.likes.count = this.likes;
-    if (this.isLike) {
-      let liker = {
-        username: this.user.username,
-        isLike: this.isLike
-      };
-      this.likers.push(liker);
-    } else {
-      this.likers.find(user => {
-        this.user.username = user;
-        this.likers.splice(this.likers.indexOf(post));
-        this.isLike = false;
-      });
-    }
-    post.likes.likers = this.likers;
-    this.addedPost = post;
-    this.addedPost.likes = post.likes;
-    // this.service.updatePost(this.addedPost).subscribe(p => p);
-
     this.service.getUsers().subscribe(users => {
       users.forEach(user => {
         if (post.author === user.username) {
           this.postAuthor = user;
           this.postAuthor.posts.forEach(p => {
             if (post.title === p.title) {
-              p.likes.likers = this.likers;
-              p.likes.count = this.likes;
+              p.likes[0].likers = post.likes[0].likers;
+              p.likes[0].count = post.likes[0].count;
+              console.log(p);
             }
           });
-          this.service.updateUserPosts(this.postAuthor);
+          this.service.updateUserPosts(this.postAuthor).subscribe(postAuthor => postAuthor);
         }
       });
     });
+    this.postService.updatePost(post).subscribe(pos => pos);
   }
 
   formatDate(date) {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
-    let yy = date.getFullYear() + 1;
+    const yy = date.getFullYear() + 1;
     if (dd < 10) {
       dd = '0' + dd;
     }
@@ -144,53 +156,60 @@ console.log(this.user);
     this.allPosts.push(this.addPostForm.value);
     this.userPosts.push(this.addPostForm.value);
     this.user.posts = this.userPosts;
-    // this.service.postUserPost(this.addPostForm.value, this.user._id);
     this.service.updateUserPosts(this.user).subscribe(user => user);
-    // this.service.postPost(this.addPostForm.value);
+    this.postService.postPost(this.addPostForm.value);
     this.addPostForm.reset();
     this.closeModal();
   }
 
-  ngOnInit() {
+  onEditPost(post) {
+    post.title = this.editPostForm.value.title;
+    post.postText = this.editPostForm.value.postText;
+    post.upload = this.editPostForm.value.upload;
+    post.category = this.editPostForm.value.category;
+    this.service.updateUserPosts(this.user).subscribe(postAuthor => postAuthor);
+    this.postService.updatePost(post).subscribe(pos => pos);
+    this.edit.close();
+  }
+
+  onGetUserPosts() {
     this.service.getUsers().subscribe((users) => {
       users.forEach((user) => {
         if (this.storedUsername === user.username) {
           this.user = user;
           this.userPosts = this.user.posts;
-          // this.userPosts.forEach(post => {
-          //   if (post.likes = []) {
-          //     .likes = 0;
-          //     // this.likers = [];
-          //     console.log(this.likes);
-          //   } else {
-          //     this.likes = post.likes.count;
-          //     console.log(this.likes);
-          //   }
-          // });
+          this.userPosts.forEach(post => {
+            if (!post.likes) {
+              post.likes[0].count = 0;
+            }
+            post.likes[0].likers.forEach(liker => {
+              if (liker.username === this.storedUsername) {
+                liker.isLike = true;
+              } else {
+                liker.isLike = false;
+              }
+            });
+          });
           this.initForm();
         }
       });
     });
-    // this.service.getPosts().subscribe((posts) => {
-    //   this.allPosts = posts;
-    //   this.allPosts.forEach(post => {
-    //     if (post.likes = []) {
-    //       this.likes = post.likes.count = 0;
-    //       this.likers = [];
-    //     } else {
-    //       this.likes = post.likes.count;
-    //       this.likers = post.likes.likers;
-    //     }
-    //
-    //     this.likers.forEach(liker => {
-    //       if (liker.username === this.storedUsername) {
-    //         this.isLike = true;
-    //       } else {
-    //         this.isLike = false;
-    //       }
-    //     });
-    //   });
-    // });
+  }
+
+  onGetAllPosts() {
+    this.postService.getPosts().subscribe((posts) => {
+      this.allPosts = posts;
+      this.allPosts.forEach(post => {
+        if (!post.likes) {
+          post.likes[0].count = 0;
+        }
+      });
+    });
+  }
+
+  ngOnInit() {
+    this.onGetUserPosts();
+    this.onGetAllPosts();
   }
 
 }

@@ -19,6 +19,7 @@ export class Posts {
 export class Likes {
   constructor(
     public count: number,
+    public isLike: boolean,
     public likers: Liker,
   ) {}
 }

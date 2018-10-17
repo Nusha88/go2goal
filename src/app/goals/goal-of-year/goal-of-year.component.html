@@ -11,7 +11,7 @@
       <div class="goals-content">
         <div class="row">
           <div class="col-md-12" style="padding: 0;">
-            <div *ngIf="!datesY || isEdited">
+            <div *ngIf="datesY.length < 1 || isEdited">
               <label for="from">From</label>
               <input type="text" #from id="from" class="dates-input">
               <label for="to">To</label>

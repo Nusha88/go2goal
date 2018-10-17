@@ -78,10 +78,10 @@ let liker = new Schema({
 });
 let likes = new Schema({
   count: Number,
+  isLike: Boolean,
   likers: [liker]
 });
 let posts = new Schema({
-  id: String,
   title: String,
   isEdited: Boolean,
   postText: String,

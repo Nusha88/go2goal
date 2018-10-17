@@ -10,17 +10,17 @@ export class MainPageComponent implements OnInit {
   username: any;
   users: any;
   user: any;
-  @Input() todos: any;
-  @Input() gol: any;
-  @Input() goy: any;
-  @Input() gom: any;
-  @Input() gow: any;
   todosNumber: number;
+  notesNumber: number;
+  postsNumber: number;
   golNumber: number;
   goyNumber: number;
   gomNumber: number;
   gowNumber: number;
-  constructor(public service: UserService) { }
+  todos: any;
+  constructor(public service: UserService) {
+    this.todos = [];
+  }
 
   ngOnInit() {
     const storedUsername =  localStorage.getItem('username');
@@ -30,11 +30,23 @@ export class MainPageComponent implements OnInit {
           this.user = user;
           if (storedUsername === this.user.username) {
             this.user = user;
-            if (this.user.goals) {
-              this.golNumber = 1;
-            } else {
-              this.golNumber = 0;
-            }
+            console.log(this.user);
+            this.gomNumber = this.user.goals_of_the_month.length;
+            this.golNumber = this.user.goal_of_live.length;
+            this.goyNumber = this.user.goals_of_the_year.length;
+            this.gomNumber = this.user.goals_of_the_month.length;
+            this.gowNumber = this.user.goals_of_the_week.length;
+            this.notesNumber = this.user.notes.length;
+            this.user.todoLists.forEach(todolist => {
+              this.todos.push(todolist.todos);
+            });
+            this.todosNumber = this.todos[0].length;
+            this.postsNumber = this.user.posts.length;
+            // if (this.user.goals) {
+            //   this.golNumber = 1;
+            // } else {
+            //   this.golNumber = 0;
+            // }
           }
         });
       });

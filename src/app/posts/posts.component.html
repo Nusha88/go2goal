@@ -29,54 +29,6 @@
                 </div>
                 <hr>
                 <div class="post-icons">
-                  <span class="like-post"><i class="fas fa-heart"></i> <span>{{likes.count}}</span></span>
-                  <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
-                  <span class="show-post" (click)="openFullPost(content2)">Read More <i class="fas fa-angle-double-right"></i></span>
-                </div>
-                <ng-template #content2 let-c="close" let-d="dismiss">
-                  <div class="modal-header">
-                    <h4 class="modal-title">{{post.title}}</h4>
-                    <span class="close-popup" (click)="d('Cross click')"><i class="ion-close-round"></i></span>
-                    <hr>
-                  </div>
-                  <div class="modal-body">
-                    <div class="post-details">
-                      <span>Date: <span class="post-info">{{post.date}}</span></span> &nbsp;
-                      <span>Author: <span class="post-info">{{post.author}}</span></span> &nbsp;
-                      <span>Category: <span class="post-info">{{post.category}}</span></span> &nbsp;
-                    </div>
-                    <br>
-                    <p class="card-text">{{post.postText}}</p>
-                    <img [src]="post.upload" alt="">
-                  </div>
-                  <div class="modal-footer">
-                    <div class="post-icons">
-                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddPostLike(post, i)"><i class="far fa-heart"></i> <span>{{likes.count}}</span></span>
-                      <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
-                    </div>
-                  </div>
-                </ng-template>
-              </div>
-            </mat-tab>
-            <mat-tab label="My Posts">
-              <div class="add-post text-right">
-                <button class="btn btn--indigo add-post-button" (click)="openModal(content)"><i class="ion-android-add"></i>
-                  Add Post
-                </button>
-              </div>
-              <div class="card post-container" *ngFor="let post of userPosts; let i = index">
-                <h3>{{post.title}}</h3>
-                <br>
-                <p class="card-text">{{post.postText | truncate:[200, '...']}}</p>
-                <img [src]="post.upload" alt="">
-                <br>
-                <div class="post-details">
-                  <span>Date: <span class="post-info">{{post.date}}</span></span> &nbsp;
-                  <span>Author: <span class="post-info">{{post.author}}</span></span> &nbsp;
-                  <span>Category: <span class="post-info">{{post.category}}</span></span> &nbsp;
-                </div>
-                <hr>
-                <div class="post-icons">
                   <span class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
                   <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                   <span class="show-post" (click)="openFullPost(content2)">Read More <i class="fas fa-angle-double-right"></i></span>
@@ -99,11 +51,108 @@
                   </div>
                   <div class="modal-footer">
                     <div class="post-icons">
-                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddLike(post, i)"><i class="far fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
+                      <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddPostLike(post)"><i class="far fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
                       <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                     </div>
                   </div>
                 </ng-template>
+              </div>
+            </mat-tab>
+            <mat-tab label="My Posts">
+              <div class="add-post text-right">
+                <button class="btn btn--indigo add-post-button" (click)="openModal(content)"><i class="ion-android-add"></i>
+                  Add Post
+                </button>
+              </div>
+
+
+              <div class="card post-container" *ngFor="let post of userPosts; let i = index">
+                <h3>{{post.title}}</h3>
+                <br>
+                <p class="card-text">{{post.postText | truncate:[200, '...']}}</p>
+                <img [src]="post.upload" alt="">
+                <br>
+                <div class="post-details">
+                  <span>Date: <span class="post-info">{{post.date}}</span></span> &nbsp;
+                  <span>Author: <span class="post-info">{{post.author}}</span></span> &nbsp;
+                  <span>Category: <span class="post-info">{{post.category}}</span></span> &nbsp;
+                </div>
+                <hr>
+                <div class="post-icons">
+                  <span  class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
+                  <span class="show-post" (click)="editPost(edit)"><i class="fas fa-edit"></i></span>
+                </div>
+
+
+                <ng-template #edit let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">{{post.title}}</h4>
+                    <span class="close-popup" (click)="d('Cross click')"><i class="ion-close-round"></i></span>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-post-form-container">
+                      <form class="form-group add-post-form posts-form" [formGroup]="editPostForm">
+                        <input class="form-input" id="titleEdit" type="text" formControlName="title" placeholder="Post Title">
+                        <i class="fas fa-book"></i>
+                        <i class="far fa-comment-dots textarea-icon"></i>
+                        <textarea formControlName="postText" class="form-input" id="" cols="30" rows="10"
+                                  placeholder="Enter Your Story"></textarea>
+
+                        <input type="text" class="form-input" (change)="uploadFile($event)" formControlName="upload"
+                               placeholder="Add an image url to your post">
+                        <i class="far fa-image"></i>
+                        <img *ngIf="image" [src]="image" alt="" class="preview-image">
+                        <div class="form-group">
+                          <select class="form-input" id="exampleFormControlSelect2" formControlName="category">
+                            <option value="" disabled selected>Choose a category of your post</option>
+                            <option>Goals</option>
+                            <option>Books</option>
+                            <option>Travel</option>
+                            <option>Movies</option>
+                            <option>Places</option>
+                            <option>Music</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="post-button">
+                      <button
+                              type="submit" (click)="onEditPost(post)"
+                              class="btn btn--indigo"><i class="ion-android-add add-post-icon"></i> Edit
+                      </button>
+                    </div>
+                  </div>
+                  <div class="post-icon">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <!--<div class="modal-header">-->
+                    <!--<h4 class="modal-title">{{post.title}}</h4>-->
+                    <!--<span class="close-popup" (click)="d('Cross click')"><i class="ion-close-round"></i></span>-->
+                    <!--<hr>-->
+                  <!--</div>-->
+                  <!--<div class="modal-body">-->
+                    <!--<div class="post-details">-->
+                      <!--<span>Date: <span class="post-info">{{post.date}}</span></span> &nbsp;-->
+                      <!--<span>Author: <span class="post-info">{{post.author}}</span></span> &nbsp;-->
+                      <!--<span>Category: <span class="post-info">{{post.category}}</span></span> &nbsp;-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<p class="card-text">{{post.postText}}</p>-->
+                    <!--<img [src]="post.upload" alt="">-->
+                  <!--</div>-->
+                  <!--<div class="modal-footer">-->
+                    <!--<div class="post-icons">-->
+                      <!--&lt;!&ndash;<span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddLike(post)"><i class="far fa-heart"></i> <span>{{post.likes[0].count}}</span></span>&ndash;&gt;-->
+                      <!--<span class="like-post"><i class="fas fa-edit"></i></span>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                </ng-template>
+
+
+
               </div>
             </mat-tab>
           </mat-tab-group>

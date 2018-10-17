@@ -22,6 +22,7 @@
   }
 }
 .register-form {
+  width: 50%;
   padding: 5rem 0;
   position: relative;
   .register {
@@ -30,15 +31,16 @@
       margin: 0 auto;
       width: 70%;
       padding: 3rem;
+      h2 {
+        color: $color-white;
+        margin-top: 3rem;
+        letter-spacing: 1rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        font-weight: 400;
+      }
       .u-margin-bottom-small {
         text-align: center;
-        h2 {
-          color: $color-white;
-          margin-top: 3rem;
-          letter-spacing: 1rem;
-          margin-bottom: 4rem;
-          font-weight: 400;
-        }
       }
       p{
         display: inline-block;

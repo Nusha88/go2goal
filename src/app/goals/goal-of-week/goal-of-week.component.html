@@ -4,14 +4,14 @@
       <h2 class="heading-secondary">My Goals For The Next Week</h2>
       <div class="goal-of-week--edit" *ngIf="datesW.length > 0">
         <p *ngFor="let date of datesW">({{date.from}} - {{date.to}})
-          <span (click)="editDate(dates)"><i class="ion-edit"></i></span>
+          <span (click)="editDate(datesW)"><i class="ion-edit"></i></span>
         </p>
       </div>
       <hr>
       <div class="goals-content">
         <div class="row">
           <div class="col-md-12" style="padding: 0;">
-            <div *ngIf="!datesW || isEdited">
+            <div *ngIf="datesW.length < 1 || isEdited">
               <label for="from">From</label>
               <input type="text" #from id="from" class="dates-input">
               <label for="to">To</label>

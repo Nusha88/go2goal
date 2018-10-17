@@ -44,31 +44,7 @@ export class UserService {
         catchError(this._handleError));
   }
 
-  // updateUser(user: UserModel): any {
-  //   console.log(user);
-  //   return this.httpClient
-  //     .put(`http://localhost:8083/api/users/${user._id}`, user)
-  //     .pipe(catchError(this._handleError));
-  // }
-
-  postUserPost(data: Observable<Posts[]>, id: string) {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
-      .set('Access-Control-Allow-Origin', '*');
-    console.log(data);
-    return this.httpClient.post<Posts>(`http://localhost:8083/api/users/${id}/posts`,
-      JSON.stringify(data), {
-        headers: headers
-      }
-    )
-      .subscribe(post => {
-        return post;
-      });
-  }
-
   updateUserPosts(user: UserModel): any {
-    console.log(user);
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/posts`, user)
       .pipe(catchError(this._handleError));
@@ -95,38 +71,6 @@ export class UserService {
   updateUserTodos(user: UserModel): any {
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/todolists`, user)
-      .pipe(catchError(this._handleError));
-  }
-
-  // POSTS
-
-  getPosts(): any {
-    return this.httpClient.get('http://localhost:8083/api/posts')
-      .pipe(map(res => res),
-        catchError(this._handleError));
-  }
-
-  postPost(data: Observable<Posts[]>) {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
-      .set('Access-Control-Allow-Origin', '*');
-    console.log(data);
-
-    return this.httpClient.post<Posts>('http://localhost:8083/api/posts',
-      JSON.stringify(data), {
-        headers: headers
-      }
-    )
-      .subscribe(post => {
-        return post;
-      });
-  }
-
-  updatePost(post: Posts): any {
-    console.log(post);
-    return this.httpClient
-      .put(`http://localhost:8083/api/posts/${post._id}`, post)
       .pipe(catchError(this._handleError));
   }
 
