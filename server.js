@@ -45,6 +45,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cors());
 
+const allowedExt = [
+  '.js',
+  '.ico',
+  '.css',
+  '.png',
+  '.jpg',
+  '.woff2',
+  '.woff',
+  '.ttf',
+  '.svg',
+];
+
+app.get('*', (req, res) => {
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(path.resolve(`public/${req.url}`));
+  } else {
+    res.sendFile(path.resolve('dist/index.html'));
+  }
+});
+
 // Set port
 const port = process.env.PORT || '8083';
 app.set('port', port);
@@ -67,7 +87,11 @@ require('./server/api')(app, config);
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
+    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+      res.sendFile(path.resolve(`public/${req.url}`));
+    } else {
+      res.sendFile(path.resolve('dist/index.html'));
+    }
   });
 }
 
@@ -78,7 +102,11 @@ if (process.env.NODE_ENV !== 'dev') {
  */
 
 app.get('/*', function(req, res){
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(path.resolve(`public/${req.url}`));
+  } else {
+    res.sendFile(path.resolve('dist/index.html'));
+  }
 });
 
 app.listen(port, function () {
