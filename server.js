@@ -52,7 +52,7 @@ app.set('port', port);
 // Set static path to Angular app in dist
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
-  app.use('/', express.static(path.join(__dirname, 'dist', 'index.html')));
+  app.use(express.static(__dirname + '/dist/go2goal'));
 }
 
 /*
@@ -67,7 +67,7 @@ require('./server/api')(app, config);
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname+'/dist/<go2goal>/index.html'));
+    res.sendFile(path.join(__dirname+'/dist/go2goal/index.html'));
   });
 }
 
@@ -78,7 +78,7 @@ if (process.env.NODE_ENV !== 'dev') {
  */
 
 app.get('/*', function(req, res){
-  res.sendFile(path.join(__dirname+'/dist/<go2goal>/index.html'));
+  res.sendFile(path.join(__dirname+'/dist/go2goal/index.html'));
 });
 
 app.listen(port, function () {
