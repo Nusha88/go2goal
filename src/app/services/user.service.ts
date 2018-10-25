@@ -37,11 +37,42 @@ export class UserService {
       });
   }
 
+  postUserEmail(data, user_id) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json;charset=utf-8')
+      .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Accept', 'text/plain');
+
+    return this.httpClient.post('http://localhost:8083/api/reset-password',
+      {'email': data, 'id': user_id}, {
+        headers: headers
+      })
+      .subscribe(dat => {
+        // console.log(data);
+        return dat;
+      });
+  }
+
   getUserById$(id: string): any {
     return this.httpClient
       .get(`http://localhost:8083/api/users/${id}/todos`)
       .pipe(map(res => res),
         catchError(this._handleError));
+  }
+
+  updateUserPassword(user: UserModel): any {
+    console.log(user);
+    return this.httpClient
+      .put(`http://localhost:8083/api/users/${user._id}/newpass`, user)
+      .pipe(catchError(this._handleError));
+  }
+
+  updateUser(user: UserModel): any {
+    console.log(user);
+    return this.httpClient
+      .put(`http://localhost:8083/api/users/${user._id}`, user)
+      .pipe(catchError(this._handleError));
   }
 
   updateUserPosts(user: UserModel): any {
@@ -144,6 +175,18 @@ export class UserService {
       .put(`http://localhost:8083/api/users/${user._id}/notes`, user)
       .pipe(catchError(this._handleError));
   }
+
+  getToken(): any {
+    return this.httpClient.get('http://localhost:8083/api/reset-password')
+      .pipe(map(res => res),
+        catchError(this._handleError));
+  }
+
+  // updateUserPassword(user): Observable<any> {
+  //   return this.httpClient
+  //     .put(`http://localhost:8083/api/users/${user._id}`, user)
+  //     .catch(this._handleError);
+  // }
 
   private _handleError(err: HttpErrorResponse | any) {
     const errorMsg = err.message || 'Error: Unable to complete request.';

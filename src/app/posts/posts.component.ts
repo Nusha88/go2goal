@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {PostService} from '../services/post.service';
 
@@ -26,7 +26,6 @@ export class PostsComponent implements OnInit {
   likes: any;
   likers: any;
   count: number;
-  addedPost: any;
   storedUsername = localStorage.getItem('username');
 
   constructor(private modalService: NgbModal, public service: UserService, public postService: PostService) {

@@ -1,6 +1,9 @@
-
 @import "../../assets/scss/variables";
 @import "../../assets/scss/mixins";
+
+.register-container {
+  padding: 3rem;
+}
 .register-page__content {
   font-family: Lato, sans-serif;
   color: $color-white;
@@ -8,7 +11,7 @@
   background-image: linear-gradient(to right bottom,
     rgba($light-primary-color, 0.8),
     rgba($dark-primary-color, 0.8)),
-  url("../../assets/images/34943640193_0b537367ac_h.jpg");
+  url("../../assets/images/34943640193_0b537367ac_h-min.jpg");
   background-size: cover;
   background-position: top;
   clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);

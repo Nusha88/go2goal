@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
@@ -40,6 +42,10 @@ import { MatDialog, MatDialogModule} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TruncatePipe} from './pipes/truncate-pipe';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ContactComponent } from './contact/contact.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -63,11 +69,16 @@ import {TruncatePipe} from './pipes/truncate-pipe';
     FooterComponent,
     FirstLevelStepComponent,
     MainPageComponent,
-    TruncatePipe
+    TruncatePipe,
+    ReviewsComponent,
+    ContactComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
+    Ng2SearchPipeModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,

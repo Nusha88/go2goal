@@ -7,6 +7,7 @@
 
 
 const jwt = require('express-jwt');
+const jwtToken = require('jsonwebtoken');
 const jwks = require('jwks-rsa');
 const User = require('./models/user');
 const Todo = require('./models/todo');
@@ -14,6 +15,16 @@ const Goals = require('./models/goals');
 const Post = require('./models/posts');
 const TodoListModel = require("./models/todolist");
 const NoteModel = require('./models/note');
+const Token = require('./models/tokens');
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'go2goal.today@gmail.com',
+    pass: '6265417go2goal'
+  }
+});
 
 /*
  |--------------------------------------
@@ -35,6 +46,9 @@ module.exports = function (app, config) {
     algorithm: 'RS256'
   });
 
+  const bcrypt = require('bcrypt');
+  const saltRounds = 10;
+
 // GET USERS
   app.get('/api/users', function (req, res) {
 
@@ -52,8 +66,31 @@ module.exports = function (app, config) {
       res.send(usersArr);
     });
   });
+
+
+  // app.post('/api/login', function (req, res, next) {
+  //   var username = req.body.username;
+  //   var password = req.body.password;
+  //   User.findOne({ username: username }, function(err, user) {
+  //     if (err) throw err;
+  //
+  //     // test a matching password
+  //     bcrypt.compare(password, user.password, function(err, isMatch) {
+  //       if (err) throw err;
+  //       if (isMatch) {
+  //         res.send({result: true});
+  //       } else {
+  //         res.send({result: false});
+  //       }
+  //       console.log(user.password, isMatch); // -> Password123: true
+  //     });
+  //   });
+  // });
   // POST USER
   app.post('/api/users', (req, res) => {
+    // var password = req.body.password;
+    // bcrypt.genSalt(saltRounds, function(err, salt) {
+    //   bcrypt.hash(password, salt, function(err, hash) {
     var user = new User({
       username: req.body.username,
       email: req.body.email,
@@ -75,7 +112,9 @@ module.exports = function (app, config) {
         return next(err)
       }
       res.status(201).json(user)
-    })
+    });
+    // });
+    // });
   });
 
 // GET USER BY ID
@@ -92,35 +131,21 @@ module.exports = function (app, config) {
     });
   });
 
-  // app.get('/api/users/:id/todos', function (req, res) {
-  //
-  //   User.findById(req.params.id, function (err, user) {
-  //     if (err) {
-  //       return res.status(500).send({message: err.message});
-  //     }
-  //     if (!user) {
-  //       return res.status(400).send({message: 'User not found.'});
-  //     }
-  //     res.send(user.todos);
-  //   });
-  // });
+  app.put('/api/users/:id', (req, res) => {
+    const userId = req.params.id;
 
-  // app.post('/api/users/:id/todos', (req, res) => {
-  //   User.findById(req.params.id, function (err, user) {
-  //     var todo = new Todo({
-  //       id: req.body.id,
-  //       title: req.body.title,
-  //       complete: req.body.complete
-  //     });
-  //     user.todos.push(todo);
-  //     user.save(function (err) {
-  //       if (err) {
-  //         return next(err)
-  //       }
-  //       res.status(201).json(user);
-  //     })
-  //   });
-  // });
+    User.findById({_id: userId}, (err, user) => {
+
+      user.username = req.body.username;
+      user.email = req.body.email;
+      user.save((err, user) => {
+        if (err) {
+          return res.status(500).send({message: err.message});
+        }
+        res.send(user);
+      });
+    });
+  });
 
   // POST TODOLIST
 
@@ -142,7 +167,7 @@ module.exports = function (app, config) {
   });
 
   // UPDATE TODOLIST
-  app.put('/api/users/:id/todolists', function(req, res) {
+  app.put('/api/users/:id/todolists', function (req, res) {
     const userId = req.params.id;
     const todoLists = req.body.todoLists;
 
@@ -176,7 +201,7 @@ module.exports = function (app, config) {
   });
 
   // UPDATE NOTE
-  app.put('/api/users/:id/notes', function(req, res, next) {
+  app.put('/api/users/:id/notes', function (req, res, next) {
     const userId = req.params.id;
     const notes = req.body.notes;
 
@@ -216,20 +241,17 @@ module.exports = function (app, config) {
     });
   });
 
-//   app.put('/api/users/:id/posts', function(req, res) {
-//     const userId = req.params.id;
-//     const posts = req.body.posts;
-//     User.findById({_id: userId}, (err, user) => {
-// console.log(posts);
-//       user.posts = posts;
-//       user.save((err, user) => {
-//         if (err) {
-//           return res.status(500).send({message: err.message});
-//         }
-//         res.send(user);
-//       });
-//     });
-//   });
+  app.put('/api/users/:id/newpass', (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+      user.password = req.body.password;
+      user.save(function (err) {
+        if (err) {
+          return res.status(500).send({message: err.message});
+        }
+        res.send(user);
+      })
+    });
+  });
 
   app.put('/api/users/:id/posts', (req, res) => {
     User.findById(req.params.id, function (err, user) {
@@ -282,7 +304,7 @@ module.exports = function (app, config) {
     })
   });
 
-  app.put('/api/posts/:id/', function(req, res) {
+  app.put('/api/posts/:id/', function (req, res) {
     const postId = req.params.id;
     Post.findById({_id: postId}, (err, post) => {
       post.title = req.body.title;
@@ -339,7 +361,7 @@ module.exports = function (app, config) {
 
   // GOALS
 
-  app.put('/api/users/:id/goals/goals-of-year', function(req, res) {
+  app.put('/api/users/:id/goals/goals-of-year', function (req, res) {
     const userId = req.params.id;
     User.findById({_id: userId}, (err, user) => {
       user.goals_of_the_year = req.body.goals_of_the_year;
@@ -352,7 +374,7 @@ module.exports = function (app, config) {
     });
   });
 
-  app.put('/api/users/:id/goals/goals-of-month', function(req, res) {
+  app.put('/api/users/:id/goals/goals-of-month', function (req, res) {
     const userId = req.params.id;
     User.findById({_id: userId}, (err, user) => {
       user.goals_of_the_month = req.body.goals_of_the_month;
@@ -365,7 +387,7 @@ module.exports = function (app, config) {
     });
   });
 
-  app.put('/api/users/:id/goals/goals-of-week', function(req, res) {
+  app.put('/api/users/:id/goals/goals-of-week', function (req, res) {
     const userId = req.params.id;
     User.findById({_id: userId}, (err, user) => {
       user.goals_of_the_week = req.body.goals_of_the_week;
@@ -398,6 +420,85 @@ module.exports = function (app, config) {
         }
         res.send(user);
       })
+    });
+  });
+
+
+  app.post('/api/reset-password', function (req, res, next) {
+    if (req.body.email !== undefined) {
+      let emailAddress = req.body.email;
+      let id = req.body.id;
+      let payload = {
+        id: id,
+        email: emailAddress
+      };
+      let token = jwtToken.sign(payload, 'secretString');
+      let resetLink = "http://localhost:8083/reset-password/" + token;
+      let sendToken = new Token({
+        _id: req.body._id,
+        user_id: req.body.id,
+        token: token,
+        link: resetLink
+      });
+
+      const mailOptions = {
+        from: 'go2goal.today@gmail.com', // sender address
+        to: emailAddress, // list of receivers
+        subject: 'Reset Password Link', // Subject line
+        html: '<p>Reset your password <a href=" ' + resetLink + '">Click the link</a></p>'// plain text body
+      };
+
+      sendToken.save(function (err, token) {
+        if (err) {
+          return next(err)
+        }
+        res.status(201).json(token)
+        transporter.sendMail(mailOptions, function (err, info) {
+          if (err)
+            console.log(err);
+        });
+      })
+    }
+  });
+
+  app.get('/api/reset-password', function (req, res) {
+
+    Token.find({}, function (err, tokens) {
+      let tokenArr = [];
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (tokens) {
+        tokens.forEach(function (token) {
+          tokenArr.push(token);
+        })
+        ;
+      }
+      res.send(tokenArr);
+    });
+  });
+
+  app.get('/api/reset-password/:token', function (req, res) {
+    let tokenInRoute = req.params.token;
+    let userArr = [];
+    Token.find({}, function (err, tokens) {
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (tokens) {
+        tokens.find(function (token) {
+          if (token.token === tokenInRoute) {
+            let user_id = token.user_id;
+            console.log(user_id);
+            User.findById(user_id, function (err, user) {
+              userArr.push(token);
+              res.send(userArr);
+            });
+            // res.send(token);
+          }
+        });
+      }
+      // res.send(tokensArr);
     });
   });
 

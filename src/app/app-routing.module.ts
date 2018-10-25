@@ -13,6 +13,11 @@ import {GoalOfYearComponent} from './goals/goal-of-year/goal-of-year.component';
 import {GoalOfMonthComponent} from './goals/goal-of-month/goal-of-month.component';
 import {GoalOfWeekComponent} from './goals/goal-of-week/goal-of-week.component';
 import {MainPageComponent} from './main-page/main-page.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {ReviewsComponent} from './reviews/reviews.component';
+import {ContactComponent} from './contact/contact.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -28,6 +33,27 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'reviews',
+    component: ReviewsComponent,
+  },
+  {
+    path: 'contact-us',
+    component: ContactComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    children: [
+      {
+        path: ':token', component: ResetPasswordComponent
+      }
+    ]
+  },
+  {
     path: '',
     component: MainComponent,
     children: [
@@ -35,6 +61,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
+      },
+      {
+        path: 'profile',
+        component: UserProfileComponent,
       },
       {
         path: 'todos',

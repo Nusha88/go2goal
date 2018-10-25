@@ -40,7 +40,7 @@ export class MainPageComponent implements OnInit {
             this.user.todoLists.forEach(todolist => {
               this.todos.push(todolist.todos);
             });
-            this.todosNumber = this.todos[0].length;
+            this.todosNumber = this.todos.length;
             this.postsNumber = this.user.posts.length;
             // if (this.user.goals) {
             //   this.golNumber = 1;

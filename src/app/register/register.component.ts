@@ -18,13 +18,16 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   type = 'password';
   show = false;
+  usernameExist = false;
+  emailExist = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public uf: UserFormService,
     private usersService: UserService,
-    private loginService: LoginService) { }
+    private loginService: LoginService) {
+  }
 
   sendUser(): void {
     this.loginService.sendUser(this.registerForm.value.username);
@@ -33,6 +36,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.initForm();
   }
+
   private initForm() {
 
     const username = '';
@@ -44,13 +48,15 @@ export class RegisterComponent implements OnInit {
       'password': new FormControl(password, Validators.required),
     });
   }
+
   register() {
+
     this.sendUser();
     this.usersService.postUser(this.registerForm.value);
     localStorage.setItem('username', this.registerForm.value.username);
     localStorage.setItem('remember', 'true');
     this.router.navigate(['/']);
-  }
+  };
 
   toggleShowHidePassword() {
     this.show = !this.show;

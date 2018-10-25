@@ -72,7 +72,7 @@
       border-top-right-radius: 3px;
     }
     .card__picture--1 {
-      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9), url(../../assets/images/goals.jpg);
+      background-image: linear-gradient(to right bottom, #4776E6, #8E54E9), url(../../assets/images/goals-min.jpg);
     }
     .card__picture--2 {
       background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../assets/images/todos.jpg);
@@ -81,7 +81,7 @@
       background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../../assets/images/notes.jpg);
     }
     .card__picture--4 {
-      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../../assets/images/posts.jpg);
+      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../../assets/images/posts-min.jpg);
     }
     .card__heading {
       font-size: 2.8rem;
@@ -224,11 +224,30 @@
     }
   }
 }
+.pre--paragraph {
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 4rem;
+  margin-bottom: 3rem;
+  color: $primary-text;
+  letter-spacing: 1px;
+  position: relative;
+  &:after {
+    content: '';
+    width: 30rem;
+    height: .5rem;
+    background-color: $orange-color;
+    position: absolute;
+    bottom: 0;
+    right: 37%;
+
+  }
+}
 
 .jumbotron {
   background-image: linear-gradient(to right bottom,
     rgba($light-primary-color, 0.5),
-    rgba($dark-primary-color, 0.5)), url("../../assets/images/luca-bravo-370128-unsplash.jpg");
+    rgba($dark-primary-color, 0.5)), url("../../assets/images/luca-bravo-370128-unsplash-min.jpg");
   margin-bottom: 0;
   background-size: cover;
   background-attachment: fixed;

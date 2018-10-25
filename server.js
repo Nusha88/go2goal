@@ -77,6 +77,10 @@ if (process.env.NODE_ENV !== 'dev') {
  |--------------------------------------
  */
 
+app.get('/*', function(req, res){
+      res.sendFile(__dirname + '/index.html');
+});
+
 app.listen(port, function () {
   console.log("Server running on localhost:" + port);
 });

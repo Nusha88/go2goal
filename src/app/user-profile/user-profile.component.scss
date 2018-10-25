@@ -1,0 +1,104 @@
+@import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
+
+.post-component {
+  background-color: $color-white;
+  //padding: 2rem 0;
+  font-size: 1.5rem;
+  .profile--paragraph {
+    position: relative;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 2rem;
+    color: $primary-text;
+    letter-spacing: 1px;
+    &:after {
+      content: '';
+      width: 30rem;
+      height: .5rem;
+      background-color: $orange-color;
+      position: absolute;
+      bottom: 0;
+      right: 37%;
+      opacity: .3;
+    }
+    &:before {
+      content: '';
+      width: 48rem;
+      height: .5rem;
+      background-color: $orange-color;
+      position: absolute;
+      top: 0;
+      right: 29%;
+      opacity: .3;
+    }
+  }
+}
+
+.jumbotron {
+  background-image: linear-gradient(to right bottom,
+    rgba($light-primary-color, 0.5),
+    rgba($dark-primary-color, 0.5)), url("../../assets/images/michael-coury-70410-unsplash-min.jpg");
+  margin-bottom: 0;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 10rem 2rem;
+  .heading-secondary {
+    color: $color-white;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+.profile-content {
+  margin: 3rem auto;
+  width: 90%;
+  //background: $color-white;
+  padding: 2rem;
+  .profile-container {
+    width: 100%;
+    margin: 0 auto;
+    button {
+      padding: 1rem 4rem;
+      margin-left: 3rem;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .form-input {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    color: inherit;
+    border-radius: 2px;
+    background-color: rgba($color-white, .7);
+    border: none;
+    font-family: Lato, sans-serif;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    background-color: $light-grey-color;
+    display: block;
+    transition: all .3s;
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $dark-primary-color;
+    }
+    &:focus:invalid {
+      border-bottom: 3px solid orangered !important;
+    }
+    &::-webkit-input-placeholder {
+      color: $primary-text;
+    }
+  }
+}
+
+.incorrect-data {
+  color: orangered;
+  font-size: 1.5rem;
+}
+.success {
+  color: $orange-color;
+  font-size: 2rem;
+}
