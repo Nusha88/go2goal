@@ -29,7 +29,7 @@ monDb.on('error', function() {
 });
 
 monDb.once('open', function callback() {
-  console.info('Connected to MongoDB:', config.MONGO_URI);
+  console.info('Connected to MongoDB:');
 });
 
 /*
@@ -52,7 +52,7 @@ app.set('port', port);
 // Set static path to Angular app in dist
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
-  app.use('/', express.static(path.join('dist', 'index.html')));
+  app.use(express.static(__dirname + '/dist/index.html'));
 }
 
 /*
@@ -67,8 +67,7 @@ require('./server/api')(app, config);
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
   app.get('*', function(req, res) {
-    const index = path.join('dist', 'index.html');
-    res.sendFile(index);
+    res.sendFile(path.join(__dirname+'/dist/index.html'));
   });
 }
 
@@ -79,8 +78,7 @@ if (process.env.NODE_ENV !== 'dev') {
  */
 
 app.get('/*', function(req, res){
-  const index = path.join('dist', 'index.html');
-  res.sendFile(index);
+  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
 app.listen(port, function () {
