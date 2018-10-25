@@ -67,9 +67,7 @@ require('./server/api')(app, config);
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
   app.get('*', function(req, res) {
-    const index = path.join('/dist', 'index.html');
-    console.log(index);
-    res.sendFile(index);
+    res.sendFile(path.resolve('dist/index.html'));
   });
 }
 
@@ -80,8 +78,7 @@ if (process.env.NODE_ENV !== 'dev') {
  */
 
 app.get('/*', function(req, res){
-  const index = path.join( '/dist', 'index.html');
-  res.sendFile(index);
+  res.sendFile(path.resolve('dist/index.html'));
 });
 
 app.listen(port, function () {
