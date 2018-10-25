@@ -1,0 +1,72 @@
+@import "mixins";
+*,
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+
+  @include respond(big-desktop) { font-size: 75%}; //1800
+  @include respond(tab-land) { font-size: 56.25%}; //1200
+  @include respond(tab-port) { font-size: 50%}; //900
+}
+
+body {
+  box-sizing: border-box;
+  @include respond(tab-port) {
+    padding: 0;};
+  .modal-dialog {
+    max-width: 700px;
+    .modal-content {
+      padding: 2rem;
+    }
+  }
+}
+
+
+/*-- Forms --*/
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select option,
+textarea {
+  font-size: 16px; /* for iOS to prevent autozoom */
+}
+.formErrors {
+  padding-top: 6px;
+}
+.ng-invalid.ng-dirty,
+.ng-invalid.ng-dirty:focus {
+  border-color: #D9534E !important;
+}
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(0,0,0,.25) !important;
+  opacity: 1 !important;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(0,0,0,.25) !important;
+  opacity: 1 !important;
+}
+input:-moz-placeholder { /* Firefox 18- */
+  color: rgba(0,0,0,.25) !important;
+  opacity: 1 !important;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(0,0,0,.25) !important;
+  opacity: 1 !important;
+}
+
+/*-- Helpers --*/
+
+.opacity-half {
+  opacity: .5;
+}
+.list-group-item > strong {
+  padding-right: 5px;
+}
