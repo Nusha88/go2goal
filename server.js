@@ -52,7 +52,7 @@ app.set('port', port);
 // Set static path to Angular app in dist
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
-  app.use('/', express.static(path.join(__dirname, 'dist', 'index.html')));
+  app.use('/', express.static(path.join('dist', 'index.html')));
 }
 
 /*
@@ -67,7 +67,7 @@ require('./server/api')(app, config);
 // Don't run in dev
 if (process.env.NODE_ENV !== 'dev') {
   app.get('*', function(req, res) {
-    const index = path.join(__dirname, 'dist', 'index.html');
+    const index = path.join('dist', 'index.html');
     res.sendFile(index);
   });
 }
@@ -79,7 +79,7 @@ if (process.env.NODE_ENV !== 'dev') {
  */
 
 app.get('/*', function(req, res){
-  const index = path.join(__dirname, 'dist', 'index.html');
+  const index = path.join('dist', 'index.html');
   res.sendFile(index);
 });
 
