@@ -8,25 +8,29 @@
           </p>
           <p class="author">Earl Nightingale</p>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="notebook-content__area textarea-field">
+            <form [formGroup]="addNoteForm">
+                  <textarea #note name="note" id="note" placeholder="Enter Note Here..."
+                            formControlName="note"></textarea>
+            </form>
+            <button [disabled]="!addNoteForm.valid" type="submit" (click)="addNote(note.value)">
+              <i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 notebook-content">
-        <p class="notebook--paragraph">Leave here any notes, your favorite quotes and expressions, useful resources,
-          links. Everything you don't want to forget or lose.</p>
+        <p class="pre--paragraph"></p>
         <div class="row">
           <div class="col-md-12">
-            <div class="notebook-content__area">
-              <form [formGroup]="addNoteForm">
-                <textarea #note name="note" id="note" placeholder="Enter Note Here..."
-                          formControlName="note"></textarea>
-              </form>
-              <button [disabled]="!addNoteForm.valid" type="submit" (click)="addNote(note.value)"><i
-                class="ion-android-add add-todolist-icon"></i></button>
-            </div>
+            <h4 class="text-center" *ngIf="noNotes">Your notes will appear here... </h4>
             <div class="notebook-content__area note-content" *ngFor="let note of notes; let index = index">
-              <span (click)="editNote(note)" class="todo--edit"><i class="ion-edit"></i></span>
-              <span (click)="deleteNote(note, index)" class="delete-icon"><i class="ion-close-round"></i></span>
+              <span (click)="editNote(note)" class="todo--edit"><i class="far fa-edit"></i></span>
+              <span (click)="deleteNote(note, index)" class="delete-icon"><i class="far fa-times-circle"></i></span>
               <p>{{note.title}}</p>
               <div class="form-group edit-note-form" *ngIf="note.isEdited">
               <textarea type="text"
@@ -34,13 +38,14 @@
                         class="form-input"
                         value="{{note.title}}">
                  </textarea>
-              <button type="button" class="btn edit-button"
-                      (click)="updateNote(noteUpdate.value, note)"><i class="ion-edit"></i>
-              </button>
+                <button type="button" class="btn edit-button"
+                        (click)="updateNote(noteUpdate.value, note)"><i class="far fa-edit"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <p class="pre--paragraph"></p>
       </div>
     </div>
   </div>

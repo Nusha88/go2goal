@@ -28,7 +28,6 @@ import { GoalOfMonthComponent } from './goals/goal-of-month/goal-of-month.compon
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserComponent } from './user/user.component';
 import { SubmittingComponent } from './core/forms/submitting.component';
-import {UserFormService} from './services/user-form.service';
 import { FooterComponent } from './footer/footer.component';
 import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/first-level-step.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -99,7 +98,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LoginService,
     // TodoDataService,
     MatDialog,
-    UserFormService
   ],
   bootstrap: [AppComponent]
 })

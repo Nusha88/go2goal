@@ -5,8 +5,6 @@ import {UserService} from '../services/user.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from './CustomValidation';
 import {UserModel} from '../models/user.model';
-import {Subscription} from 'rxjs/Subscription';
-import {UserFormService} from '../services/user-form.service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +22,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public uf: UserFormService,
     private usersService: UserService,
     private loginService: LoginService) {
   }
@@ -43,20 +40,46 @@ export class RegisterComponent implements OnInit {
     const email = '';
     const password = '';
     this.registerForm = new FormGroup({
-      'username': new FormControl(username, Validators.required),
-      'email': new FormControl(email, Validators.compose([Validators.required, CustomValidators.emailValidator])),
+      'username': new FormControl(username, [Validators.required, this.usernameTaken(this.usersService)]),
+      'email': new FormControl(email, Validators.compose(
+        [Validators.required, CustomValidators.emailValidator]
+      )),
       'password': new FormControl(password, Validators.required),
     });
   }
 
-  register() {
+  usernameTaken(httpService: UserService) {
+    return control => new Promise((resolve, reject) => {
+      httpService.lookupUser(control.value).subscribe(data => {
+        if (data.length === 1) {
+          resolve({usernameTaken: true});
+          this.usernameExist = true;
+        } else if (data.length === 0) {
+          resolve({usernameTaken: false});
+          this.usernameExist = false;
+          control.status = 'VALID';
+        } else {
+          resolve(null);
+        }
+      }, (err) => {
+        console.log('in error' + err);
+        if (err !== '404 - Not Found') {
+          resolve({usernameTaken: true});
+          this.usernameExist = true;
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  }
 
+  register() {
     this.sendUser();
     this.usersService.postUser(this.registerForm.value);
     localStorage.setItem('username', this.registerForm.value.username);
     localStorage.setItem('remember', 'true');
     this.router.navigate(['/']);
-  };
+  }
 
   toggleShowHidePassword() {
     this.show = !this.show;

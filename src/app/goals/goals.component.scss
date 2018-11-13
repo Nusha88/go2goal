@@ -2,22 +2,23 @@
 
 .goals-page__component {
   padding-bottom: 5rem;
+  margin-top: -6rem;
   font-size: 1.5rem;
+  h2 {
+    animation: moveToRight 1s ease-in;
+  }
   .jumbotron {
     background-image: linear-gradient(to right bottom,
       rgba($light-primary-color, 0.5),
-      rgba($dark-primary-color, 0.5)), url("../../assets/images/34943640193_0b537367ac_h-min.jpg");
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/michael-coury-70410-unsplash-min.jpg");
     margin-bottom: 0;
     background-size: cover;
     background-attachment: fixed;
+    padding: 20rem 2rem;
+    height: 95vh;
+    clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   }
-  .goals--paragraph {
-    font-size: 1.6rem;
-    text-align: center;
-    padding: 2rem;
-    color: $primary-text;
-    letter-spacing: 1px;
-  }
+
   .heading-secondary {
     color: $color-white;
     transform: none;
@@ -25,48 +26,45 @@
     margin-top: 2rem;
   }
   .goals__header--paragraph {
-    font-size: 1.8rem;
-    text-align: center;
-    text-transform: uppercase;
+    font-size: 2rem;
+    text-align: left;
     padding: 2rem 17rem 0;
     color: $color-white;
     letter-spacing: 2px;
+    animation: moveToLeft 1s ease-in;
   }
   .author {
-    font-size: 1.8rem;
     text-align: center;
     width: 100%;
-    text-transform: none;
-    color: $primary-color;
-
+    color: $hover-color;
+    font-size: 2.8rem;
+    font-family: 'Black And White Picture', sans-serif;
+    animation: moveToLeft 1s ease-in;
   }
 
   .nav.nav-tabs {
     border-bottom: 1px solid transparent;
-    margin-top: 5rem;
+    margin-top: 8rem;
+    animation: moveInBottom 1s ease-in;
     .active {
       background-color: transparent;
-      border: 1px solid $color-white;
-      color: $light-primary-color;
-      a {
-        color: $light-primary-color;
-      }
+      border: 1px solid $light-orange-color;
+      color: $light-orange-color !important;
     }
     li {
-      color: $color-white;
+      font-size: 1.5rem !important;
+      text-transform: uppercase;
       a {
         color: $color-white;
+        &:hover {
+          color: $light-orange-color !important;
+        }
       }
       .nav-link:focus, .nav-link:hover {
-        border-color: $color-white;
+        border-color: $light-orange-color;
       }
     }
 
   }
 
-  .goals_content {
-    background-color: $color-white;
-    color: $primary-text;
-    margin: 0;
-  }
 }

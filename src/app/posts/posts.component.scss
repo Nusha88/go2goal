@@ -3,15 +3,21 @@
 
 .post-component {
   background-color: $color-white;
-  //padding: 2rem 0;
+  margin-top: -6rem;
   font-size: 1.5rem;
-  .posts--paragraph {
-    position: relative;
-    font-size: 1.6rem;
+  .pre--paragraph {
+    font-size: 2.6rem;
     text-align: center;
-    padding: 2rem;
-    color: $primary-text;
-    letter-spacing: 1px;
+    padding: 0 20rem;
+    font-style: italic;
+    margin-bottom: 3rem;
+    color: #212121;
+    letter-spacing: 1.5px;
+    line-height: 2;
+    position: relative;
+    &:last-child {
+      padding: 2rem 20rem;
+    }
     &:after {
       content: '';
       width: 30rem;
@@ -20,34 +26,42 @@
       position: absolute;
       bottom: 0;
       right: 37%;
-      opacity: .3;
+
     }
-    &:before {
-      content: '';
-      width: 48rem;
-      height: .5rem;
-      background-color: $orange-color;
-      position: absolute;
-      top: 0;
-      right: 29%;
-      opacity: .3;
-    }
+  }
+  .main-paragraph {
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 0 4rem;
+    margin-bottom: 3rem;
+    color: #212121;
+    letter-spacing: 1px;
+  }
+  h4 {
+    padding: 1rem;
+    margin-top: 3rem;
+    color: $orange-color;
+    text-transform: uppercase;
+    font-size: 1.8rem;
   }
 }
 
 .jumbotron {
   background-image: linear-gradient(to right bottom,
     rgba($light-primary-color, 0.5),
-    rgba($dark-primary-color, 0.5)), url("../../assets/images/michael-coury-70410-unsplash-min.jpg");
+    rgba($dark-primary-color, 0.5)), url("../../assets/images/hugues-de-buyer-mimeure-335733-min.jpg");
   margin-bottom: 0;
   background-size: cover;
   background-attachment: fixed;
-  padding: 10rem 2rem;
+  padding: 20rem 2rem;
+  height: 95vh;
+  clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   .heading-secondary {
     color: $color-white;
     transform: none;
     width: 100%;
     margin-top: 2rem;
+    animation: moveToRight 1s ease-in;
   }
 }
 
@@ -58,22 +72,24 @@
   padding: 2rem 17rem 0;
   color: $color-white;
   letter-spacing: 2px;
+  animation: moveToLeft 1s ease-in;
 }
 
 .author {
-  font-size: 1.8rem;
   text-align: center;
   width: 100%;
-  text-transform: none;
-  color: $primary-color;
-
+  color: $hover-color;
+  font-size: 2.8rem;
+  font-family: 'Black And White Picture', sans-serif;
+  animation: moveToLeft 1s ease-in;
 }
 
 .posts-content {
-  margin: 3rem auto;
+  margin: 0 auto;
   width: 90%;
   //background: $color-white;
   padding: 2rem;
+  margin-bottom: 3rem;
   .posts-container {
     width: 100%;
     margin: 0 auto;
@@ -92,6 +108,7 @@
 
 .filter-post {
   padding: 2rem;
+  text-align: right;
   input {
     border: none;
     border-bottom: 3px solid $dark-primary-color;
@@ -101,12 +118,14 @@
 }
 
 .add-post-button {
-  margin-top: 2rem;
+  margin-top: 4rem;
+  color: $dark-primary-color;
 }
 .post-container {
   padding: 1.3rem 1.5rem;
   width: 32%;
   display: inline-flex;
+  font-size: 1.2rem;
   background-color: #fff;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -116,19 +135,24 @@
   color: inherit;
   margin-right: 1%;
   border: 1px solid rgba(0, 0, 0, .1);
+  img {
+    width: 100%;
+    max-height: 250px;
+    margin-bottom: 1rem;
+  }
 }
 
 h3 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: $primary-text;
   margin-bottom: .5rem;
   font-family: inherit;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 span {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   .post-info {
     color: $orange-color;
   }
@@ -142,7 +166,7 @@ img {
 .post-icons {
   position: relative;
   .like-post {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-right: 2rem;
     i {
       margin-right: .5rem;
@@ -275,7 +299,7 @@ img {
   border-radius: 50%;
   font-size: 1.5rem;
   margin-right: 1rem;
-  padding: .2rem .7rem;
+  padding: .7rem;
 }
 
 .modal-content {
@@ -338,6 +362,4 @@ select {
 .modal-footer .like-post {
   cursor: pointer;
 }
-
-
 

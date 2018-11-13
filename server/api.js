@@ -13,6 +13,7 @@ const User = require('./models/user');
 const Todo = require('./models/todo');
 const Goals = require('./models/goals');
 const Post = require('./models/posts');
+const Review = require('./models/review');
 const TodoListModel = require("./models/todolist");
 const NoteModel = require('./models/note');
 const Token = require('./models/tokens');
@@ -67,6 +68,18 @@ module.exports = function (app, config) {
     });
   });
 
+  app.get('/api/users/:username', function (req, res) {
+
+    User.find({username: req.params.username}, function (err, user) {
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (!user) {
+        return res.status(400).send({message: 'User not found.'});
+      }
+      res.send(user);
+    });
+  });
 
   // app.post('/api/login', function (req, res, next) {
   //   var username = req.body.username;
@@ -130,6 +143,7 @@ module.exports = function (app, config) {
       res.send(user);
     });
   });
+
 
   app.put('/api/users/:id', (req, res) => {
     const userId = req.params.id;
@@ -305,20 +319,51 @@ module.exports = function (app, config) {
   });
 
   app.put('/api/posts/:id/', function (req, res) {
-    const postId = req.params.id;
-    Post.findById({_id: postId}, (err, post) => {
+    Post.findById(req.params.id, function (err, post) {
       post.title = req.body.title;
       post.postText = req.body.postText;
       post.upload = req.body.upload;
       post.category = req.body.category;
       post.likes = req.body.likes[0];
-      post.save((err, post) => {
+      post.save(function (err) {
         if (err) {
           return res.status(500).send({message: err.message});
         }
         res.send(post);
-      });
+      })
     });
+  });
+
+  //REVIEWS
+
+  app.get('/api/reviews', function (req, res) {
+
+    Review.find({}, function (err, reviews) {
+      let reviewsArr = [];
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (reviews) {
+        reviews.forEach(function (review) {
+          reviewsArr.push(review);
+        })
+        ;
+      }
+      res.send(reviewsArr);
+    });
+  });
+
+  app.post('/api/reviews', (req, res) => {
+    var review = new Review({
+      text: req.body.text,
+      username: req.body.username,
+    });
+    review.save(function (err, review) {
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      res.status(201).json(review)
+    })
   });
 
   // DATES
@@ -489,16 +534,13 @@ module.exports = function (app, config) {
         tokens.find(function (token) {
           if (token.token === tokenInRoute) {
             let user_id = token.user_id;
-            console.log(user_id);
             User.findById(user_id, function (err, user) {
               userArr.push(token);
               res.send(userArr);
             });
-            // res.send(token);
           }
         });
       }
-      // res.send(tokensArr);
     });
   });
 

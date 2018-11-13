@@ -1,15 +1,34 @@
 <!--<div class="gol-of-life__content">-->
+<div class="row goals_content">
+  <div class="col-md-12" style="padding: 0;">
+    <p class="pre--paragraph">It's time to find your way!</p>
+    <p class="main-paragraph">There is no universal definition for happiness. Every persone defines it in different ways.
+      But obviously in order to feel happy you should achieve or have something. Something that fills your life with meaning.
+      And when you get it you'll be able to say: "That is What I was seeking for, what makes me happy.
+      And that was the main goal of my life.
+      Now I can be proud of myself, relax and just enjoy the result of those efforts I made for achieving this goal".
+      <br>
+      We all set goals but we don't really understand what we want to get in the end. That's why we should move from the end to beginning.
+      First of all we need to define what will be the last stop in our journey to
+      happiness and absolute satisfaction. And then move on from this point to today.
+    </p>
+  </div>
+</div>
 <div class="goal-of-life__container">
   <div class="row">
     <div class="col-md-12" style="padding: 0;">
       <div class="form-group" *ngIf="showAddMain">
         <h4 class="text-center">You don't have a goal of life yet. Let's create it now! </h4>
-        <input type="text"
-               #mainGoal
-               class="form-input"
-               id="mainGoal"
-               placeholder="Enter your main goal">
-        <button type="button" class="btn btn--indigo" (click)="getMainGoal(mainGoal.value)">Add</button>
+        <div class="row">
+          <div class="col-md-12">
+            <input type="text"
+                   #mainGoal
+                   class="form-input"
+                   id="mainGoal"
+                   placeholder="Enter your main goal">
+            <button type="button" class="btn btn--indigo" (click)="getMainGoal(mainGoal.value)">Add</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -17,9 +36,9 @@
     <div class="col-md-12 text-center">
       <div class="goal-of-life--content">
         <h2 class="heading-secondary"> <i class="fas fa-crown"></i> {{goal.title}}</h2>
-        <span class="goal--add" (click)="addFls = !addFls"><i class="ion-android-add"></i></span>
-        <span class="goal--edit" (click)="editMainGoal()"><i class="ion-edit"></i></span>
-        <span class="goal--remove" (click)="deleteGol(inde)"><i class="ion-close-round"></i></span>
+        <span class="goal--add" (click)="addFls = !addFls"><i class="fas fa-plus"></i></span>
+        <span class="goal--edit" (click)="editMainGoal()"><i class="far fa-edit"></i></span>
+        <span class="goal--remove" (click)="deleteGol(inde)"><i class="far fa-times-circle"></i></span>
         <span class="goal--title">Main Goal</span>
         <form class="mainGoalInputs" *ngIf="edited">
           <div class="form-group" *ngIf="edited">
@@ -69,21 +88,20 @@
                   <button type="button" class="btn btn--orange" (click)="updateFirstStep(fls_nameEdit.value)">Edit
                   </button>
                 </div>
-                <span class="goal-first-step--add" (click)="fls.addSls = !fls.addSls"><i
-                  class="ion-android-add"></i></span>
-                <span class="goal-first-step--edit" (click)="fls.editedFlsP = !fls.editedFlsP"><i class="ion-edit"></i></span>
+                <span class="goal-first-step--add" (click)="fls.addSls = !fls.addSls"><i class="fas fa-plus"></i></span>
+                <span class="goal-first-step--edit" (click)="fls.editedFlsP = !fls.editedFlsP"><i class="far fa-edit"></i></span>
                 <span class="goal-first-step--title">First Level</span>
-                <span class="goal-first-step--remove" (click)="deleteFls(fls, i)"><i class="ion-close-round"></i></span>
+                <span class="goal-first-step--remove" (click)="deleteFls(fls, i)"><i class="far fa-times-circle"></i></span>
                 <p class="fls_title">{{fls.title}}</p>
                 <ul>
                   <li class="goal-of-life--second-step" *ngFor="let sls of fls.second_level_steps; let index = index">
                     <span class="goal-second-step--title">Second Level</span>
                     <span class="goal-second-step--add" (click)="sls.addTls = !sls.addTls">
-                      <i class="ion-android-add"></i></span>
+                      <i class="fas fa-plus"></i></span>
                     <span class="goal-second-step--edit" (click)="sls.editedSls = !sls.editedSls">
-                      <i class="ion-edit"></i></span>
+                      <i class="far fa-edit"></i></span>
                     <span class="goal-second-step--remove" (click)="deleteSls(sls, i, index)">
-                      <i class="ion-close-round"></i></span>
+                      <i class="far fa-times-circle"></i></span>
                     <div class="row addTlsForm" *ngIf="sls.addTls || addTls">
                       <input type="text"
                              #tls_name
@@ -109,11 +127,11 @@
                       <li class="goal-of-life--third-step" *ngFor="let tls of sls.third_level_steps; let ind = index">
                         <span class="goal-third-step--title">Third Level</span>
                         <span class="goal-third-step--add" (click)="tls.addFthls = !tls.addFthls">
-                      <i class="ion-android-add"></i></span>
+                      <i class="fas fa-plus"></i></span>
                         <span class="goal-third-step--edit" (click)="tls.editedTls = !tls.editedTls">
-                      <i class="ion-edit"></i></span>
+                      <i class="far fa-edit"></i></span>
                         <span class="goal-third-step--remove" (click)="deleteTls(tls, ind, i, index)">
-                      <i class="ion-close-round"></i></span>
+                      <i class="far fa-times-circle"></i></span>
                         <div class="row addFthlsForm" *ngIf="tls.addFthls || addFthls">
                           <input type="text"
                                  #fthls_name
@@ -141,11 +159,11 @@
                               *ngFor="let fthls of tls.fourth_level_steps; let ind4 = index">
                             <span class="goal-fourth-step--title">Fourth Level</span>
                             <span class="goal-fourth-step--add" (click)="fthls.addFithls = !fthls.addFithls">
-                              <i class="ion-android-add"></i></span>
+                              <i class="fas fa-plus"></i></span>
                             <span class="goal-fourth-step--edit" (click)="fthls.editedFthls = !fthls.editedFthls">
-                              <i class="ion-edit"></i></span>
+                              <i class="far fa-edit"></i></span>
                                     <span class="goal-fourth-step--remove" (click)="deleteFthls(fthls, i, index, ind, ind4)">
-                              <i class="ion-close-round"></i></span>
+                              <i class="far fa-times-circle"></i></span>
 
                             <div class="row addFithlsForm" *ngIf="fthls.addFithls || addFithls">
                               <input type="text"
@@ -174,9 +192,9 @@
                               <li class="goal-of-life--fifth-step" *ngFor="let fithls of fthls.fifth_level_steps; let ind5 = index">
                                 <span class="goal-fifth-step--title">Fifth Level</span>
                                 <span class="goal-fifth-step--edit" (click)="fithls.editedFithls = !fithls.editedFithls">
-                      <i class="ion-edit"></i></span>
+                      <i class="far fa-edit"></i></span>
                                 <span class="goal-fifth-step--remove" (click)="deleteFithls(fithls, i, index, ind, ind4, ind5 )">
-                      <i class="ion-close-round"></i></span>
+                      <i class="far fa-times-circle"></i></span>
                                 <div class="row sls-input" *ngIf="fithls.editedFithls || editedFithls">
                                   <input type="text"
                                          #fith_nameEdit
@@ -200,9 +218,11 @@
               </li>
             </ul>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+  <div class="pre--paragraph"></div>
 </div>
 <!--</div>-->

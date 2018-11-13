@@ -30,7 +30,6 @@ export class MainPageComponent implements OnInit {
           this.user = user;
           if (storedUsername === this.user.username) {
             this.user = user;
-            console.log(this.user);
             this.gomNumber = this.user.goals_of_the_month.length;
             this.golNumber = this.user.goal_of_live.length;
             this.goyNumber = this.user.goals_of_the_year.length;
@@ -42,11 +41,6 @@ export class MainPageComponent implements OnInit {
             });
             this.todosNumber = this.todos.length;
             this.postsNumber = this.user.posts.length;
-            // if (this.user.goals) {
-            //   this.golNumber = 1;
-            // } else {
-            //   this.golNumber = 0;
-            // }
           }
         });
       });

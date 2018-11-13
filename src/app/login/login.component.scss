@@ -43,6 +43,7 @@
         letter-spacing: 1rem;
         margin-bottom: 4rem;
         font-weight: 400;
+        animation: moveToRight 1s ease-in;
       }
     }
     p {
@@ -68,6 +69,7 @@
     }
     .form-group {
       color: $primary-text;
+      animation: moveToLeft 1s ease-in;
       label {
         color: $color-white;
       }

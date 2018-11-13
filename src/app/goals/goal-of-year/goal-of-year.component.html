@@ -4,10 +4,10 @@
       <h2 class="heading-secondary">My Goals For The Next Year</h2>
       <div class="goal-of-year--edit" *ngIf="datesY.length > 0">
         <p *ngFor="let date of datesY">({{date.from}} - {{date.to}})
-          <span (click)="editDate(datesY)"><i class="ion-edit"></i></span>
+          <span (click)="editDate(datesY)"><i class="far fa-edit"></i></span>
           </p>
         </div>
-      <hr>
+      <p class="pre--paragraph"></p>
       <div class="goals-content">
         <div class="row">
           <div class="col-md-12" style="padding: 0;">
@@ -38,8 +38,8 @@
                            id="{{goal.title}}" (click)="updateGoal(goal, complete.checked)">
                     <label for="{{goal.title}}" class="checkbox-label" [ngClass]="{'checked': goal.complete}">
                       <span class="form-checkbox"></span>{{ goal.title }}</label>
-                    <span class="goal--edit" (click)="editGoal(goal)"><i class="ion-edit"></i></span>
-                    <span (click)="deleteGoal(i)" class="delete-icon"><i class="ion-close-round"></i></span>
+                    <span class="goal--edit" (click)="editGoal(goal)"><i class="far fa-edit"></i></span>
+                    <span (click)="deleteGoal(i)" class="delete-icon"><i class="far fa-times-circle"></i></span>
 
                     <div class="form-group edit-goal-list-form form-goal" *ngIf="goal.isEdited">
                       <input type="text"
@@ -57,6 +57,7 @@
             </div>
           </div>
         </div>
+        <p class="pre--paragraph"></p>
       </div>
     </div>
   </div>

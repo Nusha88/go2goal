@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "postinstall": "ng build --aot -prod",
     "build": "ng build",
     "test": "ng test",
@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/platform-server": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
     "angular-material": "^1.1.9",
     "auth0-js": "^9.8.0",
@@ -46,8 +47,8 @@
     "nodemailer": "^4.6.8",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.0",
-    "zone.js": "^0.8.14",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.6",

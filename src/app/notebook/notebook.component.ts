@@ -13,6 +13,7 @@ export class NotebookComponent implements OnInit {
   noteObj: any;
   user: any;
   id: any;
+  noNotes: boolean;
 
   constructor(public service: UserService) {
     this.notes = [];
@@ -26,6 +27,11 @@ export class NotebookComponent implements OnInit {
           this.user = user;
           this.id = this.user._id;
           this.notes = this.user.notes;
+          if (this.notes.length > 0) {
+            this.noNotes = false;
+          } else {
+            this.noNotes = true;
+          }
         }
       });
     });
@@ -40,6 +46,7 @@ export class NotebookComponent implements OnInit {
     this.notes.push(this.noteObj);
     this.service.postNotes(this.noteObj, this.user._id);
     this.addNoteForm.reset();
+    this.noNotes = false;
   }
 
   editNote(note) {
@@ -55,6 +62,11 @@ export class NotebookComponent implements OnInit {
   deleteNote(note, index) {
     this.notes.splice(index, 1);
     this.service.updateNotes(this.user).subscribe(user => user);
+    if (this.notes.length > 0) {
+      this.noNotes = false;
+    } else {
+      this.noNotes = true;
+    }
   }
 
   private initForm() {

@@ -25,6 +25,27 @@
     color: $secondary-text;
   }
 }
+
+.pre--paragraph {
+  font-size: 2.6rem;
+  text-align: center;
+  padding: 1rem 20rem;
+  font-style: italic;
+  color: #212121;
+  letter-spacing: 1.5px;
+  line-height: 2;
+  position: relative;
+  &:after {
+    content: '';
+    width: 30rem;
+    height: .5rem;
+    background-color: $orange-color;
+    position: absolute;
+    bottom: 0;
+    right: 38%;
+
+  }
+}
 .goals-of-month {
   margin-top: 2rem;
 }

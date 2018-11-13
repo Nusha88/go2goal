@@ -3,19 +3,18 @@
 
 .main-page__component {
   background-color: $light-grey-color;
-  margin-top: -3rem;
+  margin-top: -6rem;
+  h2 {
+    color: $primary-text;
+    animation: moveToLeft 1s ease-in;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
 
   .content {
-    margin: 3rem auto;
+    margin: 0 auto;
     width: 90%;
     padding: 2rem;
-    h1 {
-      color: $primary-text;
-      margin-top: 3rem;
-      span {
-        color: $dark-primary-color;
-      }
-    }
     .card {
       perspective: 150rem;
       -moz-perspective: 150rem;
@@ -225,12 +224,14 @@
   }
 }
 .pre--paragraph {
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   text-align: center;
-  padding: 4rem;
+  padding: 3rem 20rem;
+  font-style: italic;
   margin-bottom: 3rem;
-  color: $primary-text;
-  letter-spacing: 1px;
+  color: #212121;
+  letter-spacing: 1.5px;
+  line-height: 2;
   position: relative;
   &:after {
     content: '';
@@ -243,6 +244,32 @@
 
   }
 }
+.main-paragraph {
+  font-size: 1.8rem;
+  text-align: center;
+  padding: 0rem 4rem;
+  margin-bottom: 3rem;
+  color: $color-black;
+  letter-spacing: 1px;
+  span {
+    color: $orange-color;
+    font-size: 2.3rem;
+    font-family: 'Black And White Picture', sans-serif;
+  }
+  ul {
+    margin: 2rem;
+    border: 2px solid $light-primary-color;
+    border-radius: 10px;
+    list-style: none;
+    padding: 3rem;
+    line-height: 1.5;
+    text-align: justify;
+    font-size: 1.8rem;
+    i {
+      color: $light-primary-color;
+    }
+  }
+}
 
 .jumbotron {
   background-image: linear-gradient(to right bottom,
@@ -251,7 +278,9 @@
   margin-bottom: 0;
   background-size: cover;
   background-attachment: fixed;
-  padding: 10rem 2rem;
+  padding: 20rem 2rem;
+  height: 95vh;
+  clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   .heading-secondary {
     color: $color-white;
     transform: none;
@@ -260,14 +289,16 @@
   }
 }
 .todos__header--paragraph {
-  font-size: 1.8rem;
-  text-align: center;
-  text-transform: uppercase;
+  font-size: 2rem;
+  text-align: left;
+  animation: moveToRight 1s ease-in;
   padding: 2rem 17rem 0;
   color: $color-white;
   letter-spacing: 2px;
   span {
     color: $hover-color;
+    font-size: 2.8rem;
+    font-family: 'Black And White Picture', sans-serif;
   }
 }
 .author {

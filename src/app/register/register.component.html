@@ -17,13 +17,14 @@
                   <input type="text"
                          class="form-input"
                          placeholder="Username"
+                         #username
                          id="username"
                          formControlName="username">
                   <label class="form-label" for="username">Username</label>
                 </div>
 
                 <div class="form-group">
-                  <p *ngIf="emailExist">User with this email is already exist!</p>
+                  <!--<p *ngIf="emailExist">User with this email is already exist!</p>-->
                   <input type="text"
                          class="form-input"
                          placeholder="Email"

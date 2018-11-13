@@ -4,11 +4,11 @@ import {map, catchError} from 'rxjs/operators';
 import {UserModel} from '../models/user.model';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {TodoListModel} from '../models/todolist.model';
-import {Posts} from '../models/posts';
 import {NoteModel} from '../models/note.model';
 
 @Injectable()
 export class UserService {
+  private url = 'http://localhost:8083/api';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -16,7 +16,7 @@ export class UserService {
   // USERS
 
   getUsers(): any {
-    return this.httpClient.get('http://localhost:8083/api/users')
+    return this.httpClient.get(`${this.url}/users`)
       .pipe(map(res => res),
         catchError(this._handleError));
   }
@@ -49,7 +49,6 @@ export class UserService {
         headers: headers
       })
       .subscribe(dat => {
-        // console.log(data);
         return dat;
       });
   }
@@ -62,14 +61,12 @@ export class UserService {
   }
 
   updateUserPassword(user: UserModel): any {
-    console.log(user);
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}/newpass`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateUser(user: UserModel): any {
-    console.log(user);
     return this.httpClient
       .put(`http://localhost:8083/api/users/${user._id}`, user)
       .pipe(catchError(this._handleError));
@@ -88,7 +85,6 @@ export class UserService {
       .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
-    console.log(data + ',' + id);
     return this.httpClient.post<TodoListModel>(`http://localhost:8083/api/users/${id}/todolists`,
       JSON.stringify(data), {
         headers: headers
@@ -180,6 +176,11 @@ export class UserService {
     return this.httpClient.get('http://localhost:8083/api/reset-password')
       .pipe(map(res => res),
         catchError(this._handleError));
+  }
+
+  lookupUser(username: string): Observable<any> {
+    return this.httpClient.get('http://localhost:8083/api/users/' + username)
+      .pipe(map(res => res), catchError(this._handleError));
   }
 
   // updateUserPassword(user): Observable<any> {

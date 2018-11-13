@@ -10,6 +10,8 @@ nav {
     rgba($dark-primary-color, 1));
   color: $color-white;
   font-size: 1.4rem;
+  height: 25vh;
+  clip-path: polygon(0 0, 100% 0, 100% 18vh, 0 100%);
   .navbar-brand {
     img {
       height: 4rem;
@@ -28,21 +30,12 @@ nav {
     }
   }
 }
-.jumbotron {
-  background-image: linear-gradient(to right bottom,
-    rgba($light-primary-color, 0.5),
-    rgba($dark-primary-color, 0.5)), url("../../assets/images/michael-coury-70410-unsplash-min.jpg");
-  margin-bottom: 0;
-  background-size: cover;
-  background-attachment: fixed;
-  padding: 10rem 2rem;
   .heading-secondary {
-    color: $color-white;
+    color: $dark-primary-color;
     transform: none;
     width: 100%;
     margin-top: 2rem;
   }
-}
 .contact-content {
   margin: 3rem auto;
   width: 90%;
@@ -68,27 +61,28 @@ nav {
     text-align: center;
     font-size: 1.6rem;
   }
-  .social-links {
-    display: block;
-    text-align: center;
-    padding: 12rem;
-    a {
-      padding: 4rem;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      margin-right: 4rem;
-    }
-    .ig-icon {
-      background-image: url('../../assets/images/if_Instagram_1298747-min.png');
-    }
-    .fb-icon {
-      background-image: url('../../assets/images/if_facebook_386622-min.png');
-    }
-    .vk-icon {
-      background-image: url('../../assets/images/if_vkontakte_386743-min.png');
-    }
-    .mail-icon {
-      background-image: url('../../assets/images/if_mail_115714-min.png');
-    }
+}
+.social-links {
+  display: block;
+  text-align: center;
+  padding: 12rem;
+  a {
+    padding: 2rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-right: 4rem;
   }
+  .ig-icon {
+    background-image: url('../../assets/images/if_Instagram_1298747-min.png');
+  }
+  .fb-icon {
+    background-image: url('../../assets/images/if_facebook_386622-min.png');
+  }
+  .vk-icon {
+    background-image: url('../../assets/images/if_vkontakte_386743-min.png');
+  }
+  .mail-icon {
+    background-image: url('../../assets/images/if_mail_115714-min.png');
+  }
+
 }

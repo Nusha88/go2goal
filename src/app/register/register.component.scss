@@ -74,6 +74,10 @@
             background-color: #ffffff;
           }
         }
+        p {
+          color: $hover-color;
+          margin-bottom: 2rem;
+        }
       }
       .form-input {
         font-size: 1.5rem;

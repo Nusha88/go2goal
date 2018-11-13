@@ -3,14 +3,17 @@
 .notebook-page__component {
   padding-bottom: 5rem;
   font-size: 1.5rem;
+  margin-top: -6rem;
   .jumbotron {
     background-image: linear-gradient(to right bottom,
       rgba($light-primary-color, 0.5),
-      rgba($dark-primary-color, 0.5)), url("../../assets/images/thought-catalog-214785-unsplash.jpg");
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/thought-catalog-214785-unsplash-min.jpg");
     margin-bottom: 0;
     background-size: cover;
     background-attachment: fixed;
-    padding: 8rem 2rem;
+    padding: 20rem 2rem;
+    height: 95vh;
+    clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   }
 
   .heading-secondary {
@@ -18,6 +21,7 @@
     transform: none;
     width: 100%;
     margin-top: 2rem;
+    animation: moveToLeft 1s ease-in;
   }
   .notebook__header--paragraph {
     font-size: 1.8rem;
@@ -26,29 +30,34 @@
     padding: 2rem 17rem 0;
     color: $color-white;
     letter-spacing: 2px;
+    animation: moveToRight 1s ease-in;
   }
   .author {
-    font-size: 1.8rem;
     text-align: center;
     width: 100%;
-    text-transform: none;
-    color: $primary-color;
-
+    color: $hover-color;
+    font-size: 2.8rem;
+    font-family: 'Black And White Picture', sans-serif;
+    animation: moveToRight 1s ease-in;
   }
   .notebook-content {
     background-color: $color-white;
     padding: 3rem;
     font-size: 1.5rem;
 
-    .notebook--paragraph {
-      font-size: 1.6rem;
+    .pre--paragraph {
+      font-size: 2.6rem;
       text-align: center;
-      padding: 2rem;
-      padding-bottom: 4rem;
+      padding: 3rem 20rem;
+      font-style: italic;
       margin-bottom: 3rem;
-      color: $primary-text;
-      letter-spacing: 1px;
+      color: #212121;
+      letter-spacing: 1.5px;
+      line-height: 2;
       position: relative;
+      &:last-child {
+        padding: 1rem 20rem;
+      }
       &:after {
         content: '';
         width: 30rem;
@@ -60,53 +69,13 @@
 
       }
     }
-    .notebook-content__area {
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 1rem;
-      width: 24%;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: $shadow-btn;
-      border-radius: 5px;
-      background-image: linear-gradient(to right bottom,
-        rgba($orange-color, 0.2), rgba($light-orange-color, 0.2));
-      textarea {
-        width: 100%;
-        border: none;
-        border-radius: 5px;
-        padding: .5rem;
-        background: none;
-        &:focus {
-          outline: none;
-        }
-      }
-      p {
-        word-break: break-all;
-      }
-      button {
-        padding: 0.3rem 1rem;
-        position: absolute;
-        bottom: -1rem;
-        right: -1rem;
-        background-color: $orange-color;
-        box-shadow: $shadow-btn;
-        border-radius: 50%;
-        color: $color-white;
-        cursor: pointer;
-        transform: rotate(0deg);
-        transition: all ease-in .2s;
-        &:focus, &:active {
-          outline: none;
-          border: none;
-        }
-      }
-      button[disabled] {
-        cursor: not-allowed;
-        background-color: $light-orange-color;
-        transform: rotate(45deg);
-      }
+    .main-paragraph {
+      font-size: 1.6rem;
+      text-align: center;
+      padding: 3rem 4rem;
+      margin-bottom: 3rem;
+      color: #212121;
+      letter-spacing: 1px;
     }
     .note-content {
       background-image: linear-gradient(to right bottom,
@@ -178,4 +147,62 @@
     }
   }
 }
+.notebook-content__area {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1rem;
+  width: 24%;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: $shadow-btn;
+  border-radius: 5px;
+  //background-image: linear-gradient(to right bottom,
+  //  rgba($orange-color, 0.2), rgba($light-orange-color, 0.2));
+  textarea {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: .5rem;
+    background: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  p {
+    word-break: break-all;
+  }
+  button {
+    padding: 0.4rem 1rem;
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    background-color: $orange-color;
+    box-shadow: $shadow-btn;
+    border-radius: 50%;
+    color: $color-white;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: all ease-in .2s;
+    &:focus, &:active {
+      outline: none;
+      border: none;
+    }
+  }
+  button[disabled] {
+    cursor: not-allowed;
+    background-color: $light-orange-color;
+    transform: rotate(45deg);
+  }
+}
+.textarea-field {
+  margin-top: 3.5rem;
+  background-color: rgba($color-white, .5);
+}
 
+h4 {
+  padding: 1rem;
+  color: $orange-color;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}

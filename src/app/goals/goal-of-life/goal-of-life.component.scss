@@ -4,9 +4,43 @@
 .gol-of-life__content {
   padding: 3rem;
 }
+.pre--paragraph {
+  font-size: 2.6rem;
+  text-align: center;
+  padding: 1rem 20rem;
+  font-style: italic;
+  color: #212121;
+  letter-spacing: 1.5px;
+  line-height: 2;
+  position: relative;
+  &:after {
+    content: '';
+    width: 30rem;
+    height: .5rem;
+    background-color: $orange-color;
+    position: absolute;
+    bottom: 0;
+    right: 38%;
 
+  }
+}
+.goal-of-life__container .pre--paragraph {
+  margin-top: 3rem;
+}
+.goals_content {
+  background-color: $color-white;
+  color: $primary-text;
+  margin: 0;
+  .main-paragraph {
+    font-size: 1.6rem;
+    text-align: justify;
+    padding: 3rem 4rem;
+    margin-bottom: 3rem;
+    color: #212121;
+    letter-spacing: 1px;
+  }
+}
 .form-input {
-  margin-left: 10rem;
   box-shadow: 0 1rem 2rem rgba($color-black, .1);
   font-size: 1.5rem;
   padding: 1.5rem 2rem;
@@ -39,6 +73,13 @@
 
 .goal-of-life__container {
   padding: 1rem;
+  h4 {
+    padding: 3rem;
+    color: $orange-color;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    font-size: 1.8rem;
+  }
   .heading-secondary {
     padding: 3rem;
     padding-bottom: 0;
@@ -104,10 +145,13 @@
       z-index: 3;
       input {
         width: 50%;
+        float: left;
         background-color: $color-white;
       }
       button {
         margin: 0;
+        display: block;
+        margin-left: 2rem;
       }
     }
   }
@@ -309,6 +353,7 @@ li.is-active {
     margin-top: .5rem;
   }
 }
+
 .addFthlsForm {
   margin-top: 1.2rem;
   input {
@@ -326,6 +371,7 @@ li.is-active {
     margin-top: .5rem;
   }
 }
+
 .addFithlsForm {
   margin-top: 1.2rem;
   input {
@@ -396,6 +442,7 @@ li.is-active {
     //border-bottom: 1px solid $dark-primary-color;
   }
 }
+
 .goal-of-life--fourth-step {
   box-sizing: border-box;
   list-style: none;
@@ -536,6 +583,7 @@ li.is-active {
 .goal-of-life--fourth-step:hover .goal-fourth-step--remove {
   display: block;
 }
+
 .goal-of-life--fourth-step:hover .goal-fourth-step--add {
   display: block;
 }

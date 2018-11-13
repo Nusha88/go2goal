@@ -23,7 +23,6 @@ export class PostService {
       .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
-    console.log(data);
 
     return this.httpClient.post<Posts>('http://localhost:8083/api/posts',
       JSON.stringify(data), {

@@ -1,3 +1,74 @@
-<p>
-  reviews works!
-</p>
+<div class="reviews">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" routerLink="/welcome">
+      <img src="../../assets/images/logoShot.png" alt="">
+    </a>
+    <div class="btns-log">
+      <a [routerLink]="['/login']">Log in</a>
+      <a [routerLink]="['/register']">Register</a>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container text-center">
+        <h2 class="heading-secondary">Reviews</h2>
+      </div>
+      <p class="pre--paragraph"></p>
+      <div class="reviews-container">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <button class="btn btn--indigo btn--animated add-review-button" (click)="openModal(content)">
+              <i class="fas fa-plus-circle"></i> Add Review
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Your review is important for us!</h4>
+                <span class="close-popup" (click)="d('Cross click')"><i class="far fa-times-circle"></i></span>
+              </div>
+              <div class="modal-body">
+                <div class="add-review-form-container">
+                  <form class="form-group add-review-form reviews-form" [formGroup]="addReviewForm">
+                    <p>Enter review here...</p>
+                    <textarea class="form-input" id="title" type="text" formControlName="title"></textarea>
+                    <i class="far fa-comment-alt"></i>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="todo-button">
+                  <button [disabled]="!addReviewForm.valid"
+                          type="submit" (click)="addReview(addReviewForm.value)"
+                          class="btn btn--indigo"><i class="fas fa-plus-circle add-todolist-icon"></i> Add
+                  </button>
+                </div>
+              </div>
+              <div class="todo-icon">
+                <i class="far fa-comment-alt"></i>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="cards-review">
+              <div class="card" *ngFor="let review of reviews">
+                <div class="card-header">
+                  {{review.username}}
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{review.text}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="pre--paragraph"></p>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -88,6 +88,9 @@ export class GoalOfLifeComponent implements OnInit {
     this.goals.splice(ind, 1);
     this.user.goal_of_live = this.goals;
     this.user.first_level_steps = [];
+    this.userService.updateFirstLevelSteps(this.user).subscribe(
+      user => user
+    );
     this.userService.updateGoalOfLife(this.user).subscribe(goal => goal);
     this.showAddMain = true;
   }

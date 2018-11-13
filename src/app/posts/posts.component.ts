@@ -26,6 +26,7 @@ export class PostsComponent implements OnInit {
   likes: any;
   likers: any;
   count: number;
+  noPosts: boolean;
   storedUsername = localStorage.getItem('username');
 
   constructor(private modalService: NgbModal, public service: UserService, public postService: PostService) {
@@ -110,7 +111,6 @@ export class PostsComponent implements OnInit {
       };
       postLike = liker;
       post.likes[0].likers.push(liker);
-      console.log(post);
     } else {
       post.likes[0].likers.find(user => {
         if (this.user.username = user) {
@@ -127,7 +127,6 @@ export class PostsComponent implements OnInit {
             if (post.title === p.title) {
               p.likes[0].likers = post.likes[0].likers;
               p.likes[0].count = post.likes[0].count;
-              console.log(p);
             }
           });
           this.service.updateUserPosts(this.postAuthor).subscribe(postAuthor => postAuthor);
@@ -159,6 +158,7 @@ export class PostsComponent implements OnInit {
     this.postService.postPost(this.addPostForm.value);
     this.addPostForm.reset();
     this.closeModal();
+    this.noPosts = false;
   }
 
   onEditPost(post) {
@@ -189,6 +189,11 @@ export class PostsComponent implements OnInit {
               }
             });
           });
+          if (this.userPosts.length > 0) {
+            this.noPosts = false;
+          } else {
+            this.noPosts = true;
+          }
           this.initForm();
         }
       });

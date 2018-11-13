@@ -1,21 +1,48 @@
 @import "../../assets/scss/variables";
 @import "../../assets/scss/mixins";
-.todos-component {
+.todo-component {
   background-color: $color-white;
   padding: 2rem 0;
   font-size: 1.5rem;
-  .todos--paragraph {
+  margin-top: -7.1rem;
+  .pre--paragraph {
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 3rem 20rem;
+    font-style: italic;
+    margin-bottom: 3rem;
+    color: #212121;
+    letter-spacing: 1.5px;
+    line-height: 2;
+    position: relative;
+    &:last-child {
+      padding: 1rem 20rem;
+    }
+    &:after {
+      content: '';
+      width: 30rem;
+      height: .5rem;
+      background-color: $orange-color;
+      position: absolute;
+      bottom: 0;
+      right: 37%;
+
+    }
+  }
+  .main-paragraph {
     font-size: 1.6rem;
     text-align: center;
-    padding: 2rem;
-    color: $primary-text;
+    padding: 3rem 4rem;
+    margin-bottom: 3rem;
+    color: #212121;
     letter-spacing: 1px;
   }
+
   .todos-content {
-    margin: 3rem auto;
+    margin: 0 auto;
     width: 90%;
     //background: $color-white;
-    padding: 2rem;
+    padding: 0 2rem 3rem;
     .todos-form {
       width: 90%;
       margin: 0 auto;
@@ -94,11 +121,8 @@
     }
   }
   .add-todolist-button {
-    margin-bottom: 2rem;
-    background-color: transparent;
-    background-image: linear-gradient(to right,
-      rgba($light-primary-color, 0.9),
-      rgba($dark-primary-color, 0.9));
+    margin-top: 6rem;
+    color: $light-primary-color;
   }
 }
 .jumbotron {
@@ -108,12 +132,15 @@
   margin-bottom: 0;
   background-size: cover;
   background-attachment: fixed;
-  padding: 10rem 2rem;
+  padding: 20rem 2rem;
+  height: 95vh;
+  clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   .heading-secondary {
     color: $color-white;
     transform: none;
     width: 100%;
     margin-top: 2rem;
+    animation: moveToLeft 1s ease-in;
   }
 }
 .todos__header--paragraph {
@@ -123,14 +150,21 @@
   padding: 2rem 17rem 0;
   color: $color-white;
   letter-spacing: 2px;
+  animation: moveToRight 1s ease-in;
 }
 .author {
-  font-size: 1.8rem;
   text-align: center;
   width: 100%;
-  text-transform: none;
-  color: $primary-color;
-
+  color: $hover-color;
+  font-size: 2.8rem;
+  font-family: 'Black And White Picture', sans-serif;
+  animation: moveToRight 1s ease-in;
+}
+h4 {
+  padding: 1rem;
+  color: $orange-color;
+  text-transform: uppercase;
+  font-size: 1.8rem;
 }
 
 .add_todo {
@@ -321,7 +355,7 @@
     padding: 1rem;
     outline: none;
     border: none;
-    border-bottom: 3px solid $orange-color;
+    border-bottom: 3px solid $dark-primary-color;
   }
   button {
     padding: .5rem 1rem;
@@ -373,7 +407,7 @@
   border-radius: 50%;
   font-size: 1.5rem;
   margin-right: 1rem;
-  padding: .2rem .7rem;
+  padding: .2rem;
 }
 .modal-content {
   border: none;
