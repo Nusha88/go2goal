@@ -1,9 +1,5 @@
 @import '../../assets/scss/variables';
 @import "../../assets/scss/mixins";
-.welcome-page__content {
-  padding: 3rem;
-}
-
 .header {
   position: relative;
   height: 95vh;
@@ -13,7 +9,13 @@
   url("../../assets/images/bg2-min.jpg");
   background-size: cover;
   background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
 
   .header__logo-box {
     position: absolute;
@@ -46,19 +48,18 @@
   background-color: $light-grey-color;
   padding: 25rem 0;
   margin-top: -25vh;
-  .container {
-    @include respond(min-big) {
-      max-width: 2500px;
-    }
+  @include respond(tab-land) {
+    margin-top: -20vh;
+  }
 
-    .btn-text {
-      @include respond(tab-port) {
-        margin-bottom: 2rem;
-      }
+  .we-suggest {
+    padding: 0 5rem;
+    @include respond(tab-port) {
+      text-align: center;
     }
-    .col-md-6 {
-      padding: 0 8rem;
-    }
+  }
+  .composition-container {
+    padding: 0 5rem;
   }
 
   .composition {
@@ -94,6 +95,13 @@
     }
     &:hover .composition__photo:not(:hover) {
       transform: scale(.95);
+    }
+    @include respond(tab-port) {
+      height: 35rem;
+      margin-top: 5rem;
+    }
+    @include respond(phone) {
+      height: 25rem;
     }
   }
 }

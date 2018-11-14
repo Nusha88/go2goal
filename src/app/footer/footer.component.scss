@@ -53,4 +53,10 @@
       margin-left: 0;
     }
   }
+  @include respond(tab-land) {
+    padding-top: 21rem;
+  }
+  @include respond(phone) {
+    padding-top: 28rem;
+  }
 }

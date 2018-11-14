@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
   id: String,
+  title: String,
   text: String,
   username: String
 }, { collection : 'reviews' });

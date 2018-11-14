@@ -1,8 +1,5 @@
 @import "../../assets/scss/variables";
 @import "../../assets/scss/mixins";
-.login-container {
-  padding: 3rem;
-}
 
 .login-page__content {
   position: relative;
@@ -15,7 +12,12 @@
   url("../../assets/images/34943640193_0b537367ac_h-min.jpg");
   background-size: cover;
   background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
   .header__logo-box {
     position: absolute;
     top: 4rem;
@@ -27,7 +29,7 @@
 }
 
 .login-form {
-  width: 50%;
+  width: 100%;
   padding: 5rem 0;
   position: relative;
 
@@ -65,6 +67,9 @@
       margin-top: 0;
       a {
         color: $hover-color;
+      }
+      @include respond(tab-port) {
+        margin-top: 2rem;
       }
     }
     .form-group {
@@ -178,7 +183,7 @@
 .footer {
   margin-top: -15rem;
   @include respond(tab-land) {
-    margin-top: -19rem;
+    margin-top: -27rem;
   }
 }
 

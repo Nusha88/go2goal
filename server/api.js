@@ -34,25 +34,24 @@ var transporter = nodemailer.createTransport({
  */
 
 module.exports = function (app, config) {
-  // Authentication middleware
-  const jwtCheck = jwt({
-    secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://' + config.AUTH0_DOMAIN + '/.well-known/jwks.json'
-    }),
-    audience: config.AUTH0_API_AUDIENCE,
-    issuer: 'https://' + config.AUTH0_DOMAIN + '/',
-    algorithm: 'RS256'
-  });
-
-  const bcrypt = require('bcrypt');
-  const saltRounds = 10;
+//   // Authentication middleware
+//   const jwtCheck = jwt({
+//     secret: jwks.expressJwtSecret({
+//       cache: true,
+//       rateLimit: true,
+//       jwksRequestsPerMinute: 5,
+//       jwksUri: 'https://' + config.AUTH0_DOMAIN + '/.well-known/jwks.json'
+//     }),
+//     audience: config.AUTH0_API_AUDIENCE,
+//     issuer: 'https://' + config.AUTH0_DOMAIN + '/',
+//     algorithm: 'RS256'
+//   });
+//
+//   const bcrypt = require('bcrypt');
+//   const saltRounds = 10;
 
 // GET USERS
   app.get('/api/users', function (req, res) {
-
     User.find({}, function (err, users) {
       let usersArr = [];
       if (err) {
@@ -69,7 +68,6 @@ module.exports = function (app, config) {
   });
 
   app.get('/api/users/:username', function (req, res) {
-
     User.find({username: req.params.username}, function (err, user) {
       if (err) {
         return res.status(500).send({message: err.message});
@@ -81,29 +79,8 @@ module.exports = function (app, config) {
     });
   });
 
-  // app.post('/api/login', function (req, res, next) {
-  //   var username = req.body.username;
-  //   var password = req.body.password;
-  //   User.findOne({ username: username }, function(err, user) {
-  //     if (err) throw err;
-  //
-  //     // test a matching password
-  //     bcrypt.compare(password, user.password, function(err, isMatch) {
-  //       if (err) throw err;
-  //       if (isMatch) {
-  //         res.send({result: true});
-  //       } else {
-  //         res.send({result: false});
-  //       }
-  //       console.log(user.password, isMatch); // -> Password123: true
-  //     });
-  //   });
-  // });
   // POST USER
   app.post('/api/users', (req, res) => {
-    // var password = req.body.password;
-    // bcrypt.genSalt(saltRounds, function(err, salt) {
-    //   bcrypt.hash(password, salt, function(err, hash) {
     var user = new User({
       username: req.body.username,
       email: req.body.email,
@@ -126,13 +103,10 @@ module.exports = function (app, config) {
       }
       res.status(201).json(user)
     });
-    // });
-    // });
   });
 
 // GET USER BY ID
   app.get('/api/users/:id', function (req, res) {
-
     User.findById(req.params.id, function (err, user) {
       if (err) {
         return res.status(500).send({message: err.message});
@@ -144,12 +118,9 @@ module.exports = function (app, config) {
     });
   });
 
-
   app.put('/api/users/:id', (req, res) => {
     const userId = req.params.id;
-
     User.findById({_id: userId}, (err, user) => {
-
       user.username = req.body.username;
       user.email = req.body.email;
       user.save((err, user) => {
@@ -162,7 +133,6 @@ module.exports = function (app, config) {
   });
 
   // POST TODOLIST
-
   app.post('/api/users/:id/todolists', (req, res) => {
     User.findById(req.params.id, function (err, user) {
       var todolist = new TodoListModel({
@@ -184,9 +154,7 @@ module.exports = function (app, config) {
   app.put('/api/users/:id/todolists', function (req, res) {
     const userId = req.params.id;
     const todoLists = req.body.todoLists;
-
     User.findById({_id: userId}, (err, user) => {
-
       user.todoLists = todoLists;
       user.save((err, user) => {
         if (err) {
@@ -218,9 +186,7 @@ module.exports = function (app, config) {
   app.put('/api/users/:id/notes', function (req, res, next) {
     const userId = req.params.id;
     const notes = req.body.notes;
-
     User.findById({_id: userId}, (err, user) => {
-
       user.notes = notes;
       user.save((err, user) => {
         if (err) {
@@ -280,9 +246,7 @@ module.exports = function (app, config) {
   });
 
   // POSTS
-
   app.get('/api/posts', function (req, res) {
-
     Post.find({}, function (err, posts) {
       let postsArr = [];
       if (err) {
@@ -291,8 +255,7 @@ module.exports = function (app, config) {
       if (posts) {
         posts.forEach(function (post) {
           postsArr.push(post);
-        })
-        ;
+        });
       }
       res.send(postsArr);
     });
@@ -335,9 +298,7 @@ module.exports = function (app, config) {
   });
 
   //REVIEWS
-
   app.get('/api/reviews', function (req, res) {
-
     Review.find({}, function (err, reviews) {
       let reviewsArr = [];
       if (err) {
@@ -346,8 +307,7 @@ module.exports = function (app, config) {
       if (reviews) {
         reviews.forEach(function (review) {
           reviewsArr.push(review);
-        })
-        ;
+        });
       }
       res.send(reviewsArr);
     });
@@ -355,6 +315,7 @@ module.exports = function (app, config) {
 
   app.post('/api/reviews', (req, res) => {
     var review = new Review({
+      title: req.body.title,
       text: req.body.text,
       username: req.body.username,
     });
@@ -367,7 +328,6 @@ module.exports = function (app, config) {
   });
 
   // DATES
-
   app.put('/api/users/:id/dates-year', (req, res) => {
     User.findById(req.params.id, function (err, user) {
       user.datesY = req.body.datesY;
@@ -405,7 +365,6 @@ module.exports = function (app, config) {
   });
 
   // GOALS
-
   app.put('/api/users/:id/goals/goals-of-year', function (req, res) {
     const userId = req.params.id;
     User.findById({_id: userId}, (err, user) => {
@@ -478,26 +437,25 @@ module.exports = function (app, config) {
         email: emailAddress
       };
       let token = jwtToken.sign(payload, 'secretString');
-      let resetLink = "http://localhost:8083/reset-password/" + token;
+      let resetLink = "http://localhost:3000/reset-password/" + token;
       let sendToken = new Token({
         _id: req.body._id,
         user_id: req.body.id,
         token: token,
         link: resetLink
       });
-
       const mailOptions = {
         from: 'go2goal.today@gmail.com', // sender address
         to: emailAddress, // list of receivers
         subject: 'Reset Password Link', // Subject line
-        html: '<p>Reset your password <a href=" ' + resetLink + '">Click the link</a></p>'// plain text body
+        html: '<p>Use this link to reset the password <a href=" ' + resetLink + '">Click the link</a></p>'// plain text body
       };
 
       sendToken.save(function (err, token) {
         if (err) {
           return next(err)
         }
-        res.status(201).json(token)
+        res.status(201).json(token);
         transporter.sendMail(mailOptions, function (err, info) {
           if (err)
             console.log(err);
@@ -543,5 +501,4 @@ module.exports = function (app, config) {
       }
     });
   });
-
 };

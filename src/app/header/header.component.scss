@@ -94,3 +94,21 @@ nav {
 .active {
   color: $primary-color !important;
 }
+
+.collapse.show {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  @include respond(tab-land) {
+    top: 47%;
+    left: 42%;
+  }
+  @include respond(tab-port) {
+    top: 23%;
+    left: 42%;
+  }
+  @include respond(tab-port) {
+    top: 13%;
+    left: 39%;
+  }
+}

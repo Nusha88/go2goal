@@ -37,16 +37,19 @@ export class ReviewsComponent implements OnInit {
 
   private initForm() {
     const title = '';
+    const text = '';
     const username = this.username;
 
     this.addReviewForm = new FormGroup({
       'title': new FormControl(title, Validators.required),
+      'text': new FormControl(text, Validators.required),
       'username': new FormControl(username)
     });
   }
   addReview(review) {
     this.revObj = {
-      text: review.title,
+      title: review.title,
+      text: review.text,
       username: this.username
     };
     this.reviews.push(this.revObj);

@@ -1,9 +1,5 @@
 @import "../../assets/scss/variables";
 @import "../../assets/scss/mixins";
-.reviews {
-  padding: 3rem;
-  color: $primary-text;
-}
 
 nav {
   background-image: linear-gradient(to right,
@@ -259,4 +255,80 @@ nav {
 }
 .cards-review {
   margin-top: 3rem;
+}
+
+.card-footer {
+  font-size: 1.3rem;
+  color: $divider-color !important;
+  background-color: transparent;
+}
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  transform: skewX(-12deg);
+  min-height: 25rem;
+
+  @include respond(phone) {
+    transform: none;
+  }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+    overflow: hidden;
+    backface-visibility: hidden;
+
+    @include respond(phone) {
+      transform: none;
+    }
+    img {
+      height: 100%;
+      transform: translateX(1rem) scale(1.4);
+      backface-visibility: hidden;
+      transition: all .5s;
+    }
+  }
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: none;
+    }
+  }
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0;
+    transition: all .5s;
+    backface-visibility: hidden;
+  }
+  &:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%,-50%);
+  }
+
+  &:hover .story__shape img {
+    transform: translateX(0rem) scale(1);
+    filter: blur(3px) brightness(80%);
+    backface-visibility: hidden;
+  }
 }

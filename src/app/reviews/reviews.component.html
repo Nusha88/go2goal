@@ -15,7 +15,7 @@
       </div>
       <p class="pre--paragraph"></p>
       <div class="reviews-container">
-        <div class="row">
+        <div class="row u-margin-bottom-medium"  *ngIf="username">
           <div class="col-md-12 text-right">
             <button class="btn btn--indigo btn--animated add-review-button" (click)="openModal(content)">
               <i class="fas fa-plus-circle"></i> Add Review
@@ -32,8 +32,10 @@
               <div class="modal-body">
                 <div class="add-review-form-container">
                   <form class="form-group add-review-form reviews-form" [formGroup]="addReviewForm">
+                    <p>Title</p>
+                    <input type="text" formControlName="title" >
                     <p>Enter review here...</p>
-                    <textarea class="form-input" id="title" type="text" formControlName="title"></textarea>
+                    <textarea class="form-input" id="text" type="text" formControlName="text"></textarea>
                     <i class="far fa-comment-alt"></i>
                   </form>
                 </div>
@@ -52,16 +54,16 @@
             </ng-template>
           </div>
         </div>
-        <div class="row">
+        <div class="row u-margin-bottom-big" *ngFor="let review of reviews">
           <div class="col-md-12">
-            <div class="cards-review">
-              <div class="card" *ngFor="let review of reviews">
-                <div class="card-header">
-                  {{review.username}}
-                </div>
-                <div class="card-body">
-                  <p class="card-text">{{review.text}}</p>
-                </div>
+            <div class="story">
+              <figure class="story__shape">
+                <img src="../../assets/images/user1.jpeg" alt="">
+                <figcaption class="story__caption">{{review.username}}</figcaption>
+              </figure>
+              <div class="story__text">
+                <h3 class="heading-tertiary">{{review.title}}</h3>
+                <p class="paragraph">{{review.text}}</p>
               </div>
             </div>
           </div>
