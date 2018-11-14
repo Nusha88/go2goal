@@ -11,9 +11,10 @@ export class PostService {
 
   constructor(private httpClient: HttpClient) { }
   // POSTS
+  private url = 'https://go2goal.herokuapp.com/api';
 
   getPosts(): any {
-    return this.httpClient.get('http://localhost:8083/api/posts')
+    return this.httpClient.get(`${this.url}/posts`)
       .pipe(map(res => res),
         catchError(this._handleError));
   }
@@ -24,7 +25,7 @@ export class PostService {
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
 
-    return this.httpClient.post<Posts>('http://localhost:8083/api/posts',
+    return this.httpClient.post<Posts>(`${this.url}/posts`,
       JSON.stringify(data), {
         headers: headers
       }
@@ -36,7 +37,7 @@ export class PostService {
 
   updatePost(post: Posts): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/posts/${post._id}`, post)
+      .put(`${this.url}/posts/${post._id}`, post)
       .pipe(catchError(this._handleError));
   }
 

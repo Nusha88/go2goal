@@ -362,7 +362,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import {TodoDataService} from './services/todo-data.service';
 
 
 
@@ -437,7 +436,6 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["Title"],
                 _services_user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"],
                 _services_login_service__WEBPACK_IMPORTED_MODULE_10__["LoginService"],
-                // TodoDataService,
                 _angular_material__WEBPACK_IMPORTED_MODULE_29__["MatDialog"],
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -2798,10 +2796,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var PostService = /** @class */ (function () {
     function PostService(httpClient) {
         this.httpClient = httpClient;
+        // POSTS
+        this.url = 'https://go2goal.herokuapp.com/api';
     }
-    // POSTS
     PostService.prototype.getPosts = function () {
-        return this.httpClient.get('http://localhost:8083/api/posts')
+        return this.httpClient.get(this.url + "/posts")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     PostService.prototype.postPost = function (data) {
@@ -2809,7 +2808,7 @@ var PostService = /** @class */ (function () {
             .set('Content-Type', 'application/json')
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*');
-        return this.httpClient.post('http://localhost:8083/api/posts', JSON.stringify(data), {
+        return this.httpClient.post(this.url + "/posts", JSON.stringify(data), {
             headers: headers
         })
             .subscribe(function (post) {
@@ -2818,7 +2817,7 @@ var PostService = /** @class */ (function () {
     };
     PostService.prototype.updatePost = function (post) {
         return this.httpClient
-            .put("http://localhost:8083/api/posts/" + post._id, post)
+            .put(this.url + "/posts/" + post._id, post)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     PostService.prototype._handleError = function (err) {
@@ -2869,9 +2868,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ReviewService = /** @class */ (function () {
     function ReviewService(httpClient) {
         this.httpClient = httpClient;
+        this.url = 'https://go2goal.herokuapp.com/api';
     }
     ReviewService.prototype.getReviews = function () {
-        return this.httpClient.get('http://localhost:8083/api/reviews')
+        return this.httpClient.get(this.url + "/reviews")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this._handleError));
     };
     ReviewService.prototype.postReviews = function (data) {
@@ -2879,7 +2879,7 @@ var ReviewService = /** @class */ (function () {
             .set('Content-Type', 'application/json')
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*');
-        return this.httpClient.post('http://localhost:8083/api/reviews', JSON.stringify(data), {
+        return this.httpClient.post(this.url + "/reviews", JSON.stringify(data), {
             headers: headers
         })
             .subscribe(function (review) {
@@ -2945,7 +2945,7 @@ var UserService = /** @class */ (function () {
             .set('Content-Type', 'application/json')
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*');
-        return this.httpClient.post('http://localhost:8083/api/users', JSON.stringify(data), {
+        return this.httpClient.post(this.url + "/users", JSON.stringify(data), {
             headers: headers
         })
             .subscribe(function (user) {
@@ -2958,7 +2958,7 @@ var UserService = /** @class */ (function () {
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*')
             .set('Accept', 'text/plain');
-        return this.httpClient.post('http://localhost:8083/api/reset-password', { 'email': data, 'id': user_id }, {
+        return this.httpClient.post(this.url + "/reset-password", { 'email': data, 'id': user_id }, {
             headers: headers
         })
             .subscribe(function (dat) {
@@ -2967,22 +2967,22 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.getUserById$ = function (id) {
         return this.httpClient
-            .get("http://localhost:8083/api/users/" + id + "/todos")
+            .get(this.url + "/users/" + id + "/todos")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateUserPassword = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/newpass", user)
+            .put(this.url + "/users/" + user._id + "/newpass", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateUser = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id, user)
+            .put(this.url + "/users/" + user._id, user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateUserPosts = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/posts", user)
+            .put(this.url + "/users/" + user._id + "/posts", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     // TODOLISTS
@@ -2991,7 +2991,7 @@ var UserService = /** @class */ (function () {
             .set('Content-Type', 'application/json')
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*');
-        return this.httpClient.post("http://localhost:8083/api/users/" + id + "/todolists", JSON.stringify(data), {
+        return this.httpClient.post(this.url + "/users/" + id + "/todolists", JSON.stringify(data), {
             headers: headers
         })
             .subscribe(function (todo) {
@@ -3000,48 +3000,48 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.updateUserTodos = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/todolists", user)
+            .put(this.url + "/users/" + user._id + "/todolists", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     // GOALS
     UserService.prototype.updateUserDatesYear = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/dates-year", user)
+            .put(this.url + "/users/" + user._id + "/dates-year", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateUserDatesMonth = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/dates-month", user)
+            .put(this.url + "/users/" + user._id + "/dates-month", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateUserDatesWeek = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/dates-week", user)
+            .put(this.url + "/users/" + user._id + "/dates-week", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateGoalOfLife = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/goals/goal-of-life", user)
+            .put(this.url + "/users/" + user._id + "/goals/goal-of-life", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateFirstLevelSteps = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/goals/first-level-steps", user)
+            .put(this.url + "/users/" + user._id + "/goals/first-level-steps", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateGoalsOfYear = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/goals/goals-of-year", user)
+            .put(this.url + "/users/" + user._id + "/goals/goals-of-year", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateGoalsOfMonth = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/goals/goals-of-month", user)
+            .put(this.url + "/users/" + user._id + "/goals/goals-of-month", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.updateGoalsOfWeek = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/goals/goals-of-week", user)
+            .put(this.url + "/users/" + user._id + "/goals/goals-of-week", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.postNotes = function (data, id) {
@@ -3049,7 +3049,7 @@ var UserService = /** @class */ (function () {
             .set('Content-Type', 'application/json')
             .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
             .set('Access-Control-Allow-Origin', '*');
-        return this.httpClient.post("http://localhost:8083/api/users/" + id + "/notes", JSON.stringify(data), {
+        return this.httpClient.post(this.url + "/users/" + id + "/notes", JSON.stringify(data), {
             headers: headers
         })
             .subscribe(function (note) {
@@ -3058,20 +3058,20 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.updateNotes = function (user) {
         return this.httpClient
-            .put("http://localhost:8083/api/users/" + user._id + "/notes", user)
+            .put(this.url + "/users/" + user._id + "/notes", user)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.getToken = function () {
-        return this.httpClient.get('http://localhost:8083/api/reset-password')
+        return this.httpClient.get('${this.url}/reset-password')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     UserService.prototype.lookupUser = function (username) {
-        return this.httpClient.get('http://localhost:8083/api/users/' + username)
+        return this.httpClient.get(this.url + "/users/" + username)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(this._handleError));
     };
     // updateUserPassword(user): Observable<any> {
     //   return this.httpClient
-    //     .put(`http://localhost:8083/api/users/${user._id}`, user)
+    //     .put(`${this.url}/users/${user._id}`, user)
     //     .catch(this._handleError);
     // }
     UserService.prototype._handleError = function (err) {

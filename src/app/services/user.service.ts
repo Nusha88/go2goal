@@ -27,7 +27,7 @@ export class UserService {
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
 
-    return this.httpClient.post<UserModel>('http://localhost:8083/api/users',
+    return this.httpClient.post<UserModel>(`${this.url}/users`,
       JSON.stringify(data), {
         headers: headers
       }
@@ -44,7 +44,7 @@ export class UserService {
       .set('Access-Control-Allow-Origin', '*')
       .set('Accept', 'text/plain');
 
-    return this.httpClient.post('http://localhost:8083/api/reset-password',
+    return this.httpClient.post(`${this.url}/reset-password`,
       {'email': data, 'id': user_id}, {
         headers: headers
       })
@@ -55,26 +55,26 @@ export class UserService {
 
   getUserById$(id: string): any {
     return this.httpClient
-      .get(`http://localhost:8083/api/users/${id}/todos`)
+      .get(`${this.url}/users/${id}/todos`)
       .pipe(map(res => res),
         catchError(this._handleError));
   }
 
   updateUserPassword(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/newpass`, user)
+      .put(`${this.url}/users/${user._id}/newpass`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateUser(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}`, user)
+      .put(`${this.url}/users/${user._id}`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateUserPosts(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/posts`, user)
+      .put(`${this.url}/users/${user._id}/posts`, user)
       .pipe(catchError(this._handleError));
   }
 
@@ -85,7 +85,7 @@ export class UserService {
       .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
-    return this.httpClient.post<TodoListModel>(`http://localhost:8083/api/users/${id}/todolists`,
+    return this.httpClient.post<TodoListModel>(`${this.url}/users/${id}/todolists`,
       JSON.stringify(data), {
         headers: headers
       }
@@ -97,7 +97,7 @@ export class UserService {
 
   updateUserTodos(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/todolists`, user)
+      .put(`${this.url}/users/${user._id}/todolists`, user)
       .pipe(catchError(this._handleError));
   }
 
@@ -105,49 +105,49 @@ export class UserService {
 
   updateUserDatesYear(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/dates-year`, user)
+      .put(`${this.url}/users/${user._id}/dates-year`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateUserDatesMonth(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/dates-month`, user)
+      .put(`${this.url}/users/${user._id}/dates-month`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateUserDatesWeek(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/dates-week`, user)
+      .put(`${this.url}/users/${user._id}/dates-week`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateGoalOfLife(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/goals/goal-of-life`, user)
+      .put(`${this.url}/users/${user._id}/goals/goal-of-life`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateFirstLevelSteps(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/goals/first-level-steps`, user)
+      .put(`${this.url}/users/${user._id}/goals/first-level-steps`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateGoalsOfYear(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/goals/goals-of-year`, user)
+      .put(`${this.url}/users/${user._id}/goals/goals-of-year`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateGoalsOfMonth(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/goals/goals-of-month`, user)
+      .put(`${this.url}/users/${user._id}/goals/goals-of-month`, user)
       .pipe(catchError(this._handleError));
   }
 
   updateGoalsOfWeek(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/goals/goals-of-week`, user)
+      .put(`${this.url}/users/${user._id}/goals/goals-of-week`, user)
       .pipe(catchError(this._handleError));
   }
 
@@ -156,7 +156,7 @@ export class UserService {
       .set('Content-Type', 'application/json')
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
-    return this.httpClient.post<NoteModel>(`http://localhost:8083/api/users/${id}/notes`,
+    return this.httpClient.post<NoteModel>(`${this.url}/users/${id}/notes`,
       JSON.stringify(data), {
         headers: headers
       }
@@ -168,24 +168,24 @@ export class UserService {
 
   updateNotes(user: UserModel): any {
     return this.httpClient
-      .put(`http://localhost:8083/api/users/${user._id}/notes`, user)
+      .put(`${this.url}/users/${user._id}/notes`, user)
       .pipe(catchError(this._handleError));
   }
 
   getToken(): any {
-    return this.httpClient.get('http://localhost:8083/api/reset-password')
+    return this.httpClient.get('${this.url}/reset-password')
       .pipe(map(res => res),
         catchError(this._handleError));
   }
 
   lookupUser(username: string): Observable<any> {
-    return this.httpClient.get('http://localhost:8083/api/users/' + username)
+    return this.httpClient.get(`${this.url}/users/` + username)
       .pipe(map(res => res), catchError(this._handleError));
   }
 
   // updateUserPassword(user): Observable<any> {
   //   return this.httpClient
-  //     .put(`http://localhost:8083/api/users/${user._id}`, user)
+  //     .put(`${this.url}/users/${user._id}`, user)
   //     .catch(this._handleError);
   // }
 

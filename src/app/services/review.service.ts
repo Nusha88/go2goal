@@ -9,9 +9,10 @@ import {Review} from '../models/review';
 })
 export class ReviewService {
 
+  private url = 'https://go2goal.herokuapp.com/api';
   constructor(private httpClient: HttpClient) { }
   getReviews(): any {
-    return this.httpClient.get('http://localhost:8083/api/reviews')
+    return this.httpClient.get(`${this.url}/reviews`)
       .pipe(map(res => res),
         catchError(this._handleError));
   }
@@ -22,7 +23,7 @@ export class ReviewService {
       .set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
       .set('Access-Control-Allow-Origin', '*');
 
-    return this.httpClient.post<Review>('http://localhost:8083/api/reviews',
+    return this.httpClient.post<Review>(`${this.url}/reviews`,
       JSON.stringify(data), {
         headers: headers
       }
