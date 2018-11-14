@@ -2933,7 +2933,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UserService = /** @class */ (function () {
     function UserService(httpClient) {
         this.httpClient = httpClient;
-        this.url = 'https://go2goal.herokuapp.com:8083/api';
+        this.url = 'https://go2goal.herokuapp.com/api';
     }
     // USERS
     UserService.prototype.getUsers = function () {
