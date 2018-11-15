@@ -4,10 +4,11 @@
     <p class="pre--paragraph">It's time to find your way!</p>
     <p class="main-paragraph">There is no universal definition for happiness. Every persone defines it in different ways.
       But obviously in order to feel happy you should achieve or have something. Something that fills your life with meaning.
-      And when you get it you'll be able to say: "That is What I was seeking for, what makes me happy.
+      <br><br>
+      And when you get it you'll be able to say: "That is what I was seeking for, what makes me happy.
       And that was the main goal of my life.
       Now I can be proud of myself, relax and just enjoy the result of those efforts I made for achieving this goal".
-      <br>
+      <br><br>
       We all set goals but we don't really understand what we want to get in the end. That's why we should move from the end to beginning.
       First of all we need to define what will be the last stop in our journey to
       happiness and absolute satisfaction. And then move on from this point to today.
@@ -33,7 +34,7 @@
     </div>
   </div>
   <div class="row" *ngFor="let goal of goals, let inde = index">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 goal-block">
       <div class="goal-of-life--content">
         <h2 class="heading-secondary"> <i class="fas fa-crown"></i> {{goal.title}}</h2>
         <span class="goal--add" (click)="addFls = !addFls"><i class="fas fa-plus"></i></span>

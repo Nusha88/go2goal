@@ -62,11 +62,17 @@ nav {
   display: block;
   text-align: center;
   padding: 12rem;
+  @include respond(phone) {
+    padding: 3rem;
+  }
   a {
     padding: 2rem;
     background-size: 100%;
     background-repeat: no-repeat;
     margin-right: 4rem;
+    @include respond(phone) {
+      margin-right: 2rem;
+    }
   }
   .ig-icon {
     background-image: url('../../assets/images/if_Instagram_1298747-min.png');

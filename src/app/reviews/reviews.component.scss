@@ -182,6 +182,9 @@ nav {
   font-size: 6rem;
   padding: 1rem 4rem;
   border: 10px solid rgba(#ccc, .5);
+  @include respond(tab-port) {
+    display: none;
+  }
 }
 .modal-content {
   border: none;
@@ -250,7 +253,12 @@ nav {
     position: absolute;
     bottom: 0;
     right: 38%;
-
+    @include respond(tab-port) {
+      right: 33%;
+    }
+    @include respond(phone) {
+      right: 21%;
+    }
   }
 }
 .cards-review {
@@ -330,5 +338,12 @@ nav {
     transform: translateX(0rem) scale(1);
     filter: blur(3px) brightness(80%);
     backface-visibility: hidden;
+  }
+}
+
+.add-review {
+  text-align: right;
+  @include respond(phone) {
+    text-align: center;
   }
 }

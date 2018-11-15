@@ -1,9 +1,16 @@
 @import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
 
 .goals-page__component {
   padding-bottom: 5rem;
   margin-top: -6rem;
   font-size: 1.5rem;
+  @include respond(tab-land) {
+    margin-top: -11rem;
+  }
+  @include respond(phone) {
+    margin-top: 0;
+  }
   h2 {
     animation: moveToRight 1s ease-in;
   }
@@ -16,7 +23,15 @@
     background-attachment: fixed;
     padding: 20rem 2rem;
     height: 95vh;
+    -webkit-clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
     clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
+    @include respond(tab-land) {
+      -webkit-clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
+      clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
+    }
+    @include respond(phone) {
+      clip-path: none;
+    }
   }
 
   .heading-secondary {
@@ -32,6 +47,10 @@
     color: $color-white;
     letter-spacing: 2px;
     animation: moveToLeft 1s ease-in;
+    @include respond(phone) {
+      padding: 2rem;
+      text-align: center;
+    }
   }
   .author {
     text-align: center;
@@ -46,12 +65,13 @@
     border-bottom: 1px solid transparent;
     margin-top: 8rem;
     animation: moveInBottom 1s ease-in;
+
     .active {
       background-color: transparent;
       border: 1px solid $light-orange-color;
       color: $light-orange-color !important;
     }
-    li {
+    li.nav-item {
       font-size: 1.5rem !important;
       text-transform: uppercase;
       a {
@@ -63,7 +83,12 @@
       .nav-link:focus, .nav-link:hover {
         border-color: $light-orange-color;
       }
+      @include respond(phone) {
+        display: block;
+        width: 100%;
+      }
     }
+
 
   }
 

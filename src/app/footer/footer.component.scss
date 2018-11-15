@@ -48,8 +48,8 @@
     width: 100%;
     text-transform: uppercase;
     float: right; }
-  .offset-2 {
-    @include respond(tab-port) {
+  .offset-4 {
+    @include respond(phone) {
       margin-left: 0;
     }
   }
@@ -57,6 +57,6 @@
     padding-top: 21rem;
   }
   @include respond(phone) {
-    padding-top: 28rem;
+    padding-top: 12rem;
   }
 }

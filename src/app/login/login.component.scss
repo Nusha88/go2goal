@@ -185,6 +185,9 @@
   @include respond(tab-land) {
     margin-top: -27rem;
   }
+  @include respond(phone) {
+    margin-top: -10rem;
+  }
 }
 
 .incorrect-data {

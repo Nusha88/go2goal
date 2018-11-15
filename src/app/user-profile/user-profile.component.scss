@@ -91,3 +91,11 @@
   color: $orange-color;
   font-size: 2rem;
 }
+.profile-component .btn--indigo {
+  @include respond(tab-land) {
+    padding: 2rem;
+  }
+  @include respond(tab-port) {
+    padding: 1rem;
+  }
+}

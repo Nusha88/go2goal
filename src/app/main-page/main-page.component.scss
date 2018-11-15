@@ -8,10 +8,10 @@
     margin-top: -10rem;
   }
   @include respond(tab-port) {
-    margin-top: -9rem;
+    margin-top: 0
   }
   @include respond(phone) {
-    margin-top: -6rem;
+    margin-top: 0
   }
   h2 {
     color: $primary-text;
@@ -263,8 +263,13 @@
       right: 34%;
     }
     @include respond(phone) {
-      right: 19%;
+      right: 17%;
     }
+  }
+}
+.last-paragraph {
+  @include respond(phone) {
+    right: -7%;
   }
 }
 .main-paragraph {
@@ -308,8 +313,8 @@
   @include respond(tab-land) {
     padding: 23rem 2rem;
   }
-  @include respond(phone) {
-    padding: 17rem 2rem;
+  @include respond(tab-port) {
+    clip-path: none;
   }
   .heading-secondary {
     color: $color-white;

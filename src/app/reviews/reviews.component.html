@@ -16,7 +16,7 @@
       <p class="pre--paragraph"></p>
       <div class="reviews-container">
         <div class="row u-margin-bottom-medium"  *ngIf="username">
-          <div class="col-md-12 text-right">
+          <div class="col-md-12 add-review">
             <button class="btn btn--indigo btn--animated add-review-button" (click)="openModal(content)">
               <i class="fas fa-plus-circle"></i> Add Review
             </button>
@@ -33,7 +33,7 @@
                 <div class="add-review-form-container">
                   <form class="form-group add-review-form reviews-form" [formGroup]="addReviewForm">
                     <p>Title</p>
-                    <input type="text" formControlName="title" >
+                    <input class="form-input" type="text" formControlName="title" >
                     <p>Enter review here...</p>
                     <textarea class="form-input" id="text" type="text" formControlName="text"></textarea>
                     <i class="far fa-comment-alt"></i>

@@ -25,9 +25,11 @@
     color: $secondary-text;
   }
 }
+
 .goals-of-year {
   margin-top: 2rem;
 }
+
 .pre--paragraph {
   font-size: 2.6rem;
   text-align: center;
@@ -45,9 +47,15 @@
     position: absolute;
     bottom: 0;
     right: 38%;
-
+    @include respond(tab-port) {
+      right: 33%;
+    }
+    @include respond(phone) {
+      right: 17%;
+    }
   }
 }
+
 .dates-input {
   border: none;
   border-bottom: 3px solid $light-primary-color;
@@ -55,10 +63,14 @@
   padding-left: 1rem;
   margin-left: 1rem;
   width: 18% !important;
+  @include respond(phone) {
+    width: 33%;
+  }
   &:focus {
     outline: none;
   }
 }
+
 .add-dates {
   color: $dark-primary-color;
   font-size: 2rem;
@@ -75,6 +87,7 @@
     text-shadow: none;
   }
 }
+
 .goal-of-year--edit {
   color: $orange-color;
   text-align: center;
@@ -92,6 +105,7 @@
     display: block;
   }
 }
+
 .goals-content {
   padding: 2rem;
   input[type='text'] {
@@ -154,7 +168,8 @@
     transition: all .3s;
   }
   .checkbox:checked ~ .checkbox-label .form-checkbox::after {
-    opacity: 1; }
+    opacity: 1;
+  }
   .checked {
     text-decoration: line-through;
     color: $light-primary-color;
@@ -205,6 +220,7 @@
     font-size: 1.3rem;
   }
 }
+
 .form-goal {
   top: -1px;
   left: 0px;
