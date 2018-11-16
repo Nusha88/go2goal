@@ -254,10 +254,21 @@ nav {
     bottom: 0;
     right: 38%;
     @include respond(tab-port) {
-      right: 33%;
+      right: 35%;
     }
     @include respond(phone) {
       right: 21%;
+    }
+  }
+}
+.last-paragraph {
+  &:after {
+    right: 35%;
+    @include respond(tab-port) {
+      right: 32%;
+    }
+    @include respond(phone) {
+      right: 15%;
     }
   }
 }

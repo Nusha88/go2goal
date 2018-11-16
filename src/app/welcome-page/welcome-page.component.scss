@@ -12,12 +12,19 @@
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
+  @include respond(tab-port) {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.8),
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/bg2-min-tab.jpg");
+  }
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
     background-image: linear-gradient(to right bottom,
       rgba($light-primary-color, 0.8),
-      rgba($dark-primary-color, 0.8));
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/bg2-min-phone.jpg");
   }
 
   .header__logo-box {
@@ -120,7 +127,14 @@
   @include respond(phone) {
     background-image: linear-gradient(to right bottom,
       rgba($light-primary-color, 0.8),
-      rgba($dark-primary-color, 0.8));
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/bottle-min-tab.jpg");
+  }
+  @include respond(phone) {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.8),
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/bottle-min-phone.jpg");
   }
 
   & > * {

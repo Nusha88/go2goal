@@ -8,7 +8,7 @@
     margin-top: -10rem;
   }
   @include respond(tab-port) {
-    margin-top: 0
+    margin-top: -9rem
   }
   @include respond(phone) {
     margin-top: 0
@@ -312,9 +312,16 @@
   clip-path: polygon(0 7vh, 100% 0, 100% 75vh, 0 100%);
   @include respond(tab-land) {
     padding: 23rem 2rem;
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/luca-bravo-370128-unsplash-min-tab.jpg");
   }
-  @include respond(tab-port) {
+
+  @include respond(phone) {
     clip-path: none;
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/luca-bravo-370128-unsplash-min-phone.jpg");
   }
   .heading-secondary {
     color: $color-white;

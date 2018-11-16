@@ -25,9 +25,15 @@
     @include respond(tab-land) {
       -webkit-clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
       clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
+      background-image: linear-gradient(to right bottom,
+        rgba($light-primary-color, 0.5),
+        rgba($dark-primary-color, 0.5)), url("../../assets/images/thought-catalog-214785-unsplash-min-tab.jpg");
     }
     @include respond(phone) {
       clip-path: none;
+      background-image: linear-gradient(to right bottom,
+        rgba($light-primary-color, 0.5),
+        rgba($dark-primary-color, 0.5)), url("../../assets/images/thought-catalog-214785-unsplash-min-phone.jpg");
     }
   }
 

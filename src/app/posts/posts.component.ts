@@ -13,6 +13,7 @@ export class PostsComponent implements OnInit {
   public mr: NgbModalRef;
   public mr2: NgbModalRef;
   public edit: NgbModalRef;
+  term: any;
 
   addPostForm: FormGroup;
   editPostForm: FormGroup;

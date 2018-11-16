@@ -71,9 +71,15 @@
   @include respond(tab-land) {
     -webkit-clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
     clip-path: polygon(0 7vh, 100% 0, 100% 85vh, 0 100%);
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/hugues-de-buyer-mimeure-335733-min-tab.jpg");
   }
   @include respond(phone) {
     clip-path: none;
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.5),
+      rgba($dark-primary-color, 0.5)), url("../../assets/images/hugues-de-buyer-mimeure-335733-min-phone.jpg");
   }
   .heading-secondary {
     color: $color-white;

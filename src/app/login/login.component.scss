@@ -14,9 +14,19 @@
   background-position: top;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 78vh, 0 100%);
+  @include respond(tab-port) {
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.8),
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/34943640193_0b537367ac_h-min-tab.jpg");
+  }
   @include respond(phone) {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    background-image: linear-gradient(to right bottom,
+      rgba($light-primary-color, 0.8),
+      rgba($dark-primary-color, 0.8)),
+    url("../../assets/images/34943640193_0b537367ac_h-min-phone.jpg");
   }
   .header__logo-box {
     position: absolute;
