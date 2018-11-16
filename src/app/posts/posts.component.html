@@ -39,7 +39,6 @@
                   <hr>
                   <div class="post-icons">
                     <span class="like-post"><i class="fas fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
-                    <!--<span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>-->
                     <span class="show-post" (click)="openFullPost(content2)">Read More <i
                       class="fas fa-angle-double-right"></i></span>
                   </div>
@@ -63,7 +62,6 @@
                       <div class="post-icons">
                         <span class="like-post" [style.color]="isLike ? 'red' : '#ccc'" (click)="onAddPostLike(post)"><i
                           class="far fa-heart"></i> <span>{{post.likes[0].count}}</span></span>
-                        <span class="like-post"><i class="fas fa-star"></i> <span>{{post.favorites}}</span></span>
                       </div>
                     </div>
                   </ng-template>
