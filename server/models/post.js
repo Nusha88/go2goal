@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postsSchema = new Schema({
-  id: String,
   title: String,
   isEdited: Boolean,
   postText: String,
@@ -11,7 +10,6 @@ const postsSchema = new Schema({
   date: String,
   category: String,
   likes: Array,
-  favorites: Array
 }, { collection : 'posts' });
 
 module.exports = mongoose.model('Post', postsSchema, 'posts');

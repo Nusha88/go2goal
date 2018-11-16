@@ -11,7 +11,6 @@ export class Posts {
     public date: Date,
     public category: string,
     public likes?: Likes[],
-    public favorites?: Favorites[],
   ) {
   }
 }
@@ -23,12 +22,7 @@ export class Likes {
     public likers: Liker,
   ) {}
 }
-export class Favorites {
-  constructor(
-    public count: number,
-    public users: Liker,
-  ) {}
-}
+
 export class Liker {
   constructor(
     public username: string,

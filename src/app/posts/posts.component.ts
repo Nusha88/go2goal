@@ -14,6 +14,7 @@ export class PostsComponent implements OnInit {
   public mr2: NgbModalRef;
   public edit: NgbModalRef;
   term: any;
+  postId: string;
 
   addPostForm: FormGroup;
   editPostForm: FormGroup;
@@ -48,6 +49,10 @@ export class PostsComponent implements OnInit {
         'category': new FormControl(content._parentView.context.$implicit.category),
       });
     }
+    let postDb = this.allPosts.find(post => post.author === this.storedUsername && post.title === content._parentView.context.$implicit.title
+      && post.postText === content._parentView.context.$implicit.postText);
+    console.log(postDb);
+    this.postId = postDb._id;
     this.edit = this.modalService.open(content);
   }
 
@@ -84,14 +89,14 @@ export class PostsComponent implements OnInit {
     });
 
     this.addPostForm = new FormGroup({
-      'title': new FormControl(title, Validators.required),
-      'postText': new FormControl(postText, Validators.required),
-      'upload': new FormControl(upload),
-      'edited': new FormControl(false),
-      'date': new FormControl(this.formatDate(new Date())),
-      'author': new FormControl(this.user.username),
-      'category': new FormControl(category, Validators.required),
-      'likes': new FormControl([likes.value])
+      title: new FormControl(title, Validators.required),
+      postText: new FormControl(postText, Validators.required),
+      upload: new FormControl(upload),
+      edited: new FormControl(false),
+      date: new FormControl(this.formatDate(new Date())),
+      author: new FormControl(this.user.username),
+      category: new FormControl(category, Validators.required),
+      likes: new FormControl([likes.value])
     });
   }
 
@@ -134,7 +139,7 @@ export class PostsComponent implements OnInit {
         }
       });
     });
-    this.postService.updatePost(post).subscribe(pos => pos);
+    this.postService.updatePostLikes(post).subscribe(pos => pos);
   }
 
   formatDate(date) {
@@ -168,7 +173,7 @@ export class PostsComponent implements OnInit {
     post.upload = this.editPostForm.value.upload;
     post.category = this.editPostForm.value.category;
     this.service.updateUserPosts(this.user).subscribe(postAuthor => postAuthor);
-    this.postService.updatePost(post).subscribe(pos => pos);
+    this.postService.updatePost(post, this.postId).subscribe(pos => pos);
     this.edit.close();
   }
 

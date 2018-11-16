@@ -35,9 +35,14 @@ export class PostService {
       });
   }
 
-  updatePost(post: Posts): any {
+  updatePost(post: Posts, id: string): any {
     return this.httpClient
-      .put(`${this.url}/posts/${post._id}`, post)
+      .put(`${this.url}/posts/${id}`, post)
+      .pipe(catchError(this._handleError));
+  }
+  updatePostLikes(post: Posts): any {
+    return this.httpClient
+      .put(`${this.url}/posts/${post._id}/likes`, post)
       .pipe(catchError(this._handleError));
   }
 

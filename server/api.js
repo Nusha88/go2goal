@@ -12,7 +12,7 @@ const jwks = require('jwks-rsa');
 const User = require('./models/user');
 const Todo = require('./models/todo');
 const Goals = require('./models/goals');
-const Post = require('./models/posts');
+const Post = require('./models/post');
 const Review = require('./models/review');
 const TodoListModel = require("./models/todolist");
 const NoteModel = require('./models/note');
@@ -271,7 +271,6 @@ module.exports = function (app, config) {
       date: req.body.date,
       category: req.body.category,
       likes: req.body.likes,
-      favorites: req.body.favorites
     });
     post.save(function (err, post) {
       if (err) {
@@ -281,13 +280,27 @@ module.exports = function (app, config) {
     })
   });
 
-  app.put('/api/posts/:id/', function (req, res) {
+  app.put('/api/posts/:id', function (req, res) {
     Post.findById(req.params.id, function (err, post) {
       post.title = req.body.title;
       post.postText = req.body.postText;
       post.upload = req.body.upload;
       post.category = req.body.category;
       post.likes = req.body.likes[0];
+
+      post.save(function (err) {
+        if (err) {
+          return res.status(500).send({message: err.message});
+        }
+        res.send(post);
+      })
+    });
+  });
+
+  app.put('/api/posts/:id/likes', function (req, res) {
+    Post.findById(req.params.id, function (err, post) {
+      post.likes = req.body.likes[0];
+
       post.save(function (err) {
         if (err) {
           return res.status(500).send({message: err.message});

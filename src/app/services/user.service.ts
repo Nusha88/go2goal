@@ -9,7 +9,6 @@ import {NoteModel} from '../models/note.model';
 @Injectable()
 export class UserService {
   private url = 'https://go2goal.herokuapp.com/api';
-
   constructor(private httpClient: HttpClient) {
   }
 
