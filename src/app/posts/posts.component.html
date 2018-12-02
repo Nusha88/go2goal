@@ -73,7 +73,7 @@
               <div class="card post-container" *ngFor="let post of userPosts; let i = index">
                 <h3>{{post.title}}</h3>
                 <p class="card-text">{{post.postText | truncate:[200, '...']}}</p>
-                <img [src]="post.upload" alt="">
+                <img [src]="post.upload" alt="upload">
                 <br>
                 <div class="post-details">
                   <span>Date: <span class="post-info">{{post.date}}</span></span> &nbsp;
@@ -105,7 +105,7 @@
                         <input type="text" class="form-input" (change)="uploadFile($event)" formControlName="upload"
                                placeholder="Add an image url to your post">
                         <i class="far fa-image"></i>
-                        <img *ngIf="image" [src]="image" alt="" class="preview-image">
+                        <img *ngIf="image" [src]="image" alt="preview" class="preview-image">
                         <div class="form-group">
                           <select class="form-input" id="exampleFormControlSelect2" formControlName="category">
                             <option value="" disabled selected>Choose a category of your post</option>
@@ -155,7 +155,7 @@
                   <input type="text" class="form-input" (change)="uploadFile($event)" formControlName="upload"
                          placeholder="Add an image url to your post">
                   <i class="far fa-image"></i>
-                  <img *ngIf="image" [src]="image" alt="" class="preview-image">
+                  <img *ngIf="image" [src]="image" alt="preview" class="preview-image">
                   <div class="form-group">
                     <select class="form-input" id="exampleFormControlSelect1" formControlName="category">
                       <option value="" disabled selected>Choose a category of your post</option>
