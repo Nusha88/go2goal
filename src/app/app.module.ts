@@ -25,7 +25,6 @@ import { GoalOfWeekComponent } from './goals/goal-of-week/goal-of-week.component
 import { GoalOfYearComponent } from './goals/goal-of-year/goal-of-year.component';
 import { GoalOfMonthComponent } from './goals/goal-of-month/goal-of-month.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserComponent } from './user/user.component';
 import { SubmittingComponent } from './core/forms/submitting.component';
 import { FooterComponent } from './footer/footer.component';
 import { FirstLevelStepComponent } from './goals/goal-of-life/first-level-step/first-level-step.component';
@@ -62,7 +61,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     GoalOfYearComponent,
     GoalOfMonthComponent,
     UserProfileComponent,
-    UserComponent,
     SubmittingComponent,
     FooterComponent,
     FirstLevelStepComponent,
