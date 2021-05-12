@@ -44,7 +44,7 @@
     "method-override": "^2.3.10",
     "mongoose": "^4.13.9",
     "ng2-search-filter": "^0.4.7",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.0",
     "typescript": "^2.9.2",
